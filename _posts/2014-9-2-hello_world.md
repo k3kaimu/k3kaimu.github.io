@@ -6,6 +6,8 @@ categories: dmanual
 tags: dmanual
 ---
 
+{% tree %}
+
 ## Hello, world!---その前に
 
 プログラミングの入門といえば`Hello, world!`ですね。
