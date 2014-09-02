@@ -1,0 +1,946 @@
+<!DOCTYPE html>
+<html lang="ja" xmlns="http://www.w3.org/1999/xhtml" prefix="og: http://ogp.me/ns#">
+  <head>
+    
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="format-detection" content="telephone=no">
+<link rel="alternate" type="application/rss+xml" title="RSS Feed" href="http://k3kaimu.github.io/atom.xml">
+<link rel="shortcut icon" href="/favicon.ico">
+
+    <title> 15 構造体 | Go to the future</title>
+    
+<meta property="og:type" content="blog">
+<meta property="og:title" content="15 構造体">
+<meta property="og:description" content="{% tree %}
+
+## ユーザー定義型
+
+今までは`int`だったり`long`、または`string`などの型を使用してプログラムを組んできましたが、この章と後のいくつかの章ではユーザー定義型について紹介していきます。
+ユーザー定義型というのは、その名の通りユーザー(プログラマ)が任意...">
+<meta property="og:url" content="http://k3kaimu.github.io/dmanual/2014/04/08/dm-struct/">
+
+<meta property="og:site_name" content="Go to the future">
+<meta property="og:locale" content="ja_JP">
+<meta name="twitter:card" content="summary">
+
+<meta name="twitter:site" content="@k3_kaimu">
+
+
+    
+<link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootswatch/3.0.2/cerulean/bootstrap.min.css">
+<link rel="stylesheet" href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.min.css">
+<link rel="stylesheet" href="/assets/css/all.min.css">
+
+    
+<!--[if lt IE 9]>
+  <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+  <script src="https://oss.maxcdn.com/libs/respond.js/1.3.0/respond.min.js"></script>
+<![endif]-->
+
+  </head>
+  <body>
+    
+<div class="navbar navbar-default navbar-fixed-top" role="navigation">
+  <div class="container">
+    <div class="navbar-header">
+      <a href="/" class="navbar-brand">Go to the future</a>
+      <button class="navbar-toggle" type="button" data-toggle="collapse" data-target="#navbar-main">
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+    </div>
+    <div class="navbar-collapse collapse" id="navbar-main">
+      <ul class="nav navbar-nav js_nav">
+        <li><a href="/archives/">Archives</a></li>
+        <li><a href="/categories/">Categories</a></li>
+        <li><a href="/tags/">Tags</a></li>
+        <li><a href="/dmanual/">DManual</a></li>
+      </ul>
+      <div id="owner" itemprop="author copyrightHolder editor" itemscope itemtype="http://schema.org/Person">
+        <ul class="nav navbar-nav navbar-right">
+          <li class="dropdown">
+            <a href="#" class="dropdown-toggle" data-toggle="dropdown">k3-kaimu <b class="caret"></b></a>
+            <ul class="dropdown-menu">
+              
+              <li>
+                
+                <a href="https://www.github.com/k3kaimu" itemprop="sameAs" content="https://www.github.com/k3kaimu">
+                  <i class="fa fa-github-square fa-lg"></i> GitHub
+                </a>
+              </li>
+              
+              
+              <li>
+                
+                <a href="http://www.twitter.com/k3_kaimu" itemprop="sameAs" content="http://www.twitter.com/k3_kaimu">
+                  <i class="fa fa-twitter-square fa-lg"></i> Twitter
+                </a>
+              </li>
+              
+              
+              
+              <li>
+                <a href="/atom.xml">
+                  <i class="fa fa-rss-square fa-lg fa-lg"></i> Rss
+                </a>
+              </li>
+            </ul>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</div>
+
+    <div id="content">
+      <div class="container">
+        <article itemscope itemtype="http://schema.org/Article" itemref="owner">
+          
+<div class="row">
+  <div class="col-md-12 col-sm-12 col-xs-12">
+    <div class="page-header">
+      <h1 itemprop="url" content="http://k3kaimu.github.io/dmanual/2014/04/08/dm-struct/">
+        <i class="fa fa-puzzle-piece fa-lg"></i> <span itemprop="name">15 構造体</span>
+      </h1>
+    </div>
+  </div>
+</div>
+
+          <div class="row">
+            <div class="col-md-12 col-sm-12 col-xs-12">
+              <div itmprop="articleBody">
+                <p><h2 class="content_tree">Contents</h2><div class="content_tree_list"><ul><li>ユーザー定義型</li><li>複数の型をまとめるということ</li><li>構造体の基本</li><li>構造化プログラミングとその発展</li><li>メンバ関数</li><ul><li>UFCSとメンバ関数の使い分けと型クラス(余談)</li></ul><li>アクセス保護属性とフィールドの隠蔽</li><ul><li>データ構造へのアクセスとプロパティ</li></ul><li>コンストラクタ</li><li>ビットごとのコピーとPostblit</li><li>デストラクタ</li><li>構造体の名前空間と静的メンバ</li><li>alias this</li><li>問題</li><li>参考文献</li><li>キーワード</li></ul></ul></div></p>
+
+<h2>ユーザー定義型</h2>
+
+<p>今までは<code>int</code>だったり<code>long</code>、または<code>string</code>などの型を使用してプログラムを組んできましたが、この章と後のいくつかの章ではユーザー定義型について紹介していきます。
+ユーザー定義型というのは、その名の通りユーザー(プログラマ)が任意に定義できる型です。
+構造体などのユーザー定義型は、今までの言語定義の型(プリミティブ型)と全く同様に使用できます。</p>
+
+<p>今回はその一つ目ということで、D言語では最もベーシックで、最も利用頻度が多いユーザー定義型である構造体<code>struct</code>と、それを用いた隠蔽について解説します。</p>
+
+<h2>複数の型をまとめるということ</h2>
+
+<p>構造体とは、簡単にいえばデータの固まりを新たに型として定義できる機能です。</p>
+
+<p>もしあなたがゲームを作りたいとしましょう。
+さらに少しこじつけ気味ですが、そのゲームで画面に長方形の何かを描きたいとします。
+長方形は長方形の位置<code>float x, y</code>と長方形の大きさ<code>float width, height</code>で表せます。
+では、複数の長方形をプログラム上で表すにはどうしましょうか？</p>
+<div class="highlight"><pre><code class="language-d" data-lang="d"><span class="kt">float</span><span class="p">[]</span> <span class="n">xs</span><span class="p">,</span> <span class="n">ys</span><span class="p">,</span> <span class="n">ws</span><span class="p">,</span> <span class="n">hs</span><span class="p">;</span>
+<span class="c1">// もしくは</span>
+<span class="c1">// float[4][] rects;</span>
+</code></pre></div>
+<p>これで複数の長方形を表せそうです。</p>
+
+<p>「長方形のリストを表すために4つの配列を操作することを強いられているんだ！」</p>
+
+<p>そんなことはないので、こういう場合には構造体を使いましょう。</p>
+
+<h2>構造体の基本</h2>
+
+<p>構造体とは、複数のデータを一つにまとめたものを表すユーザー定義型です。
+たとえば、長方形を表す<code>Rectangle</code>型は次のように定義します。</p>
+<div class="highlight"><pre><code class="language-d" data-lang="d"><span class="k">struct</span> <span class="n">Rectangle</span>
+<span class="p">{</span>
+    <span class="kt">float</span> <span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">;</span>
+    <span class="kt">float</span> <span class="n">width</span><span class="p">,</span>
+          <span class="n">height</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre></div>
+<p><code>Rectangle</code>の内部に定義してある<code>x, y, width, height</code>をメンバ変数もしくはフィールドといいます。
+構造体のメンバ変数へは次のようにメンバ変数名を用いてアクセス可能です。</p>
+<div class="highlight"><pre><code class="language-d" data-lang="d"><span class="n">Rectangle</span> <span class="n">rect</span><span class="p">;</span> <span class="c1">// Rectangle型の変数rectを宣言</span>
+
+<span class="n">rect</span><span class="p">.</span><span class="n">x</span> <span class="p">=</span> <span class="mf">5.5</span><span class="p">;</span>   <span class="c1">// xに5.5を代入</span>
+
+<span class="c1">// x = 1, y = 3, width = 10.5, height = 2.3 な Rectangleを代入</span>
+<span class="n">rect</span> <span class="p">=</span> <span class="n">Rectangle</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mf">10.5</span><span class="p">,</span> <span class="mf">2.3</span><span class="p">);</span>
+
+<span class="c1">// メンバ変数を指定して初期化, 宣言時のみ有効</span>
+<span class="n">Rectangle</span> <span class="n">rect2</span> <span class="p">=</span> <span class="p">{</span><span class="n">x</span> <span class="p">:</span> <span class="mi">1</span><span class="p">,</span> <span class="n">width</span> <span class="p">:</span> <span class="mi">3</span><span class="p">,</span> <span class="n">y</span> <span class="p">:</span> <span class="mi">4</span><span class="p">,</span> <span class="n">height</span> <span class="p">:</span> <span class="mi">2</span><span class="p">};</span>
+</code></pre></div>
+<p><code>Rectangle</code>型は、今までの<code>int</code>や<code>long</code>等のプリミティブ型と同様に使用できます。
+もちろん、デフォルト初期化値<code>Rectangle.init</code>も有効です。
+今回の<code>Rectangle</code>のデフォルト初期化値は、それぞれのメンバ変数のデフォルト初期化値になりますが、
+次のように<code>Rectangle</code>を定義することでデフォルト初期化値を変更できます。</p>
+<div class="highlight"><pre><code class="language-d" data-lang="d"><span class="k">struct</span> <span class="n">Rectangle</span>
+<span class="p">{</span>
+    <span class="kt">float</span> <span class="n">x</span><span class="p">;</span>
+    <span class="kt">float</span> <span class="n">y</span><span class="p">;</span>
+    <span class="kt">float</span> <span class="n">width</span> <span class="p">=</span> <span class="mi">0</span><span class="p">;</span>
+    <span class="kt">float</span> <span class="n">height</span> <span class="p">=</span> <span class="mi">0</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre></div>
+<p>元の初期化値は<code>Rectangle(float.nan, float.nan, float.nan, float.nan)</code>ですが、2つ目の<code>Rectangle</code>の初期化値は<code>Rectangle(float.nan, float.nan, 0, 0)</code>となります。</p>
+
+<p>最初に例として提示した<code>Rectangle</code>の配列は、当然ですが型は<code>Rectangle[]</code>となり、<code>int[]</code>などと同様に使用可能です。</p>
+<div class="highlight"><pre><code class="language-d" data-lang="d"><span class="n">Rectangle</span><span class="p">[]</span> <span class="n">rects</span><span class="p">;</span>
+
+<span class="n">rects</span> <span class="p">~=</span> <span class="n">Rectangle</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">2</span><span class="p">);</span>
+<span class="n">rects</span> <span class="p">~=</span> <span class="p">[</span><span class="n">Rectangle</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">3</span><span class="p">),</span>
+          <span class="n">Rectangle</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mf">4.4</span><span class="p">)];</span>
+
+<span class="k">foreach</span><span class="p">(</span><span class="n">e</span><span class="p">;</span> <span class="n">rects</span><span class="p">)</span>
+    <span class="n">writefln</span><span class="p">(</span><span class="s">&quot;面積 S = %s&quot;</span><span class="p">,</span> <span class="n">e</span><span class="p">.</span><span class="n">width</span> <span class="p">*</span> <span class="n">e</span><span class="p">.</span><span class="n">height</span><span class="p">);</span>
+
+<span class="k">foreach</span><span class="p">(</span><span class="n">i</span><span class="p">;</span> <span class="mi">1</span> <span class="p">..</span> <span class="n">rects</span><span class="p">.</span><span class="n">length</span><span class="p">){</span>
+    <span class="n">rects</span><span class="p">[</span><span class="n">i</span><span class="p">-</span><span class="mi">1</span><span class="p">].</span><span class="n">x</span> <span class="p">+=</span> <span class="n">rects</span><span class="p">[</span><span class="n">i</span><span class="p">].</span><span class="n">x</span><span class="p">;</span>
+    <span class="n">rects</span><span class="p">[</span><span class="n">i</span><span class="p">-</span><span class="mi">1</span><span class="p">].</span><span class="n">y</span> <span class="p">+=</span> <span class="n">rects</span><span class="p">[</span><span class="n">i</span><span class="p">].</span><span class="n">y</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="n">writeln</span><span class="p">(</span><span class="n">rects</span><span class="p">);</span>
+</code></pre></div>
+<h2>構造化プログラミングとその発展</h2>
+
+<p>昔(1970~80)は(というより今でも)データ構造と手続き(関数)を一緒に考える構造化プログラミングスタイルが主流でした。
+さらにその昔は混沌としたプログラミングスタイルでしたから、
+データ構造と、それを扱う専用の関数を考えるというこのスタイルは素晴らしいといえます。
+混沌とした世の中に構造化プログラミングを提唱したダイクストラは、手続きとデータの両方が抽象化されるべきであると彼の論文&quot;Structured Programming&quot;(1969)にて主張しています。
+手続きとデータ構造の両方を抽象化する利点は、データ構造に変更を加えるような修正を行う場合や、複雑なデータ構造を上手く隠しながらプログラムを作る時に最も効力を発揮します。
+データ構造が変わったとしても、それを扱う手続きをまとめた関数さえ修正すれば、プログラム全体の動作に影響を与えなくて済みますし、複雑なデータ構造であっても関数によって覆い隠されてしまえば、簡単に扱えるようになるのです。
+これをデータのカプセル化(隠蔽)といい、現代のプログラミング技術では必須となっています。</p>
+
+<p>ダイクストラが構造化プログラミングを提唱する数年前に、Simulaという言語が登場し、後に登場するオブジェクト指向言語はこのSimulaに影響を受けたというお話はまた別の機会に。</p>
+
+<h2>メンバ関数</h2>
+
+<p>データ構造とそれを扱う専用の手続きを一緒に扱うことによって、素晴らしいプログラムが書けることは構造化プログラミングから学べることでした。
+データ構造は、構造体によって構築できそうですが、その構造体を扱う専用の関数はどのように記述するのが最も適切でしょうか？</p>
+
+<p>たとえば、長方形<code>Rectangle</code>を<code>(dx, dy)</code>だけ平行移動する関数<code>translate</code>は次のように書けます。</p>
+<div class="highlight"><pre><code class="language-d" data-lang="d"><span class="kt">void</span> <span class="n">translate</span><span class="p">(</span><span class="k">ref</span> <span class="n">Rectangle</span> <span class="n">rect</span><span class="p">,</span> <span class="kt">float</span> <span class="n">dx</span><span class="p">,</span> <span class="kt">float</span> <span class="n">dy</span><span class="p">)</span>
+<span class="p">{</span>
+    <span class="n">rect</span><span class="p">.</span><span class="n">x</span> <span class="p">+=</span> <span class="n">dx</span><span class="p">;</span>
+    <span class="n">rect</span><span class="p">.</span><span class="n">y</span> <span class="p">+=</span> <span class="n">dy</span><span class="p">;</span>
+<span class="p">}</span>
+
+
+<span class="kt">void</span> <span class="n">foo</span><span class="p">()</span>
+<span class="p">{</span>
+    <span class="n">Rectangle</span> <span class="n">rect</span> <span class="p">=</span> <span class="n">Rectangle</span><span class="p">(</span><span class="mi">600</span><span class="p">,</span> <span class="mi">400</span><span class="p">,</span> <span class="mi">1920</span><span class="p">,</span> <span class="mi">1080</span><span class="p">);</span>
+
+    <span class="n">translate</span><span class="p">(</span><span class="n">rect</span><span class="p">,</span> <span class="p">-</span><span class="mi">600</span> <span class="p">+</span> <span class="mi">1920</span> <span class="p">/</span> <span class="mi">2</span><span class="p">,</span> <span class="p">-</span><span class="mi">400</span> <span class="p">+</span> <span class="mi">1080</span> <span class="p">/</span> <span class="mi">2</span><span class="p">);</span>
+<span class="p">}</span>
+</code></pre></div>
+<p>しかし、この書き方だと<code>translate</code>関数が<code>Rectangle</code>型に所属していることが少し不透明です。</p>
+
+<p><code>Rectangle</code>型にのみ所属する関数をメンバ関数といいます。
+メンバ関数内では、フィールドに対してそのままの名前でアクセス可能です。
+また、<code>this</code>という暗黙の引数を持っていますので、<code>this</code>経由でフィールドに触ることも可能です。</p>
+
+<p><code>this</code>は<code>ref Rectangle</code>な引数だと考えることが出来ます。
+<code>this</code>に対して<code>const</code>や<code>immutable</code>、さらには<code>inout</code>などを付加させたい場合はメンバ関数の属性にそれらを付加させます。</p>
+<div class="highlight"><pre><code class="language-d" data-lang="d"><span class="k">struct</span> <span class="n">Rectangle</span>
+<span class="p">{</span>
+    <span class="kt">float</span> <span class="n">x</span><span class="p">;</span>
+    <span class="kt">float</span> <span class="n">y</span><span class="p">;</span>
+    <span class="kt">float</span> <span class="n">width</span> <span class="p">=</span> <span class="mi">0</span><span class="p">;</span>
+    <span class="kt">float</span> <span class="n">height</span> <span class="p">=</span> <span class="mi">0</span><span class="p">;</span>
+
+
+    <span class="c1">// void translateInPlace(ref Rectangle, float dx, float dy)</span>
+    <span class="cm">/**</span>
+<span class="cm">    (dx, dy)だけ平行移動する。</span>
+<span class="cm">    */</span>
+    <span class="kt">void</span> <span class="n">translateInPlace</span><span class="p">(</span><span class="kt">float</span> <span class="n">dx</span><span class="p">,</span> <span class="kt">float</span> <span class="n">dy</span><span class="p">)</span>
+    <span class="p">{</span>
+        <span class="n">x</span> <span class="p">+=</span> <span class="n">dx</span><span class="p">;</span>        <span class="c1">// メンバ関数内では、フィールドを触れる</span>
+        <span class="k">this</span><span class="p">.</span><span class="n">y</span> <span class="p">+=</span> <span class="n">dy</span><span class="p">;</span>   <span class="c1">// 暗黙の引数this経由でも触れる</span>
+
+        <span class="k">assert</span><span class="p">(&amp;</span><span class="n">width</span> <span class="p">==</span> <span class="p">&amp;(</span><span class="k">this</span><span class="p">.</span><span class="n">width</span><span class="p">));</span>
+        <span class="k">assert</span><span class="p">(&amp;</span><span class="n">height</span> <span class="p">==</span> <span class="p">&amp;(</span><span class="k">this</span><span class="p">.</span><span class="n">height</span><span class="p">));</span>
+
+        <span class="k">pragma</span><span class="p">(</span><span class="n">msg</span><span class="p">,</span> <span class="k">typeof</span><span class="p">(</span><span class="k">this</span><span class="p">));</span>  <span class="c1">// Rectangle</span>
+    <span class="p">}</span>
+
+
+    <span class="c1">// Rectangle translate(const ref Rectangle, float dx, float dy)</span>
+    <span class="c1">// もちろんpure, nothrow @safeなどの属性も付加できる。</span>
+    <span class="n">Rectangle</span> <span class="n">translate</span><span class="p">(</span><span class="kt">float</span> <span class="n">dx</span><span class="p">,</span> <span class="kt">float</span> <span class="n">dy</span><span class="p">)</span> <span class="k">const</span> <span class="k">pure</span> <span class="k">nothrow</span> <span class="nd">@safe</span>
+    <span class="p">{</span>
+        <span class="k">return</span> <span class="n">Rectangle</span><span class="p">(</span><span class="n">x</span> <span class="p">+</span> <span class="n">dx</span><span class="p">,</span> <span class="n">y</span> <span class="p">+</span> <span class="n">dy</span><span class="p">,</span> <span class="n">width</span><span class="p">,</span> <span class="n">height</span><span class="p">);</span>
+    <span class="p">}</span>
+
+
+    <span class="c1">/// 面積を返す</span>
+    <span class="kt">float</span> <span class="n">area</span><span class="p">()</span> <span class="k">pure</span> <span class="k">nothrow</span> <span class="nd">@safe</span>
+    <span class="p">{</span>
+        <span class="k">return</span> <span class="n">width</span> <span class="p">*</span> <span class="n">height</span><span class="p">;</span>
+    <span class="p">}</span>
+
+
+    <span class="c1">// 引数が0個か1個の場合にのみプロパティとなれる。</span>
+    <span class="c1">// getterの例</span>
+    <span class="cm">/**</span>
+<span class="cm">    Rectangleの中心の座標を、配列float[2]で返します。</span>
+<span class="cm">    float[0]にはx座標が、float[1]にはy座標が格納されています。</span>
+<span class="cm">    */</span>
+    <span class="kt">float</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span> <span class="n">center</span><span class="p">()</span> <span class="nd">@property</span> <span class="k">pure</span> <span class="k">nothrow</span> <span class="nd">@safe</span> <span class="k">const</span>
+    <span class="p">{</span>
+        <span class="k">return</span> <span class="p">[</span><span class="n">x</span> <span class="p">+</span> <span class="n">width</span><span class="p">/</span><span class="mi">2</span><span class="p">,</span> <span class="n">y</span> <span class="p">+</span> <span class="n">height</span><span class="p">/</span><span class="mi">2</span><span class="p">];</span>
+    <span class="p">}</span>
+
+
+    <span class="c1">// setterの例</span>
+    <span class="cm">/**</span>
+<span class="cm">    Rectangleの中心座標を設定します。</span>
+<span class="cm">    */</span>
+    <span class="kt">void</span> <span class="n">center</span><span class="p">(</span><span class="kt">float</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span> <span class="n">f</span><span class="p">)</span> <span class="k">pure</span> <span class="k">nothrow</span> <span class="nd">@safe</span> <span class="nd">@property</span>
+    <span class="p">{</span>
+        <span class="n">x</span> <span class="p">=</span> <span class="n">f</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="p">-</span> <span class="n">width</span><span class="p">/</span><span class="mi">2</span><span class="p">;</span>
+        <span class="n">y</span> <span class="p">=</span> <span class="n">f</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="p">-</span> <span class="n">height</span><span class="p">/</span><span class="mi">2</span><span class="p">;</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+
+
+<span class="kt">void</span> <span class="n">main</span><span class="p">()</span>
+<span class="p">{</span>
+    <span class="k">import</span> <span class="n">std</span><span class="p">.</span><span class="n">stdio</span><span class="p">;</span>
+    <span class="n">Rectangle</span> <span class="n">rect</span> <span class="p">=</span> <span class="n">Rectangle</span><span class="p">(</span><span class="mi">600</span><span class="p">,</span> <span class="mi">400</span><span class="p">,</span> <span class="mi">1920</span><span class="p">,</span> <span class="mi">1080</span><span class="p">);</span>
+
+    <span class="c1">// translateInPlaceメソッドの呼び出し</span>
+    <span class="n">rect</span><span class="p">.</span><span class="n">translateInPlace</span><span class="p">(-</span><span class="mi">600</span> <span class="p">-</span> <span class="mi">1920</span> <span class="p">/</span> <span class="mi">2</span><span class="p">,</span> <span class="p">-</span><span class="mi">400</span> <span class="p">-</span> <span class="mi">1080</span> <span class="p">/</span> <span class="mi">2</span><span class="p">);</span>
+
+    <span class="k">const</span> <span class="n">cRect</span> <span class="p">=</span> <span class="n">rect</span><span class="p">;</span>
+    <span class="c1">// ↓NG</span>
+    <span class="c1">// cRect.translateInPlace(-600 + 1920 / 2, -400 + 1080 / 2);</span>
+    <span class="c1">// ↑のように、constやimmutable, inoutの付いていないメソッドは</span>
+    <span class="c1">// mutableな型(Rectangle型)からのみしか呼び出せない。</span>
+    <span class="c1">// なぜなら、const(Rectangle)を引数に取る関数をRectangle型で呼び出すことは出来ないから。</span>
+
+    <span class="c1">// プロパティ(getter)の呼び出し方</span>
+    <span class="k">assert</span><span class="p">(</span><span class="n">rect</span><span class="p">.</span><span class="n">center</span> <span class="p">==</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">]);</span>
+
+    <span class="c1">// プロパティ(setter)の呼び出し方</span>
+    <span class="n">rect</span><span class="p">.</span><span class="n">center</span> <span class="p">=</span> <span class="p">[</span><span class="mi">600</span><span class="p">,</span> <span class="mi">400</span><span class="p">];</span>
+<span class="p">}</span>
+</code></pre></div>
+<h3>UFCSとメンバ関数の使い分けと型クラス(余談)</h3>
+
+<p>確かに、UFCSを使えばメンバ関数でなくても<code>rect.translate(dx, dy)</code>のように呼び出せます。
+しかし、たとえばモジュールを跨いだコードでは上手く動きません。</p>
+<div class="highlight"><pre><code class="language-d" data-lang="d"><span class="k">module</span> <span class="n">foo</span><span class="p">;</span>
+
+<span class="k">auto</span> <span class="k">ref</span> <span class="n">callTranslate</span><span class="p">(</span><span class="n">T</span><span class="p">)(</span><span class="k">auto</span> <span class="k">ref</span> <span class="n">T</span> <span class="n">t</span><span class="p">,</span> <span class="kt">float</span> <span class="n">dx</span><span class="p">,</span> <span class="kt">float</span> <span class="n">dy</span><span class="p">)</span>
+<span class="p">{</span>
+    <span class="k">return</span> <span class="n">t</span><span class="p">.</span><span class="n">translate</span><span class="p">(</span><span class="n">dx</span><span class="p">,</span> <span class="n">dy</span><span class="p">);</span>
+<span class="p">}</span>
+</code></pre></div><div class="highlight"><pre><code class="language-d" data-lang="d"><span class="k">module</span> <span class="n">rectangle</span><span class="p">;</span>
+
+<span class="k">import</span> <span class="n">foo</span><span class="p">;</span>
+
+<span class="k">struct</span> <span class="n">Rectangle</span>
+<span class="p">{</span>
+    <span class="kt">float</span> <span class="n">x</span><span class="p">;</span>
+    <span class="kt">float</span> <span class="n">y</span><span class="p">;</span>
+    <span class="kt">float</span> <span class="n">width</span> <span class="p">=</span> <span class="mi">0</span><span class="p">;</span>
+    <span class="kt">float</span> <span class="n">height</span> <span class="p">=</span> <span class="mi">0</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="kt">void</span> <span class="n">translate</span><span class="p">(</span><span class="k">ref</span> <span class="n">Rectangle</span> <span class="n">rect</span><span class="p">,</span> <span class="kt">float</span> <span class="n">dx</span><span class="p">,</span> <span class="kt">float</span> <span class="n">dy</span><span class="p">)</span>
+<span class="p">{</span>
+    <span class="n">rect</span><span class="p">.</span><span class="n">x</span> <span class="p">+=</span> <span class="n">dx</span><span class="p">;</span>
+    <span class="n">rect</span><span class="p">.</span><span class="n">y</span> <span class="p">+=</span> <span class="n">dy</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="kt">void</span> <span class="n">main</span><span class="p">()</span>
+<span class="p">{</span>
+    <span class="k">auto</span> <span class="n">rect</span> <span class="p">=</span> <span class="n">Rectangle</span><span class="p">(</span><span class="mf">0.5</span><span class="p">,</span> <span class="mf">0.5</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">);</span>
+
+    <span class="n">rect</span><span class="p">.</span><span class="n">callTranslate</span><span class="p">(</span><span class="mf">2.5</span><span class="p">,</span> <span class="mf">2.5</span><span class="p">);</span>
+<span class="p">}</span>
+</code></pre></div><div class="highlight"><pre><code class="language-text" data-lang="text">foo.d(5): Error: no property &#39;translate&#39; for type &#39;Rectangle&#39;
+rectangle.d(23): Error: template instance foo.callTranslate!(Rectangle) error instantiating
+</code></pre></div>
+<p>関数型言語での型クラスのようなものや、C++のconceptをD言語で表したい場合にはUFCSが上手く働きます。
+その最も身近な例は配列型<code>T[]</code>とRangeとの関係です。
+動的配列<code>T[]</code>には<code>.front</code>や<code>.empty</code>、<code>.popFront()</code>は定義されていませんが、<code>std.array</code>をimportすることによってそれらが使えるようになります。
+また、Rangeを受け取る関数テンプレートを書く場合には、<code>std.range</code>や<code>std.array</code>をimportすることが一般的ですから、例に示したモジュールの問題も発生しません。</p>
+
+<h2>アクセス保護属性とフィールドの隠蔽</h2>
+
+<p>構造化プログラミングでは、データ構造が変わっても関数のシグネチャが変わっていなければ、プログラム全体は上手く動くとしました。
+外部から構造体のデータ構造、つまりはメンバ変数にアクセスできてしまうとマズイわけです。</p>
+
+<p>そこで登場するのが、前章で登場したアクセス保護属性です。
+メンバのアクセス保護属性のデフォルト状態は<code>public</code>になっていますので、
+外部からアクセスされたくないメンバには<code>private</code>を付加しておきましょう。</p>
+
+<p>ちなみに、メンバ変数については特別な理由がない限り<code>private</code>にしておくとよいでしょう。</p>
+<div class="highlight"><pre><code class="language-d" data-lang="d"><span class="k">struct</span> <span class="n">Rectangle</span>
+<span class="p">{</span>
+    <span class="c1">/// いろいろな実装</span>
+
+  <span class="k">private</span><span class="p">:</span>
+    <span class="kt">float</span> <span class="n">_x</span><span class="p">;</span>
+    <span class="kt">float</span> <span class="n">_y</span><span class="p">;</span>
+    <span class="kt">float</span> <span class="n">_w</span> <span class="p">=</span> <span class="mi">0</span><span class="p">;</span>
+    <span class="kt">float</span> <span class="n">_h</span> <span class="p">=</span> <span class="mi">0</span><span class="p">;</span>
+
+
+    <span class="c1">// 外部からは使えないメソッド</span>
+    <span class="kt">void</span> <span class="n">foo</span><span class="p">()</span>
+    <span class="p">{</span>
+        <span class="n">writeln</span><span class="p">(</span><span class="s">&quot;foo&quot;</span><span class="p">);</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div>
+<h3>データ構造へのアクセスとプロパティ</h3>
+
+<p>「メンバ変数については、特別な理由がない限り<code>private</code>にしておくとよい」と書きましたが、そうしてしまえば外部からメンバ変数へアクセスする手段がなくなってしまいます。
+そこでプロパティ関数の登場です。
+プロパティ関数を上手く使うことでデータ構造を隠蔽しつつ、外部に公開もできます。
+一見矛盾したようなこの手法ですが、ちゃんとした理由があります。
+まず、メンバ関数として外部に公開するので、データ構造に変更を加えても何とかできる可能性が高くなります。
+また、メンバ変数へ代入される値を引数として取得できますから、不正な値が設定されないか監視できます。</p>
+<div class="highlight"><pre><code class="language-d" data-lang="d"><span class="k">struct</span> <span class="n">Rectangle</span>
+<span class="p">{</span>
+  <span class="nd">@property</span>
+  <span class="p">{</span>
+    <span class="kt">float</span> <span class="n">x</span><span class="p">()</span> <span class="p">{</span> <span class="k">return</span> <span class="n">_x</span><span class="p">;</span> <span class="p">}</span>
+    <span class="kt">void</span> <span class="n">x</span><span class="p">(</span><span class="kt">float</span> <span class="n">x</span><span class="p">){</span> <span class="n">_x</span> <span class="p">=</span> <span class="n">x</span><span class="p">;</span> <span class="p">}</span>
+
+    <span class="kt">float</span> <span class="n">y</span><span class="p">()</span> <span class="p">{</span> <span class="k">return</span> <span class="n">_y</span><span class="p">;</span> <span class="p">}</span>
+    <span class="kt">void</span> <span class="n">y</span><span class="p">(</span><span class="kt">float</span> <span class="n">y</span><span class="p">){</span> <span class="n">_y</span> <span class="p">=</span> <span class="n">y</span><span class="p">;</span> <span class="p">}</span>
+
+    <span class="kt">float</span> <span class="n">width</span><span class="p">()</span> <span class="p">{</span> <span class="k">return</span> <span class="n">_w</span><span class="p">;</span> <span class="p">}</span>
+    <span class="kt">void</span> <span class="n">width</span><span class="p">(</span><span class="kt">float</span> <span class="n">w</span><span class="p">)</span>
+    <span class="k">in</span><span class="p">{</span>
+        <span class="c1">// 幅は、「大きさ」なので正の値</span>
+        <span class="k">assert</span><span class="p">(</span><span class="n">w</span> <span class="p">&gt;=</span> <span class="mi">0</span><span class="p">);</span>
+    <span class="p">}</span>
+    <span class="k">body</span><span class="p">{</span>
+        <span class="n">_w</span> <span class="p">=</span> <span class="n">w</span><span class="p">;</span>
+    <span class="p">}</span>
+
+    <span class="kt">float</span> <span class="n">height</span><span class="p">()</span> <span class="p">{</span> <span class="k">return</span> <span class="n">_h</span><span class="p">;</span> <span class="p">}</span>
+    <span class="kt">void</span> <span class="n">height</span><span class="p">(</span><span class="kt">float</span> <span class="n">h</span><span class="p">)</span>
+    <span class="k">in</span><span class="p">{</span>
+        <span class="c1">// 高さは、「大きさ」なので正の値</span>
+        <span class="k">assert</span><span class="p">(</span><span class="n">h</span> <span class="p">&gt;=</span> <span class="mi">0</span><span class="p">);</span>
+    <span class="p">}</span>
+    <span class="k">body</span><span class="p">{</span>
+        <span class="n">_h</span> <span class="p">=</span> <span class="n">h</span><span class="p">;</span>
+    <span class="p">}</span>
+  <span class="p">}</span>
+
+
+  <span class="k">private</span><span class="p">:</span>
+    <span class="kt">float</span> <span class="n">_x</span><span class="p">;</span>
+    <span class="kt">float</span> <span class="n">_y</span><span class="p">;</span>
+    <span class="kt">float</span> <span class="n">_w</span> <span class="p">=</span> <span class="mi">0</span><span class="p">;</span>
+    <span class="kt">float</span> <span class="n">_h</span> <span class="p">=</span> <span class="mi">0</span><span class="p">;</span>
+<span class="p">}</span>
+
+
+<span class="kt">void</span> <span class="n">main</span><span class="p">()</span>
+<span class="p">{</span>
+    <span class="n">Rectangle</span> <span class="n">rect</span><span class="p">;</span>
+
+    <span class="c1">// プロパティ関数なので、</span>
+    <span class="c1">// メンバ変数みたいにアクセス可能</span>
+    <span class="n">rect</span><span class="p">.</span><span class="n">x</span> <span class="p">=</span> <span class="mi">12</span><span class="p">;</span>
+    <span class="k">assert</span><span class="p">(</span><span class="n">rect</span><span class="p">.</span><span class="n">x</span> <span class="p">==</span> <span class="mi">12</span><span class="p">);</span>
+
+    <span class="n">rect</span><span class="p">.</span><span class="n">width</span> <span class="p">=</span> <span class="mf">3.14</span><span class="p">;</span>  <span class="c1">// OK</span>
+    <span class="n">rect</span><span class="p">.</span><span class="n">height</span> <span class="p">=</span> <span class="p">-</span><span class="mi">2</span><span class="p">;</span>   <span class="c1">// Error</span>
+    <span class="c1">// heightプロパティ関数によって、</span>
+    <span class="c1">// 負の数を入れられないようにされている。</span>
+<span class="p">}</span>
+</code></pre></div>
+<h2>コンストラクタ</h2>
+
+<p>外部から触ってほしくないメンバに<code>private</code>をつけることで、それを隠蔽できましたね。
+次にフィールドの初期化や、構造体の値の作成を考えてみましょう。
+<a href="#%E6%A7%8B%E9%80%A0%E4%BD%93%E3%81%AE%E5%9F%BA%E6%9C%AC">これまでの構造体の使い方</a>だと、構造体内のデータ構造が変わってしまうとコンパイルエラーになってしまいます。
+つまり、構造化プログラミングの理念に反してしまいます。</p>
+
+<p>そのために、コンストラクタ(constructor, ctor)という専用の関数が存在します。
+コンストラクタはその型の値を作成するための関数で、<code>this(...){...}</code>のように宣言します。</p>
+<div class="highlight"><pre><code class="language-d" data-lang="d"><span class="k">struct</span> <span class="n">Rectangle</span>
+<span class="p">{</span>
+    <span class="c1">// コンストラクタの例</span>
+    <span class="k">this</span><span class="p">(</span><span class="kt">float</span> <span class="n">x</span><span class="p">,</span> <span class="kt">float</span> <span class="n">y</span><span class="p">,</span> <span class="kt">float</span> <span class="n">width</span><span class="p">,</span> <span class="kt">float</span> <span class="n">height</span><span class="p">)</span>
+    <span class="p">{</span>
+        <span class="c1">// メンバ関数のように、メンバにアクセス可能</span>
+        <span class="n">_xywh</span> <span class="p">=</span> <span class="p">[</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">width</span><span class="p">,</span> <span class="n">height</span><span class="p">];</span>
+
+        <span class="c1">// immutableなメンバ変数でも、コンストラクタでは初期化可能</span>
+        <span class="n">_imm</span> <span class="p">=</span> <span class="mi">3</span><span class="p">;</span>
+    <span class="p">}</span>
+
+
+    <span class="c1">// コンストラクタは、複数定義可能</span>
+    <span class="k">this</span><span class="p">(</span><span class="kt">float</span> <span class="n">width</span><span class="p">,</span> <span class="kt">float</span> <span class="n">height</span><span class="p">)</span>
+    <span class="p">{</span>
+        <span class="c1">// コンストラクタ内では、別のctorを1回だけ呼ぶことが出来る</span>
+        <span class="k">this</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="n">width</span><span class="p">,</span> <span class="n">height</span><span class="p">);</span>
+    <span class="p">}</span>
+
+
+  <span class="k">private</span><span class="p">:</span>
+    <span class="kt">float</span><span class="p">[]</span> <span class="n">_xywh</span><span class="p">;</span>
+
+    <span class="k">immutable</span> <span class="kt">int</span> <span class="n">_imm</span><span class="p">;</span>
+<span class="p">}</span>
+
+
+<span class="kt">void</span> <span class="n">main</span><span class="p">()</span>
+<span class="p">{</span>
+    <span class="k">auto</span> <span class="n">rect1</span> <span class="p">=</span> <span class="n">Rectangle</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">);</span>
+    <span class="n">writeln</span><span class="p">(</span><span class="n">rect1</span><span class="p">);</span>      <span class="c1">// Rectangle([1, 2, 3, 4]);</span>
+
+    <span class="k">auto</span> <span class="n">rect2</span> <span class="p">=</span> <span class="n">Rectangle</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">);</span>
+    <span class="n">writeln</span><span class="p">(</span><span class="n">rect2</span><span class="p">);</span>      <span class="c1">// Rectangle([0, 0, 4, 5]);</span>
+<span class="p">}</span>
+</code></pre></div>
+<h2>ビットごとのコピーとPostblit</h2>
+
+<p>ブリット(blit)とは、データをそのままコピーすることです。
+Dの構造体はただのデータの集合体ですから、デフォルトでは代入などの操作はメモリのコピーとなります。</p>
+
+<p>ある<code>S</code>型構造体の変数<code>v1</code>を使って、次のように<code>v2</code>を定義した場合にもデフォルトではメモリのコピーしか起こりません。</p>
+<div class="highlight"><pre><code class="language-d" data-lang="d"><span class="n">S</span> <span class="n">v2</span> <span class="p">=</span> <span class="n">v1</span><span class="p">;</span>
+</code></pre></div>
+<p>しかし、<code>S</code>型構造体にPostblitが定義されていた場合、メモリのコピー後にv2のPostblitが呼ばれます。
+Postblitは次のように定義します。</p>
+<div class="highlight"><pre><code class="language-d" data-lang="d"><span class="k">struct</span> <span class="n">S</span>
+<span class="p">{</span>
+    <span class="c1">// postblitコンストラクタの定義</span>
+    <span class="k">this</span><span class="p">(</span><span class="k">this</span><span class="p">)</span>
+    <span class="p">{</span>
+        <span class="c1">// ...</span>
+    <span class="p">}</span>
+
+    <span class="c1">/// fields</span>
+<span class="p">}</span>
+</code></pre></div>
+<p>Postblitが呼ばれるタイミングは、<code>S</code>型の値がコピーされた後です。
+「値がコピーされた後」という表現はかなり曖昧ですが、つまりは「複製された直後」ということです。
+いつコピーされる(値が複製される)かどうかはコンパイラの最適化(NRVO)等に影響されます。</p>
+<div class="highlight"><pre><code class="language-d" data-lang="d"><span class="k">import</span> <span class="n">std</span><span class="p">.</span><span class="n">stdio</span><span class="p">;</span>
+
+<span class="k">struct</span> <span class="n">S</span>
+<span class="p">{</span>
+    <span class="c1">// postblitコンストラクタ</span>
+    <span class="k">this</span><span class="p">(</span><span class="k">this</span><span class="p">)</span>
+    <span class="p">{</span>
+        <span class="n">writeln</span><span class="p">(</span><span class="s">&quot;call postblit, &quot;</span><span class="p">,</span> <span class="p">&amp;</span><span class="k">this</span><span class="p">);</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+
+<span class="kt">void</span> <span class="n">foo</span><span class="p">(</span><span class="n">S</span><span class="p">){}</span>
+
+<span class="kt">void</span> <span class="n">refFoo</span><span class="p">(</span><span class="k">ref</span> <span class="n">S</span><span class="p">){}</span>
+
+<span class="kt">void</span> <span class="n">main</span><span class="p">()</span>
+<span class="p">{</span>
+    <span class="n">writeln</span><span class="p">(</span><span class="s">&quot;定義&quot;</span><span class="p">);</span>
+    <span class="n">S</span> <span class="n">v1</span><span class="p">;</span>   <span class="c1">// 呼ばれない</span>
+
+    <span class="n">writeln</span><span class="p">(</span><span class="s">&quot;コピーコンストラクタ&quot;</span><span class="p">);</span>
+    <span class="n">S</span> <span class="n">v2</span> <span class="p">=</span> <span class="n">v1</span><span class="p">;</span>  <span class="c1">// call postblit</span>
+
+    <span class="n">writeln</span><span class="p">(</span><span class="s">&quot;代入&quot;</span><span class="p">);</span>
+    <span class="n">v2</span> <span class="p">=</span> <span class="n">v1</span><span class="p">;</span>    <span class="c1">// call postblit</span>
+
+    <span class="n">writeln</span><span class="p">(</span><span class="s">&quot;関数引数として渡す&quot;</span><span class="p">);</span>
+    <span class="n">foo</span><span class="p">(</span><span class="n">v1</span><span class="p">);</span>    <span class="c1">// call postblit</span>
+
+    <span class="n">writeln</span><span class="p">(</span><span class="s">&quot;参照引数として渡す&quot;</span><span class="p">);</span>
+    <span class="n">refFoo</span><span class="p">(</span><span class="n">v1</span><span class="p">);</span> <span class="c1">// 呼ばれない</span>
+
+    <span class="n">writeln</span><span class="p">(</span><span class="s">&quot;配列化(ctor)&quot;</span><span class="p">);</span>
+    <span class="n">S</span><span class="p">[]</span> <span class="n">ss</span> <span class="p">=</span> <span class="p">[</span><span class="n">v1</span><span class="p">];</span>  <span class="c1">// call postblit</span>
+
+    <span class="n">writeln</span><span class="p">(</span><span class="s">&quot;配列化(代入)&quot;</span><span class="p">);</span>
+    <span class="n">ss</span> <span class="p">=</span> <span class="p">[</span><span class="n">v1</span><span class="p">];</span>      <span class="c1">// call postblit</span>
+<span class="p">}</span>
+</code></pre></div>
+<p>Postblitの役目は、コピー後の値を調整することです。
+これによって、たとえば参照カウントをインクリメントしたり、参照オブジェクトを値型のように運用することができます。
+実際に<code>std.typecons.RefCounted</code>ではPostblitによって参照カウントをインクリメントしています。</p>
+
+<p>C++などの他の言語ではコピーコンストラクタというものが存在しますが、Dの場合は同様の処理が単純コピーとPostblitによって実行されます。</p>
+
+<h2>デストラクタ</h2>
+
+<p>デストラクタ(destructor, dtor)とは、極端なことをいえばコンストラクタの逆です。
+つまり、構造体の値が破棄されるときに呼ばれる特殊なメンバ関数みたいなもの、ということです。
+デストラクタの主な役割は、コンストラクタとかPostblitで確保したリソース(メモリとか)の解放です。</p>
+<div class="highlight"><pre><code class="language-d" data-lang="d"><span class="kt">void</span> <span class="n">main</span><span class="p">()</span>
+<span class="p">{</span>
+    <span class="p">{</span>
+        <span class="n">S</span> <span class="n">s1</span><span class="p">;</span>
+    <span class="p">}</span>   <span class="c1">// このスコープを抜けると、s1は破棄される</span>
+        <span class="c1">// 破棄された値に対してdtorが実行される</span>
+
+    <span class="c1">// コイツは関数の終了と共に破棄され、dtorが走る</span>
+    <span class="n">S</span> <span class="n">s2</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre></div>
+<p>Dにはガベージコレクタがありますが、たとえば先ほどの<code>UniqueArray</code>のGCを介さないバージョンとして<code>UniqueArrayNoGC</code>を考えてみましょう。
+GCを使わないので、DのGCヒープからメモリを確保しません。
+その代わりにC言語の<code>malloc</code>, <code>free</code>等を用いてCヒープにメモリを確保し、不要になれば適切に破棄します。
+コンストラクタや、Postblitで確保されたメモリは、デストラクタによって破棄されるようにします。</p>
+
+<p>このように、コンストラクタとデストラクタを上手く使ってリソースを管理する手法をRAIIといいます。</p>
+<div class="highlight"><pre><code class="language-d" data-lang="d"><span class="k">import</span> <span class="n">core</span><span class="p">.</span><span class="n">stdc</span><span class="p">.</span><span class="n">stdlib</span> <span class="p">:</span> <span class="n">malloc</span><span class="p">,</span> <span class="n">free</span><span class="p">;</span>     <span class="c1">// Cライブラリを使う</span>
+<span class="k">import</span> <span class="n">core</span><span class="p">.</span><span class="n">exception</span> <span class="p">:</span> <span class="n">OutOfMemoryError</span><span class="p">;</span>
+<span class="k">import</span> <span class="n">std</span><span class="p">.</span><span class="n">exception</span> <span class="p">:</span> <span class="n">enforceEx</span><span class="p">;</span>
+
+
+<span class="cm">/**</span>
+<span class="cm">要素にint型を持つ配列。</span>
+<span class="cm">ただしDのガベージコレクタのヒープへは確保せず(@nogc)、</span>
+<span class="cm">Cヒープ領域のメモリを確保し、管理します。</span>
+<span class="cm">*/</span>
+<span class="k">struct</span> <span class="n">UniqueArrayNoGC</span>
+<span class="p">{</span>
+    <span class="cm">/*</span>
+<span class="cm">    要素が未初期化であるような配列を返します。</span>
+<span class="cm">    ただしガベージコレクタではなく、Cヒープへの確保となります。</span>
+<span class="cm">    */</span>
+    <span class="k">private</span> <span class="k">static</span>
+    <span class="kt">int</span><span class="p">[]</span> <span class="n">_uninitializedArray</span><span class="p">(</span><span class="nb">size_t</span> <span class="n">n</span><span class="p">)</span> <span class="k">nothrow</span> <span class="cm">/* @nogc */</span>
+    <span class="p">{</span>
+        <span class="k">if</span><span class="p">(</span><span class="n">n</span><span class="p">){</span>
+            <span class="c1">// Cヒープから確保</span>
+            <span class="k">auto</span> <span class="n">p</span> <span class="p">=</span> <span class="k">cast</span><span class="p">(</span><span class="kt">int</span><span class="p">*)</span><span class="n">malloc</span><span class="p">(</span><span class="kt">int</span><span class="p">.</span><span class="n">sizeof</span> <span class="p">*</span> <span class="n">n</span><span class="p">);</span>
+            <span class="n">enforceEx</span><span class="p">!</span><span class="n">OutOfMemoryError</span><span class="p">(</span><span class="n">p</span> <span class="p">!</span><span class="k">is</span> <span class="kc">null</span><span class="p">);</span>       <span class="c1">// エラーを投げる</span>
+
+            <span class="k">return</span> <span class="n">p</span><span class="p">[</span><span class="mi">0</span> <span class="p">..</span> <span class="n">n</span><span class="p">];</span>
+        <span class="p">}</span><span class="k">else</span>
+            <span class="k">return</span> <span class="kc">null</span>
+    <span class="p">}</span>
+
+
+    <span class="cm">/**</span>
+<span class="cm">    大きさnのint型を要素として持つ配列を作ります。</span>
+<span class="cm">    */</span>
+    <span class="k">this</span><span class="p">(</span><span class="nb">size_t</span> <span class="n">n</span><span class="p">)</span> <span class="k">nothrow</span> <span class="nd">@trusted</span> <span class="cm">/* @nogc */</span>
+    <span class="p">{</span>
+        <span class="n">_v</span> <span class="p">=</span> <span class="n">_uninitializedArray</span><span class="p">(</span><span class="n">n</span><span class="p">);</span>
+
+        <span class="c1">// 初期化</span>
+        <span class="k">foreach</span><span class="p">(</span><span class="k">ref</span> <span class="n">e</span><span class="p">;</span> <span class="n">_v</span><span class="p">)</span>
+            <span class="n">e</span> <span class="p">=</span> <span class="mi">0</span><span class="p">;</span>
+    <span class="p">}</span>
+
+
+    <span class="c1">// 内部に持つ配列を常にユニークに保つ</span>
+    <span class="k">this</span><span class="p">(</span><span class="k">this</span><span class="p">)</span> <span class="k">nothrow</span> <span class="nd">@trusted</span> <span class="cm">/* @nogc */</span>
+    <span class="p">{</span>
+        <span class="k">auto</span> <span class="n">dst</span> <span class="p">=</span> <span class="n">_uninitializedArray</span><span class="p">(</span><span class="n">_v</span><span class="p">.</span><span class="n">length</span><span class="p">);</span>
+        <span class="n">dst</span><span class="p">[]</span> <span class="p">=</span> <span class="n">_v</span><span class="p">[];</span>   <span class="c1">// 要素のcopy</span>
+        <span class="n">_v</span> <span class="p">=</span> <span class="n">dst</span><span class="p">;</span>       <span class="c1">// 入れ替え</span>
+    <span class="p">}</span>
+
+
+    <span class="c1">// 管理しているCヒープの配列を解放する</span>
+    <span class="p">~</span><span class="k">this</span><span class="p">()</span> <span class="k">nothrow</span> <span class="nd">@trusted</span> <span class="cm">/* @nogc */</span>
+    <span class="p">{</span>
+        <span class="k">if</span><span class="p">(</span><span class="n">_v</span> <span class="p">!</span><span class="k">is</span> <span class="kc">null</span><span class="p">)</span>
+            <span class="n">free</span><span class="p">(</span><span class="n">_v</span><span class="p">.</span><span class="n">ptr</span><span class="p">);</span>   <span class="c1">// メモリ解放</span>
+
+        <span class="n">_v</span> <span class="p">=</span> <span class="kc">null</span><span class="p">;</span>
+    <span class="p">}</span>
+
+
+    <span class="cm">/*</span>
+<span class="cm">    その他のメンバ関数の実装などなど</span>
+<span class="cm">    ……………</span>
+<span class="cm">    ………</span>
+<span class="cm">    …</span>
+<span class="cm">    */</span>
+
+
+  <span class="k">private</span><span class="p">:</span>
+    <span class="kt">int</span><span class="p">[]</span> <span class="n">_v</span><span class="p">;</span>
+<span class="p">}</span>
+
+
+<span class="kt">void</span> <span class="n">main</span><span class="p">()</span>
+<span class="p">{</span>
+    <span class="k">auto</span> <span class="n">v1</span> <span class="p">=</span> <span class="n">UniqueArrayNoGC</span><span class="p">(</span><span class="mi">16</span><span class="p">);</span>
+    <span class="k">auto</span> <span class="n">v2</span> <span class="p">=</span> <span class="n">UniqueArrayNoGC</span><span class="p">(</span><span class="mi">16</span><span class="p">);</span>
+    <span class="k">assert</span><span class="p">(</span><span class="n">v1</span><span class="p">.</span><span class="n">_v</span> <span class="p">!</span><span class="k">is</span> <span class="n">v2</span><span class="p">.</span><span class="n">_v</span><span class="p">);</span>    <span class="c1">// ユニーク</span>
+
+    <span class="k">auto</span> <span class="n">v3</span> <span class="p">=</span> <span class="n">v1</span><span class="p">;</span>
+    <span class="k">assert</span><span class="p">(</span><span class="n">v1</span><span class="p">.</span><span class="n">_v</span> <span class="p">!</span><span class="k">is</span> <span class="n">v3</span><span class="p">.</span><span class="n">_v</span><span class="p">);</span>    <span class="c1">// 常にユニーク</span>
+
+    <span class="c1">// 代入により、v2の値は破棄される</span>
+    <span class="n">v2</span> <span class="p">=</span> <span class="n">v3</span><span class="p">;</span>    <span class="c1">// (v2 dtor) -&gt; (blit v3 to v2) -&gt; (v2 postblit)</span>
+
+
+    <span class="c1">// v1, v2, v3はスコープの終了、つまりmain関数の終了とともに破棄されるので、</span>
+    <span class="c1">// そのタイミングでそれぞれdtorが走る</span>
+<span class="p">}</span>
+</code></pre></div>
+<h2>構造体の名前空間と静的メンバ</h2>
+
+<p>構造体の内部に定義可能なのは、コンストラクタ, Postblit, デストラクタだけではありません。
+モジュールに書けるようなすべての宣言や定義を含めることが出来ます。
+つまり、構造体の中に構造体を定義することも可能です。</p>
+
+<p>構造体の内部に定義される関数や変数は、通常はその構造体の値に対して所属しています(つまりメンバ変数, メンバ関数となる)。
+しかし、宣言に<code>static</code>をつけると、その関数や変数の所属先は「型」になります。
+これを静的メンバ変数及び静的メンバ関数と呼びます。</p>
+
+<p>静的メンバ関数内では、通常のメンバ関数で使用できていた<code>this</code>が使用できなくなります。
+また、静的でないメンバを関数内で操作, 呼び出しできません。</p>
+<div class="highlight"><pre><code class="language-d" data-lang="d"><span class="k">struct</span> <span class="n">S</span><span class="p">{</span>
+    <span class="k">struct</span> <span class="n">SS</span><span class="p">{</span>
+    <span class="p">}</span>
+
+    <span class="kt">int</span> <span class="n">a</span><span class="p">;</span>
+
+    <span class="kt">int</span> <span class="n">foo</span><span class="p">(){</span>
+        <span class="c1">// 静的メンバにも触れる</span>
+        <span class="n">sfoo</span><span class="p">();</span>     <span class="c1">// OK</span>
+        <span class="k">return</span> <span class="n">sa</span><span class="p">;</span>  <span class="c1">// OK</span>
+    <span class="p">}</span>
+
+  <span class="k">static</span><span class="p">:</span>
+    <span class="k">struct</span> <span class="n">SSS</span><span class="p">{</span>
+    <span class="p">}</span>
+
+    <span class="kt">int</span> <span class="n">sa</span><span class="p">;</span>
+
+    <span class="kt">void</span> <span class="n">sfoo</span><span class="p">(){</span>
+        <span class="c1">// 静的でないメンバを触れない</span>
+        <span class="c1">//foo();    // NG</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+
+
+<span class="kt">void</span> <span class="n">main</span><span class="p">()</span>
+<span class="p">{</span>
+    <span class="n">S</span> <span class="n">s</span><span class="p">;</span>        <span class="c1">// OK</span>
+    <span class="n">S</span><span class="p">.</span><span class="n">SS</span> <span class="n">ss</span><span class="p">;</span>    <span class="c1">// OK</span>
+    <span class="n">S</span><span class="p">.</span><span class="n">SSS</span> <span class="n">sss</span><span class="p">;</span>  <span class="c1">// OK</span>
+
+    <span class="n">s</span><span class="p">.</span><span class="n">a</span> <span class="p">=</span> <span class="mi">11</span><span class="p">;</span>
+    <span class="n">S</span><span class="p">.</span><span class="n">sa</span> <span class="p">=</span> <span class="mi">12</span><span class="p">;</span>
+    <span class="n">s</span><span class="p">.</span><span class="n">sa</span> <span class="p">=</span> <span class="mi">13</span><span class="p">;</span>  <span class="c1">// OK</span>
+    <span class="c1">//S.a = 14; // NG</span>
+    <span class="k">assert</span><span class="p">(</span><span class="n">S</span><span class="p">.</span><span class="n">sa</span> <span class="p">==</span> <span class="mi">13</span><span class="p">);</span> <span class="c1">// staticフィールドはS型に対して一つだけ</span>
+    <span class="k">assert</span><span class="p">(&amp;</span><span class="n">S</span><span class="p">.</span><span class="n">sa</span> <span class="p">==</span> <span class="p">&amp;</span><span class="n">s</span><span class="p">.</span><span class="n">sa</span><span class="p">);</span> <span class="c1">// 同上</span>
+
+    <span class="n">s</span><span class="p">.</span><span class="n">foo</span><span class="p">();</span>
+    <span class="n">S</span><span class="p">.</span><span class="n">sfoo</span><span class="p">();</span>
+    <span class="n">s</span><span class="p">.</span><span class="n">sfoo</span><span class="p">();</span>   <span class="c1">// OK</span>
+    <span class="c1">//S.foo();  // NG</span>
+<span class="p">}</span>
+</code></pre></div>
+<h2>alias this</h2>
+
+<p><code>int</code>や<code>byte</code>などのの整数型には、暗黙の型変換という型変換がありました。
+構造体などのユーザー定義型でこの暗黙変換のようなものを実現する機能が<code>alias this</code>です。</p>
+
+<p>たとえば、<code>int</code>型のように振る舞うものの、非負の整数しか許さない整数型は次のように実装できます。</p>
+<div class="highlight"><pre><code class="language-d" data-lang="d"><span class="k">struct</span> <span class="n">LimitedInt</span>
+<span class="p">{</span>
+    <span class="c1">// getter</span>
+    <span class="kt">int</span> <span class="n">value</span><span class="p">()</span> <span class="nd">@property</span>
+    <span class="k">out</span><span class="p">(</span><span class="n">r</span><span class="p">){</span>
+        <span class="k">assert</span><span class="p">(</span><span class="n">r</span> <span class="p">&gt;=</span> <span class="mi">0</span><span class="p">);</span>
+    <span class="p">}</span>
+    <span class="k">body</span><span class="p">{</span>
+        <span class="k">return</span> <span class="n">_v</span><span class="p">;</span>
+    <span class="p">}</span>
+
+
+    <span class="c1">// setter</span>
+    <span class="kt">void</span> <span class="n">value</span><span class="p">(</span><span class="kt">int</span> <span class="n">v</span><span class="p">)</span> <span class="nd">@property</span>
+    <span class="k">in</span><span class="p">{</span>
+        <span class="k">assert</span><span class="p">(</span><span class="n">v</span> <span class="p">&gt;=</span> <span class="mi">0</span><span class="p">);</span>
+    <span class="p">}</span>
+    <span class="k">body</span><span class="p">{</span>
+        <span class="n">_v</span> <span class="p">=</span> <span class="n">v</span><span class="p">;</span>
+    <span class="p">}</span>
+
+
+    <span class="k">alias</span> <span class="n">value</span> <span class="k">this</span><span class="p">;</span>
+
+  <span class="k">private</span><span class="p">:</span>
+    <span class="kt">int</span> <span class="n">_v</span><span class="p">;</span>
+<span class="p">}</span>
+
+
+<span class="kt">void</span> <span class="n">main</span><span class="p">()</span>
+<span class="p">{</span>
+    <span class="n">LimitedInt</span> <span class="n">a</span><span class="p">;</span>
+    <span class="n">a</span> <span class="p">=</span> <span class="mi">12</span><span class="p">;</span>
+    <span class="k">assert</span><span class="p">(</span><span class="n">a</span> <span class="p">==</span> <span class="mi">12</span><span class="p">);</span>
+    <span class="k">assert</span><span class="p">(</span><span class="n">a</span> <span class="p">!=</span> <span class="p">-</span><span class="mi">12</span><span class="p">);</span>
+
+    <span class="n">a</span> <span class="p">=</span> <span class="n">a</span> <span class="p">+</span> <span class="mi">3</span><span class="p">;</span>
+    <span class="n">a</span> <span class="p">=</span> <span class="n">a</span> <span class="p">-</span> <span class="mi">3</span><span class="p">;</span>
+    <span class="n">a</span> <span class="p">=</span> <span class="n">a</span> <span class="p">-</span> <span class="n">a</span><span class="p">;</span>
+    <span class="n">a</span> <span class="p">=</span> <span class="n">a</span> <span class="p">*</span> <span class="n">a</span><span class="p">;</span>
+
+    <span class="c1">//a -= a; NG,</span>
+    <span class="c1">//getterのvalueがlvalueじゃないので.</span>
+
+    <span class="n">a</span> <span class="p">=</span> <span class="p">-</span><span class="mi">12</span><span class="p">;</span>      <span class="c1">// 実行時にError</span>
+<span class="p">}</span>
+</code></pre></div><div class="highlight"><pre><code class="language-text" data-lang="text">core.exception.AssertError@foo(16): Assertion failure
+----------------
+0x004024DF
+0x00402075
+0x0040215F
+0x004024A8
+0x0040247B
+0x00402394
+0x00402187
+0x74A6336A in BaseThreadInitThunk
+0x77009F72 in RtlInitializeExceptionChain
+</code></pre></div>
+<h2>問題</h2>
+
+<ul>
+<li>問題募集中</li>
+</ul>
+
+<h2>参考文献</h2>
+
+<ol>
+<li><p><a href="http://www.tatapa.org/%7Etakuo/structured_programming/structured_programming.html">意外と知られていない構造化プログラミング、あるいは構造化プログラミングはデータも手続きと一緒に抽象化する、あるいはストロヴストルップのオブジェクト指向プログラミング史観</a></p></li>
+<li><p><a href="http://nekogata.hatenablog.com/entry/2014/01/17/125600">猫型プログラミング言語史観(1) 〜あるいはオブジェクト指向における設計指針のひとつ〜</a></p></li>
+</ol>
+
+<h2>キーワード</h2>
+
+<ul>
+<li><code>struct</code>, 構造体</li>
+<li>ユーザー定義型</li>
+<li>構造化プログラミング</li>
+<li>メンバ関数</li>
+<li>アクセス保護属性</li>
+<li>コンストラクタ</li>
+<li>Postblit</li>
+<li>デストラクタ</li>
+<li>静的メンバ</li>
+<li>alias this</li>
+</ul>
+
+              </div>
+            </div>
+          </div>
+          <div class="row">
+  <div class="col-md-12 col-sm-12 col-xs-12">
+    <div class="page-footer">
+      <div class="list-group">
+        <a href="/archives/#y-2014" class="list-group-item col-md-3 col-sm-4 col-xs-6">
+          <i class="fa fa fa-archive fa-lg"></i> 
+          <em itemprop="datePublished" content="2014-04-08">
+            08 Apr 2014
+          </em>
+        </a>
+        
+        <a href="/categories/#dmanual" class="list-group-item col-md-3 col-sm-4 col-xs-6">
+          <i class="fa fa-folder-open fa-lg"></i> <em itemprop="keywords">Dmanual</em>
+          <span class="badge">15</span>
+        </a>
+        
+        
+        <a href="/tags/#dmanual" class="list-group-item col-md-3 col-sm-4 col-xs-6">
+          <i class="fa fa-tag fa-lg"></i> <em itemprop="keywords">dmanual</em>
+          <span class="badge">15</span>
+        </a>
+        
+    </div>
+    <div id="disqus_thread"></div>
+    <script type="text/javascript">
+        /* * * CONFIGURATION VARIABLES: EDIT BEFORE PASTING INTO YOUR WEBPAGE * * */
+        var disqus_shortname = 'dmanual'; // required: replace example with your forum shortname
+
+        /* * * DON'T EDIT BELOW THIS LINE * * */
+        (function() {
+            var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+            dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+            (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+        })();
+    </script>
+    <noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+    <a href="http://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+  </div>
+</div>
+        </article>
+      </div>
+    </div>
+    
+<div class="footer">
+  <div class="container">
+    <hr/>
+    <div class="row">
+      <div class="col-md-12 col-sm-12 col-xs-12">
+        <ul class="nav nav-pills">
+          
+          <li>
+            <a href="https://www.github.com/k3kaimu">
+              <i class="fa fa-github-square fa-lg"></i> GitHub
+            </a>
+          </li>
+          
+          
+          <li>
+            <a href="http://www.twitter.com/k3_kaimu">
+              <i class="fa fa-twitter-square fa-lg"></i> Twitter
+            </a>
+          </li>
+          
+          
+          
+          <li>
+            <a href="/atom.xml">
+              <i class="fa fa-rss-square fa-lg"></i> Rss
+            </a>
+          </li>
+          <li class="pull-right visible-md visible-lg">
+            <a href="#top">
+              <i class="fa fa-arrow-circle-up fa-lg"></i> Back to top
+            </a>
+          </li>
+        </ul>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-md-12 col-sm-12 col-xs-12">        
+        <p>
+          &copy; k3-kaimu 2014 
+          with help from <a href="https://github.com/ogaclejapan/jekyllstrap" target="_blank" title="jekyllstrap is Jekyll template based on Bootstrap.">Jekyllstrap</a>.
+        </p>
+        <p>
+          Based on <a href="http://jekyllrb.com/" target="_blank">Jekyll</a>. 
+          Themes from <a href="http://getbootstrap.com/" target="_blank">Bootstrap</a> and <a href="http://bootswatch.com/" target="_blank">Bootswatch</a>. 
+          Icons from <a href="http://fontawesome.io/" target="_blank">Font Awesome</a>.
+        </p>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+    
+<div id="back-to-top">
+  <a href="#top"><i class="fa fa-arrow-circle-up fa-5x"></i></a>
+</div>
+
+    
+<script src="//code.jquery.com/jquery-2.0.3.min.js"></script>
+<script src="//netdna.bootstrapcdn.com/bootstrap/3.0.3/js/bootstrap.min.js"></script>
+<script src="/assets/js/all.min.js"></script>
+
+
+
+    
+
+
+  </body>
+</html>

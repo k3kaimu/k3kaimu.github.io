@@ -3,35 +3,11 @@
   
  <id>http://k3kaimu.github.io</id>
  <title></title>
- <updated>2014-09-02T17:07:54+09:00</updated>
+ <updated>2014-09-02T19:18:14+09:00</updated>
  <link rel="self" href="http://k3kaimu.github.io/atom.xml"/>
  <link href="http://k3kaimu.github.io/"/>
  <author><name>k3-kaimu</name></author>
 
- 
- <entry>
-  <id>http://k3kaimu.github.io/dmanual/2014/09/02/dm-variable_type</id>
-  <title>02 変数と型</title>
-  <updated>2014-09-02T21:17:41+09:00</updated>
-  <link href="http://k3kaimu.github.io/dmanual/2014/09/02/dm-variable_type/"/>
-  <content>Contents式(Expression)と文(Statement)とは？変数(Variable)変数の宣言(Declaration)変数の寿命とスコープ左辺値(lvalue)と右辺値(rvalue)いろいろな型(Type)リテラル(Literal)とシンボル(Symbol)デフォルト初期化値(Default Initializer; Type.init)void論理型(Boolean)整数型(Decimal Number)浮動小数点型(Floating-Point Number)虚数浮動小数点型(Imaginary Floating-Point Number)複素浮動小数点型(Comp...</content>
- </entry>
- 
- <entry>
-  <id>http://k3kaimu.github.io/dmanual/2014/09/02/dm-hello_world</id>
-  <title>01 D言語入門-Hello, World!</title>
-  <updated>2014-09-02T21:17:41+09:00</updated>
-  <link href="http://k3kaimu.github.io/dmanual/2014/09/02/dm-hello_world/"/>
-  <content>ContentsHello, world!---その前にHello, world!注意...Hello, world!を詳しくみてみる注意...1行目2行目3行目4行目5行目6行目write, writelnと型について関数についてwritef, writeflnコメント問題 -&amp;gt; 解答おわりにキーワード
-
-Hello, world!---その前に
-
-プログラミングの入門といえばHello, world!ですね。
-早速書いてみたいのですが、皆さんは コンパイラ と テキストエディタ は手に入れていますか？
-
-プログラム(==ソースコード)を書くには、テキストエディタがいります。
-n...</content>
- </entry>
  
  <entry>
   <id>http://k3kaimu.github.io/blog/2014/09/02/first-post</id>
@@ -41,6 +17,234 @@ n...</content>
   <content>そのうちd-manualをここで公開します。
 少々お待ちを(m´・ω・｀)m
 </content>
+ </entry>
+ 
+ <entry>
+  <id>http://k3kaimu.github.io/dmanual/2014/08/31/dm-union</id>
+  <title>16 共用体</title>
+  <updated>2014-08-31T09:00:00+09:00</updated>
+  <link href="http://k3kaimu.github.io/dmanual/2014/08/31/dm-union/"/>
+  <content>Contents共用体共用体とは？共用体みたいな、より安全な型おわりに, まとめキーワード仕様
+
+共用体
+
+共用体とは？
+
+構造体は複数の型を一つにまとめた新たな型を作るものでした。
+共用体も複数の型をまとめた新しい型を作ります。
+
+共用体と構造体の違いは、構造体は直積的であるのに対して、共用体は直和的です。
+つまり、もっと簡単な言葉を使えば、構造体は「複数の型の値のペア」であるのに対して、共用体は「一つの値が複数の型になり得る」のです。
+
+共用体と構造体のメモリ上でのメンバの配置は次のようになります。
+構造体はメンバそれぞれに領域が割り当てられるのに対して、共用体ではすべてのメンバで領...</content>
+ </entry>
+ 
+ <entry>
+  <id>http://k3kaimu.github.io/dmanual/2014/04/08/dm-struct</id>
+  <title>15 構造体</title>
+  <updated>2014-04-08T09:00:00+09:00</updated>
+  <link href="http://k3kaimu.github.io/dmanual/2014/04/08/dm-struct/"/>
+  <content>Contentsユーザー定義型複数の型をまとめるということ構造体の基本構造化プログラミングとその発展メンバ関数UFCSとメンバ関数の使い分けと型クラス(余談)アクセス保護属性とフィールドの隠蔽データ構造へのアクセスとプロパティコンストラクタビットごとのコピーとPostblitデストラクタ構造体の名前空間と静的メンバalias this問題参考文献キーワード
+
+ユーザー定義型
+
+今まではintだったりlong、またはstringなどの型を使用してプログラムを組んできましたが、この章と後のいくつかの章ではユーザー定義型について紹介していきます。
+ユーザー定義型というのは、その名の通りユーザー...</content>
+ </entry>
+ 
+ <entry>
+  <id>http://k3kaimu.github.io/dmanual/2013/11/16/dm-main</id>
+  <title>12 main関数</title>
+  <updated>2013-11-16T09:00:00+09:00</updated>
+  <link href="http://k3kaimu.github.io/dmanual/2013/11/16/dm-main/"/>
+  <content>Contentsシグネチャコマンドライン引数とstd.getopt返り値問題キーワード
+
+この章では、今まで散々書いてきたmain関数について解説していきます。
+
+シグネチャ
+
+関数名, 関数の戻り値型, 関数が取る引数の型リストの3つをまとめてシグネチャ(signature)といいます。
+今まで書いてきたmain関数のシグネチャはvoid main();だけですが、実際には以下のバリエーションがあります。
+void main();
+void main(string[] args);
+
+// 以下2つは通常使われない
+int main();
+int main(string[] args)...</content>
+ </entry>
+ 
+ <entry>
+  <id>http://k3kaimu.github.io/dmanual/2013/11/16/dm-io</id>
+  <title>13 ファイルと標準入出力</title>
+  <updated>2013-11-16T09:00:00+09:00</updated>
+  <link href="http://k3kaimu.github.io/dmanual/2013/11/16/dm-io/"/>
+  <content>Contentsファイルと標準入出力ファイル出力std.stdio.Fileを使うstd.file.writeやstd.file.appendを使う標準出力stdoutファイル入力std.stdio.Fileを使うstd.file.readやstd.file.readTextを使う標準入力stdin問題おわりにキーワード
+
+ファイルと標準入出力
+
+ファイル出力
+
+ファイルに出力するには大きく分けて二通りの方法がよく使われます。
+
+
+std.stdio.Fileを使う
+std.file.writeやstd.file.appendを使う
+
+
+
+
+1.の方法は、C言語でのstdio.hのFIL...</content>
+ </entry>
+ 
+ <entry>
+  <id>http://k3kaimu.github.io/dmanual/2013/08/23/dm-function</id>
+  <title>11 関数</title>
+  <updated>2013-08-23T09:00:00+09:00</updated>
+  <link href="http://k3kaimu.github.io/dmanual/2013/08/23/dm-function/"/>
+  <content>Contents関数とは？関数による処理のまとめ関数の基礎宣言の書き方と関数本体関数の引数デフォルト引数引数の記憶域クラス可変個引数関数オブジェクトを形成する引数返値型推論関数の属性プロパティ関数@property関数のメモリ安全性純粋関数pure例外を投げない関数nothrowUDA(User Defined Attribute)const, immutable, inout, abstract, final関数オーバーロード(多重定義, overload)ローカルstatic変数ネスト関数関数ポインタデリゲートdelegate関数のリテラルとラムダUFCS(Uniform Funct...</content>
+ </entry>
+ 
+ <entry>
+  <id>http://k3kaimu.github.io/dmanual/2013/07/17/dm-pointer</id>
+  <title>10 ポインタ</title>
+  <updated>2013-07-17T09:00:00+09:00</updated>
+  <link href="http://k3kaimu.github.io/dmanual/2013/07/17/dm-pointer/"/>
+  <content>Contentsポインタとは(復習)アドレスってなんやねん！アドレスとポインタってなにがどうやねん！変数のアドレスってどこやねん！ポインタの使い方ポインタと配列とインデックス演算子とポインタへの加算ポインタと左辺値ポインタの初期値とゼロ値特別なポインタvoid*とスライスvoid[]おわりに
+
+ポインタとは(復習)
+
+これまでの記事でポインタは何回も出てきたので、ここまで読み進めた方にはわかると思いますが、ポインタとは「メモリ上でのアドレス」です。
+
+アドレスってなんやねん！
+
+メモリには1バイトごとにアドレスが振り分けられています。
+たとえば、32bitのシステムですと、アドレスが0x...</content>
+ </entry>
+ 
+ <entry>
+  <id>http://k3kaimu.github.io/dmanual/2013/07/07/dm-associative-array</id>
+  <title>09 連想配列</title>
+  <updated>2013-07-07T09:00:00+09:00</updated>
+  <link href="http://k3kaimu.github.io/dmanual/2013/07/07/dm-associative-array/"/>
+  <content>Contents連想配列(Associative Array)とは？基本操作in演算子同値テスト(==, is)プロパティsize_t aa.lengthV[K] aa.dupV aa.get(K key, lazy V defValue)K[] aa.keysV[] aa.valuesauto aa.byKeyauto aa.byValueV[K] aa.rehash()foreachベーシックな方法aa.keysを使った方法aa.byKeyを使った場合aa.valuesを使った場合aa.byValue()を使った場合クラスをキーとして使うには(高度)問題 -&amp;gt; 解答おわりにキー...</content>
+ </entry>
+ 
+ <entry>
+  <id>http://k3kaimu.github.io/dmanual/2013/06/23/dm-array</id>
+  <title>07 配列</title>
+  <updated>2013-06-23T09:00:00+09:00</updated>
+  <link href="http://k3kaimu.github.io/dmanual/2013/06/23/dm-array/"/>
+  <content>Contents配列(Array)とは？スタックとヒープ静的配列(Static Array)配列とポインタのお話スライスヒープ上のメモリの確保要素の追加とスライス同士の結合、大きさの拡大縮小ガベージコレクタスライス演算子スライスを使ったベクトル演算スライスの独立性スライスや配列の等価テスト(同値テスト)スライスや配列の大小比較foreachと配列Rangeとスライス静的配列やスライスのプロパティとメソッド多次元配列(配列の配列)配列操作のまとめ問題 -&amp;gt; 解答終わりにキーワード仕様
+
+配列(Array)とは？
+
+配列というのは「メモリ上に連続した値のリスト(list)」です。
+たと...</content>
+ </entry>
+ 
+ <entry>
+  <id>http://k3kaimu.github.io/dmanual/2013/06/16/dm-string</id>
+  <title>08 文字列</title>
+  <updated>2013-06-16T09:00:00+09:00</updated>
+  <link href="http://k3kaimu.github.io/dmanual/2013/06/16/dm-string/"/>
+  <content>Contents文字コード文字リテラルと文字列リテラルと型改行文字と制御文字基本的な文字列操作文字列と配列文字列の先頭の文字を得るには？2文字目以降を得る文字列からある部分を取り出す文字列を結合する文字列の比較boolへの変換少しレベルアップした文字列操作問題おわりにキーワード仕様
+
+文字とは&amp;#39;a&amp;#39;とか&amp;#39;@&amp;#39;のことです。この文字が連なり文字列となります。
+配列が操れるあなたにとってD言語の文字列操作はすごく簡単です。
+
+文字コード
+
+あなたがいつもプログラムを打ち込んでいるテキストエディタはどうやって文字を区別しているでしょうか？
+つまり、「文字に対してど...</content>
+ </entry>
+ 
+ <entry>
+  <id>http://k3kaimu.github.io/dmanual/2013/06/16/dm-other-statement</id>
+  <title>06 その他の制御構文</title>
+  <updated>2013-06-16T09:00:00+09:00</updated>
+  <link href="http://k3kaimu.github.io/dmanual/2013/06/16/dm-other-statement/"/>
+  <content>Contentsgoto文とラベルswitch文とcase文問題 -&amp;gt; 解答おわりにキーワード仕様
+
+goto文とラベル
+
+アセンブリ言語や機械語を書いたことのある人なら「ジャンプ命令」は知っていると思います。
+「ジャンプ命令」とは、プログラムの実行位置(制御位置)を指定アドレスに移動する命令です。
+アセンブリ言語では、for文とかforeach, while, ifなどの構造化文ありませんから、それらはジャンプ命令を使って実現します。
+
+たとえば、次のD言語のコードを、Z80アセンブラで記述し、さらにD言語のコードに変換してみましょう。
+size_t sum;
+for(size_...</content>
+ </entry>
+ 
+ <entry>
+  <id>http://k3kaimu.github.io/dmanual/2013/05/26/dm-loop</id>
+  <title>05 反復処理</title>
+  <updated>2013-05-26T09:00:00+09:00</updated>
+  <link href="http://k3kaimu.github.io/dmanual/2013/05/26/dm-loop/"/>
+  <content>Contentswhile文無限ループdo文for文foreach range文foreach_reverseループを抜ける, 次に進めるループから抜け出すループを次に進める問題 -&amp;gt; 解答おわりにキーワード仕様
+
+反復処理(ループ)というのは、作業の繰り返しのことです。
+プログラムでのループは、「決まった状態になるまで続ける」という処理を記述します。
+
+while文
+
+while文は典型的なループ処理を記述できる文です。
+たとえば、自然数を足していき、和が100を超えた時点での値を出力したいとします。
+/// test00601.d
+import std.stdio;
+
+void...</content>
+ </entry>
+ 
+ <entry>
+  <id>http://k3kaimu.github.io/dmanual/2013/05/25/dm-if</id>
+  <title>04 条件分岐</title>
+  <updated>2013-05-25T09:00:00+09:00</updated>
+  <link href="http://k3kaimu.github.io/dmanual/2013/05/25/dm-if/"/>
+  <content>Contents文のいろいろ条件分岐とは？if文boolと評価される式if(宣言)な文&amp;amp;&amp;amp;(且つ)と||(又は)問題 -&amp;gt; 解答おわりにキーワードif文の仕様
+
+文のいろいろ
+
+復習しますと、文というのはD言語の小さな単位です。
+&amp;lt;expr&amp;gt;;のように、式の後に;をつけると、それは「式&amp;lt;expr&amp;gt;を評価する」という文になりますし、
+{と}の間に複数の文を記述すれば、「複数の文を順番に実行する」という文になります。
+その他、void main()というのも宣言文だったり、importも文でした。
+
+この記事で説明するifも文です。
+これは制御文...</content>
+ </entry>
+ 
+ <entry>
+  <id>http://k3kaimu.github.io/dmanual/2013/05/18/dm-expr_operator</id>
+  <title>03 式と演算子</title>
+  <updated>2013-05-18T09:00:00+09:00</updated>
+  <link href="http://k3kaimu.github.io/dmanual/2013/05/18/dm-expr_operator/"/>
+  <content>Contents式と演算子演算子と暗黙の数値型変換数値型に対する演算子括弧(bracket)単項プラス(unary plus), 単項マイナス(unary minus)インクリメント(increment), デクリメント(decrement)算術演算子ビット演算子(Bitwise operators)代入演算子(Assignment operator), 複合代入演算子(Compound assignment operators)同値テスト(Equal to), 非同値テスト(Not equal to)比較(Compare)論理演算子(Logical operators)コンマ演算子付録...</content>
+ </entry>
+ 
+ <entry>
+  <id>http://k3kaimu.github.io/dmanual/2013/05/11/dm-variable_type</id>
+  <title>02 変数と型</title>
+  <updated>2013-05-11T09:00:00+09:00</updated>
+  <link href="http://k3kaimu.github.io/dmanual/2013/05/11/dm-variable_type/"/>
+  <content>Contents式(Expression)と文(Statement)とは？変数(Variable)変数の宣言(Declaration)変数の寿命とスコープ左辺値(lvalue)と右辺値(rvalue)いろいろな型(Type)リテラル(Literal)とシンボル(Symbol)デフォルト初期化値(Default Initializer; Type.init)void論理型(Boolean)整数型(Decimal Number)浮動小数点型(Floating-Point Number)虚数浮動小数点型(Imaginary Floating-Point Number)複素浮動小数点型(Comp...</content>
+ </entry>
+ 
+ <entry>
+  <id>http://k3kaimu.github.io/dmanual/2013/05/06/dm-hello_world</id>
+  <title>01 D言語入門-Hello, World!</title>
+  <updated>2013-05-06T09:00:00+09:00</updated>
+  <link href="http://k3kaimu.github.io/dmanual/2013/05/06/dm-hello_world/"/>
+  <content>ContentsHello, world!---その前にHello, world!注意...Hello, world!を詳しくみてみる注意...1行目2行目3行目4行目5行目6行目write, writelnと型について関数についてwritef, writeflnコメント問題 -&amp;gt; 解答おわりにキーワード
+
+Hello, world!---その前に
+
+プログラミングの入門といえばHello, world!ですね。
+早速書いてみたいのですが、皆さんは コンパイラ と テキストエディタ は手に入れていますか？
+
+プログラム(==ソースコード)を書くには、テキストエディタがいります。
+n...</content>
  </entry>
  
  

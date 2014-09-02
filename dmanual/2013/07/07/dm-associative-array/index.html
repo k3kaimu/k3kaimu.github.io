@@ -1,0 +1,695 @@
+<!DOCTYPE html>
+<html lang="ja" xmlns="http://www.w3.org/1999/xhtml" prefix="og: http://ogp.me/ns#">
+  <head>
+    
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="format-detection" content="telephone=no">
+<link rel="alternate" type="application/rss+xml" title="RSS Feed" href="http://k3kaimu.github.io/atom.xml">
+<link rel="shortcut icon" href="/favicon.ico">
+
+    <title> 09 連想配列 | Go to the future</title>
+    
+<meta property="og:type" content="blog">
+<meta property="og:title" content="09 連想配列">
+<meta property="og:description" content="{% tree %}
+
+## 連想配列(Associative Array)とは？
+
+連想配列は、その名前の通り、「キー(key)から、値(value)を連想する」配列です。
+ちゃんと言うと、「インデックスが整数じゃなかったり、飛び飛びの値になっている配列」になります。
+つまり、「文字列をイン...">
+<meta property="og:url" content="http://k3kaimu.github.io/dmanual/2013/07/07/dm-associative-array/">
+
+<meta property="og:site_name" content="Go to the future">
+<meta property="og:locale" content="ja_JP">
+<meta name="twitter:card" content="summary">
+
+<meta name="twitter:site" content="@k3_kaimu">
+
+
+    
+<link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootswatch/3.0.2/cerulean/bootstrap.min.css">
+<link rel="stylesheet" href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.min.css">
+<link rel="stylesheet" href="/assets/css/all.min.css">
+
+    
+<!--[if lt IE 9]>
+  <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+  <script src="https://oss.maxcdn.com/libs/respond.js/1.3.0/respond.min.js"></script>
+<![endif]-->
+
+  </head>
+  <body>
+    
+<div class="navbar navbar-default navbar-fixed-top" role="navigation">
+  <div class="container">
+    <div class="navbar-header">
+      <a href="/" class="navbar-brand">Go to the future</a>
+      <button class="navbar-toggle" type="button" data-toggle="collapse" data-target="#navbar-main">
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+    </div>
+    <div class="navbar-collapse collapse" id="navbar-main">
+      <ul class="nav navbar-nav js_nav">
+        <li><a href="/archives/">Archives</a></li>
+        <li><a href="/categories/">Categories</a></li>
+        <li><a href="/tags/">Tags</a></li>
+        <li><a href="/dmanual/">DManual</a></li>
+      </ul>
+      <div id="owner" itemprop="author copyrightHolder editor" itemscope itemtype="http://schema.org/Person">
+        <ul class="nav navbar-nav navbar-right">
+          <li class="dropdown">
+            <a href="#" class="dropdown-toggle" data-toggle="dropdown">k3-kaimu <b class="caret"></b></a>
+            <ul class="dropdown-menu">
+              
+              <li>
+                
+                <a href="https://www.github.com/k3kaimu" itemprop="sameAs" content="https://www.github.com/k3kaimu">
+                  <i class="fa fa-github-square fa-lg"></i> GitHub
+                </a>
+              </li>
+              
+              
+              <li>
+                
+                <a href="http://www.twitter.com/k3_kaimu" itemprop="sameAs" content="http://www.twitter.com/k3_kaimu">
+                  <i class="fa fa-twitter-square fa-lg"></i> Twitter
+                </a>
+              </li>
+              
+              
+              
+              <li>
+                <a href="/atom.xml">
+                  <i class="fa fa-rss-square fa-lg fa-lg"></i> Rss
+                </a>
+              </li>
+            </ul>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</div>
+
+    <div id="content">
+      <div class="container">
+        <article itemscope itemtype="http://schema.org/Article" itemref="owner">
+          
+<div class="row">
+  <div class="col-md-12 col-sm-12 col-xs-12">
+    <div class="page-header">
+      <h1 itemprop="url" content="http://k3kaimu.github.io/dmanual/2013/07/07/dm-associative-array/">
+        <i class="fa fa-puzzle-piece fa-lg"></i> <span itemprop="name">09 連想配列</span>
+      </h1>
+    </div>
+  </div>
+</div>
+
+          <div class="row">
+            <div class="col-md-12 col-sm-12 col-xs-12">
+              <div itmprop="articleBody">
+                <p><h2 class="content_tree">Contents</h2><div class="content_tree_list"><ul><li>連想配列(Associative Array)とは？</li><li>基本操作</li><ul><li>in演算子</li><li>同値テスト(<code>==</code>, <code>is</code>)</li></ul><li>プロパティ</li><ul><li><code>size_t aa.length</code></li><li><code>V[K] aa.dup</code></li><li><code>V aa.get(K key, lazy V defValue)</code></li><li><code>K[] aa.keys</code></li><li><code>V[] aa.values</code></li><li><code>auto aa.byKey</code></li><li><code>auto aa.byValue</code></li><li><code>V[K] aa.rehash()</code></li></ul><li>foreach</li><ul><li>ベーシックな方法</li><li><code>aa.keys</code>を使った方法</li><li><code>aa.byKey</code>を使った場合</li><li><code>aa.values</code>を使った場合</li><li><code>aa.byValue()</code>を使った場合</li></ul><li>クラスをキーとして使うには(高度)</li><li>問題 -&gt; <a href="%7B%7B%20site.baseurl%20%7D%7D/dmanual/answer#associative_array">解答</a></li><li>おわりに</li><li>キーワード</li><li>仕様</li></ul></ul></div></p>
+
+<h2>連想配列(Associative Array)とは？</h2>
+
+<p>連想配列は、その名前の通り、「キー(key)から、値(value)を連想する」配列です。
+ちゃんと言うと、「インデックスが整数じゃなかったり、飛び飛びの値になっている配列」になります。
+つまり、「文字列をインデックスとして<code>double</code>型の値を格納した連想配列」というのもできます。
+連想配列では、配列でインデックスと呼ばれたものは「キー(key)」といわれます。</p>
+
+<h2>基本操作</h2>
+
+<p>キーの型を<code>K</code>、値の型を<code>V</code>とすれば、連想配列の型は<code>V[K]</code>です。</p>
+
+<p>百聞は一見に如かず、以下のサンプルソースコードを確認してみましょう。</p>
+<div class="highlight"><pre><code class="language-d" data-lang="d"><span class="c1">// test00901.d</span>
+<span class="k">import</span> <span class="n">std</span><span class="p">.</span><span class="n">stdio</span><span class="p">;</span>
+
+<span class="kt">void</span> <span class="n">main</span><span class="p">()</span>
+<span class="p">{</span>
+    <span class="kt">int</span><span class="p">[</span><span class="nb">string</span><span class="p">]</span> <span class="n">aa</span> <span class="p">=</span> <span class="p">[</span><span class="s">&quot;homu&quot;</span> <span class="p">:</span> <span class="mi">1</span><span class="p">,</span> <span class="s">&quot;mami&quot;</span> <span class="p">:</span> <span class="mi">2</span><span class="p">];</span>
+
+    <span class="n">writeln</span><span class="p">(</span><span class="n">aa</span><span class="p">[</span><span class="s">&quot;homu&quot;</span><span class="p">]);</span>        <span class="c1">// 1</span>
+    <span class="n">writeln</span><span class="p">(</span><span class="n">aa</span><span class="p">[</span><span class="s">&quot;mami&quot;</span><span class="p">]);</span>        <span class="c1">// 2</span>
+    <span class="c1">//writeln(aa[&quot;saya&quot;]);      // core.exception.RangeError@test00901(9): Range violation</span>
+                                <span class="c1">// 存在しないキーにアクセスしたから、エラーが出た.</span>
+
+    <span class="n">aa</span><span class="p">[</span><span class="s">&quot;foo&quot;</span><span class="p">]</span> <span class="p">=</span> <span class="mi">12</span><span class="p">;</span>             <span class="c1">// キー&quot;foo&quot;に値`12`を格納</span>
+    <span class="n">aa</span><span class="p">[</span><span class="s">&quot;bar&quot;</span><span class="p">]</span> <span class="p">=</span> <span class="mi">13</span><span class="p">;</span>
+    <span class="n">writeln</span><span class="p">(</span><span class="n">aa</span><span class="p">[</span><span class="s">&quot;foo&quot;</span><span class="p">]);</span>         <span class="c1">// 12</span>
+    <span class="n">writeln</span><span class="p">(</span><span class="n">aa</span><span class="p">[</span><span class="s">&quot;bar&quot;</span><span class="p">]);</span>         <span class="c1">// 13</span>
+
+    <span class="n">aa</span><span class="p">[</span><span class="s">&quot;foo&quot;</span><span class="p">]</span> <span class="p">=</span> <span class="mi">15</span><span class="p">;</span>             <span class="c1">// 再度代入</span>
+    <span class="n">writeln</span><span class="p">(</span><span class="n">aa</span><span class="p">[</span><span class="s">&quot;foo&quot;</span><span class="p">]);</span>         <span class="c1">// 15</span>
+
+    <span class="nb">size_t</span> <span class="n">len</span> <span class="p">=</span> <span class="n">aa</span><span class="p">.</span><span class="n">length</span><span class="p">;</span>     <span class="c1">// 現在格納している要素数</span>
+    <span class="n">writeln</span><span class="p">(</span><span class="n">len</span><span class="p">);</span>               <span class="c1">// 4</span>
+
+    <span class="kt">bool</span> <span class="n">b</span> <span class="p">=</span> <span class="n">aa</span><span class="p">.</span><span class="n">remove</span><span class="p">(</span><span class="s">&quot;foo&quot;</span><span class="p">);</span>  <span class="c1">// &quot;foo&quot;を削除, removeはaaが&quot;foo&quot;を持っていたかどうかを返す</span>
+    <span class="n">writeln</span><span class="p">(</span><span class="n">b</span><span class="p">);</span>                 <span class="c1">// true</span>
+    <span class="n">len</span> <span class="p">=</span> <span class="n">aa</span><span class="p">.</span><span class="n">length</span><span class="p">;</span>
+    <span class="n">writeln</span><span class="p">(</span><span class="n">len</span><span class="p">);</span>               <span class="c1">// 3</span>
+
+    <span class="n">aa</span> <span class="p">=</span> <span class="kc">null</span><span class="p">;</span>                  <span class="c1">// nullを代入すると、初期化される</span>
+    <span class="n">len</span> <span class="p">=</span> <span class="n">aa</span><span class="p">.</span><span class="n">length</span><span class="p">;</span>
+    <span class="n">writeln</span><span class="p">(</span><span class="n">len</span><span class="p">);</span>               <span class="c1">// 0</span>
+
+    <span class="k">auto</span> <span class="n">aa2</span> <span class="p">=</span> <span class="n">aa</span><span class="p">;</span>              <span class="c1">// 連想配列は「凄いポインタ」なので、代入はポインタ値の代入に等しい</span>
+    <span class="n">aa2</span><span class="p">[</span><span class="s">&quot;home&quot;</span><span class="p">]</span> <span class="p">=</span> <span class="mi">2</span><span class="p">;</span>            <span class="c1">// aa2の&quot;home&quot;の書き換え</span>
+    <span class="n">writeln</span><span class="p">(</span><span class="n">aa</span><span class="p">[</span><span class="s">&quot;home&quot;</span><span class="p">]);</span>        <span class="c1">// 2</span>
+                                <span class="c1">// aaも書き換わる</span>
+
+    <span class="n">aa2</span><span class="p">[</span><span class="s">&quot;mado&quot;</span><span class="p">]</span> <span class="p">=</span> <span class="mi">100</span><span class="p">;</span>          <span class="c1">// aa2に&quot;mado&quot;を追加</span>
+    <span class="n">writeln</span><span class="p">(</span><span class="n">aa</span><span class="p">[</span><span class="s">&quot;mado&quot;</span><span class="p">]);</span>        <span class="c1">// 100</span>
+                                <span class="c1">// aaにも&quot;mado&quot;が追加されている</span>
+<span class="p">}</span>
+</code></pre></div>
+<p>文章で説明する必要はないと思いますが、連想配列リテラルは<code>[&lt;key0&gt;: &lt;value0&gt;, &lt;key1&gt;:&lt;value1&gt;, ...]</code>というように書きます。
+また、キーを指定して値の左辺値を得る方法は、<code>&lt;aa&gt;[&lt;key&gt;]</code>です。</p>
+
+<p>ある一組のキーと値を、連想配列から取り除きたい場合には、<code>&lt;aa&gt;.remove(&lt;key&gt;)</code>とします。
+また、全要素削除したいなら、<code>null</code>を代入します。</p>
+
+<p>連想配列について注意しなければいけないのは、実際には「凄いポインタ」であるということです。
+つまり、代入したとしても、凄いポインタなので、ポインタ値が代入されるだけで全く同じ連想配列を指しています。</p>
+
+<h3>in演算子</h3>
+
+<p>たとえば、連想配列<code>aa</code>が、キー<code>key</code>の要素を持っているかどうかわからない状況があります。
+そのような場合に、連想配列が実際にそのキーを持っているか確認する方法が、<code>in</code>演算子です。</p>
+
+<p><code>in</code>演算子は、2項演算子で、<code>&lt;key&gt; in &lt;aa&gt;</code>という形式になります。
+間違いやすいのは、キーと連想配列の位置ですが、英文的に考えれば自然的でしょう
+。</p>
+
+<p><code>in</code>演算子の結果は、値へのポインタ<code>V*</code>です。
+もし、連想配列にそのキーがなければ<code>null</code>を返しますが、ある場合にはそのキーに対応する値へのポインタになります。</p>
+
+<p><code>&lt;key&gt; !in &lt;aa&gt;</code>とすれば、連想配列にそのキーがない場合に<code>true</code>となり、ある場合には<code>false</code>となります。</p>
+<div class="highlight"><pre><code class="language-d" data-lang="d"><span class="c1">// test00902.d</span>
+<span class="k">import</span> <span class="n">std</span><span class="p">.</span><span class="n">stdio</span><span class="p">;</span>
+<span class="k">import</span> <span class="n">std</span><span class="p">.</span><span class="n">exception</span> <span class="p">:</span> <span class="n">enforce</span><span class="p">;</span>
+
+<span class="kt">void</span> <span class="n">main</span><span class="p">()</span>
+<span class="p">{</span>
+    <span class="k">auto</span> <span class="n">madoMagi</span> <span class="p">=</span> <span class="p">[</span><span class="s">&quot;mado&quot;</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span> <span class="s">&quot;homu&quot;</span><span class="p">:</span> <span class="mi">2</span><span class="p">,</span>
+                     <span class="s">&quot;saya&quot;</span><span class="p">:</span> <span class="mi">3</span><span class="p">,</span> <span class="s">&quot;anko&quot;</span><span class="p">:</span> <span class="mi">4</span><span class="p">];</span>
+
+    <span class="c1">// if文と組み合わせて使うと便利</span>
+    <span class="k">if</span><span class="p">(</span><span class="k">auto</span> <span class="n">p</span> <span class="p">=</span> <span class="s">&quot;mami&quot;</span> <span class="k">in</span> <span class="n">madoMagi</span><span class="p">)</span>             <span class="c1">// false</span>
+        <span class="n">writefln</span><span class="p">(</span><span class="s">&quot;マミさん(%s)は生きています。&quot;</span><span class="p">,</span> <span class="p">*</span><span class="n">p</span><span class="p">);</span>
+    <span class="k">else</span>
+        <span class="n">writeln</span><span class="p">(</span><span class="s">&quot;マミさんは、マミられたようです&quot;</span><span class="p">);</span>
+
+    <span class="n">madoMagi</span><span class="p">.</span><span class="n">remove</span><span class="p">(</span><span class="s">&quot;saya&quot;</span><span class="p">);</span>
+
+
+    <span class="k">if</span><span class="p">(</span><span class="s">&quot;saya&quot;</span> <span class="p">!</span><span class="k">in</span> <span class="n">madoMagi</span><span class="p">)</span>                     <span class="c1">// true</span>
+        <span class="n">writeln</span><span class="p">(</span><span class="s">&quot;さやかちゃんは魔女化したようです&quot;</span><span class="p">);</span>
+<span class="p">}</span>
+</code></pre></div>
+<h3>同値テスト(<code>==</code>, <code>is</code>)</h3>
+
+<p>2つの連想配列が等しい<code>==</code>とは、2つの連想配列のキーがすべて等しく、その対応する値がお互いに等しい場合にいいます。
+また、2つの連想配列が全く同じ連想配列を指しているなら、<code>a is b</code>は<code>true</code>となります。</p>
+<div class="highlight"><pre><code class="language-d" data-lang="d"><span class="k">auto</span> <span class="n">aa1</span> <span class="p">=</span> <span class="p">[</span><span class="s">&quot;mado&quot;</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span> <span class="s">&quot;homu&quot;</span><span class="p">:</span> <span class="mi">2</span><span class="p">,</span> <span class="s">&quot;saya&quot;</span><span class="p">:</span> <span class="mi">3</span><span class="p">,</span> <span class="s">&quot;anko&quot;</span><span class="p">:</span> <span class="mi">4</span><span class="p">];</span>
+<span class="k">auto</span> <span class="n">aa2</span> <span class="p">=</span> <span class="p">[</span><span class="s">&quot;mado&quot;</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span> <span class="s">&quot;homu&quot;</span><span class="p">:</span> <span class="mi">2</span><span class="p">,</span> <span class="s">&quot;saya&quot;</span><span class="p">:</span> <span class="mi">3</span><span class="p">,</span> <span class="s">&quot;anko&quot;</span><span class="p">:</span> <span class="mi">4</span><span class="p">];</span>
+
+<span class="n">writeln</span><span class="p">(</span><span class="n">aa1</span> <span class="p">==</span> <span class="n">aa2</span><span class="p">);</span>            <span class="c1">// true</span>
+<span class="n">writeln</span><span class="p">(</span><span class="n">aa1</span> <span class="k">is</span> <span class="n">aa2</span><span class="p">);</span>            <span class="c1">// false</span>
+
+<span class="n">aa1</span><span class="p">[</span><span class="s">&quot;mami&quot;</span><span class="p">]</span> <span class="p">=</span> <span class="mi">5</span><span class="p">;</span>
+<span class="n">writeln</span><span class="p">(</span><span class="n">aa1</span> <span class="p">!=</span> <span class="n">aa2</span><span class="p">);</span>            <span class="c1">// true</span>
+
+<span class="n">aa1</span> <span class="p">=</span> <span class="n">aa2</span><span class="p">;</span>
+<span class="n">writeln</span><span class="p">(</span><span class="n">aa1</span> <span class="k">is</span> <span class="n">aa2</span><span class="p">);</span>            <span class="c1">// true</span>
+</code></pre></div>
+<h2>プロパティ</h2>
+
+<h3><code>size_t aa.length</code></h3>
+
+<p>その連想配列が持つ要素の数を返します。</p>
+<div class="highlight"><pre><code class="language-d" data-lang="d"><span class="kt">int</span><span class="p">[</span><span class="kt">int</span><span class="p">]</span> <span class="n">aa</span> <span class="p">=</span> <span class="p">[</span><span class="mi">0</span><span class="p">:</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">:</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">:</span><span class="mi">2</span><span class="p">];</span>
+
+<span class="n">writeln</span><span class="p">(</span><span class="n">aa</span><span class="p">.</span><span class="n">length</span><span class="p">);</span>         <span class="c1">// 3</span>
+</code></pre></div>
+<h3><code>V[K] aa.dup</code></h3>
+
+<p>配列に対する<code>dup</code>同様に、新しい連想配列にすべてコピーし、返します。</p>
+<div class="highlight"><pre><code class="language-d" data-lang="d"><span class="kt">int</span><span class="p">[</span><span class="kt">int</span><span class="p">]</span> <span class="n">aa</span> <span class="p">=</span> <span class="p">[</span><span class="mi">0</span><span class="p">:</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">:</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">:</span><span class="mi">2</span><span class="p">];</span>
+<span class="k">auto</span> <span class="n">aa2</span> <span class="p">=</span> <span class="n">aa</span><span class="p">;</span>
+
+<span class="n">aa2</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="p">=</span> <span class="mi">12</span><span class="p">;</span>
+<span class="n">writeln</span><span class="p">(</span><span class="n">aa</span><span class="p">);</span>                <span class="c1">// 12</span>
+                            <span class="c1">// aa2を書き換えると、aa3も書き換わってしまう</span>
+
+<span class="n">aa2</span> <span class="p">=</span> <span class="n">aa</span><span class="p">.</span><span class="n">dup</span><span class="p">;</span>
+
+<span class="n">aa2</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="p">=</span> <span class="mi">13</span><span class="p">;</span>
+<span class="n">writeln</span><span class="p">(</span><span class="n">aa</span><span class="p">[</span><span class="mi">0</span><span class="p">]);</span>             <span class="c1">// 12</span>
+                            <span class="c1">// aa2を書き換えても、aaには影響はない</span>
+</code></pre></div>
+<h3><code>V aa.get(K key, lazy V defValue)</code></h3>
+
+<p><code>aa</code>の<code>key</code>の要素を返します。
+<code>aa[key]</code>とは違い、もし<code>key</code>が<code>aa</code>に無ければ<code>defValue</code>を返します。
+また、返されるのは右辺値なので、その値を通しての書き換えは不可能です。
+<code>defValue</code>は、<code>key</code>が<code>aa</code>にない場合にのみ評価されます。
+(<code>lazy</code>は遅延評価を表し、式の評価を遅らせることを意味します。)</p>
+<div class="highlight"><pre><code class="language-d" data-lang="d"><span class="kt">int</span><span class="p">[</span><span class="kt">int</span><span class="p">]</span> <span class="n">aa</span> <span class="p">=</span> <span class="p">[</span><span class="mi">0</span><span class="p">:</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">:</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">:</span><span class="mi">2</span><span class="p">];</span>
+
+<span class="n">writeln</span><span class="p">(</span><span class="n">aa</span><span class="p">.</span><span class="n">get</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="p">-</span><span class="mi">1</span><span class="p">));</span>         <span class="c1">// 0</span>
+
+<span class="n">writeln</span><span class="p">(</span><span class="n">aa</span><span class="p">.</span><span class="n">get</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="p">-</span><span class="mi">1</span><span class="p">));</span>        <span class="c1">// -1</span>
+</code></pre></div>
+<h3><code>K[] aa.keys</code></h3>
+
+<p>連想配列が持つ、キーすべてをスライスにして返します。
+キーの並び順は予測不能です。</p>
+<div class="highlight"><pre><code class="language-d" data-lang="d"><span class="k">auto</span> <span class="n">madoMagi</span> <span class="p">=</span> <span class="p">[</span><span class="s">&quot;mado&quot;</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span> <span class="s">&quot;homu&quot;</span><span class="p">:</span> <span class="mi">2</span><span class="p">,</span>
+                 <span class="s">&quot;saya&quot;</span><span class="p">:</span> <span class="mi">3</span><span class="p">,</span> <span class="s">&quot;anko&quot;</span><span class="p">:</span> <span class="mi">4</span><span class="p">];</span>
+
+<span class="n">writeln</span><span class="p">(</span><span class="n">madoMagi</span><span class="p">.</span><span class="n">keys</span><span class="p">);</span>
+    <span class="c1">// [&quot;homu&quot;, &quot;saya&quot;, &quot;mado&quot;, &quot;anko&quot;]</span>
+    <span class="c1">// 実際に必ずこのような順番になるかはわからない</span>
+</code></pre></div>
+<h3><code>V[] aa.values</code></h3>
+
+<p>連想配列が持つ値すべてをスライスにして返します。
+<code>.keys</code>同様に、並び順は予測不能です。</p>
+<div class="highlight"><pre><code class="language-d" data-lang="d"><span class="k">auto</span> <span class="n">madoMagi</span> <span class="p">=</span> <span class="p">[</span><span class="s">&quot;mado&quot;</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span> <span class="s">&quot;homu&quot;</span><span class="p">:</span> <span class="mi">2</span><span class="p">,</span>
+                 <span class="s">&quot;saya&quot;</span><span class="p">:</span> <span class="mi">3</span><span class="p">,</span> <span class="s">&quot;anko&quot;</span><span class="p">:</span> <span class="mi">4</span><span class="p">];</span>
+
+<span class="n">writeln</span><span class="p">(</span><span class="n">madoMagi</span><span class="p">.</span><span class="n">values</span><span class="p">);</span>
+    <span class="c1">// [2, 3, 1, 4]</span>
+    <span class="c1">// 実際に必ずこのような順番になるかはわからない</span>
+</code></pre></div>
+<h3><code>auto aa.byKey</code></h3>
+
+<p>連想配列が持つキーをすべて、レンジ(<code>Input Range</code>)にして返します。
+もちろん、並び順は予測不能です。</p>
+<div class="highlight"><pre><code class="language-d" data-lang="d"><span class="k">auto</span> <span class="n">madoMagi</span> <span class="p">=</span> <span class="p">[</span><span class="s">&quot;mado&quot;</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span> <span class="s">&quot;homu&quot;</span><span class="p">:</span> <span class="mi">2</span><span class="p">,</span>
+                 <span class="s">&quot;saya&quot;</span><span class="p">:</span> <span class="mi">3</span><span class="p">,</span> <span class="s">&quot;anko&quot;</span><span class="p">:</span> <span class="mi">4</span><span class="p">];</span>
+
+<span class="k">auto</span> <span class="n">keyRng</span> <span class="p">=</span> <span class="n">madoMagi</span><span class="p">.</span><span class="n">byKey</span><span class="p">;</span>
+<span class="c1">//keyRng.front = &quot;majo&quot;;        // .frontは左辺値を返すので経由で書き換え可能だが、</span>
+                                <span class="c1">// 危険なので書き換えてはいけない。</span>
+
+<span class="n">writeln</span><span class="p">(</span><span class="n">keyRng</span><span class="p">);</span>                <span class="c1">// [&quot;homu&quot;, &quot;saya&quot;, &quot;mado&quot;, &quot;anko&quot;]</span>
+</code></pre></div>
+<h3><code>auto aa.byValue</code></h3>
+
+<p>連想配列が持つキーをすべて、レンジ(<code>Input Range</code>)にして返します。
+何度もいいますが、並び順は予測不能です。</p>
+<div class="highlight"><pre><code class="language-d" data-lang="d"><span class="k">auto</span> <span class="n">madoMagi</span> <span class="p">=</span> <span class="p">[</span><span class="s">&quot;mado&quot;</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span> <span class="s">&quot;homu&quot;</span><span class="p">:</span> <span class="mi">2</span><span class="p">,</span>
+                 <span class="s">&quot;saya&quot;</span><span class="p">:</span> <span class="mi">3</span><span class="p">,</span> <span class="s">&quot;anko&quot;</span><span class="p">:</span> <span class="mi">4</span><span class="p">];</span>
+
+<span class="n">writeln</span><span class="p">(</span><span class="n">madoMagi</span><span class="p">.</span><span class="n">byValue</span><span class="p">);</span>      <span class="c1">// [2, 3, 1, 4]</span>
+    <span class="c1">// [&quot;homu&quot;, &quot;saya&quot;, &quot;mado&quot;, &quot;anko&quot;]</span>
+    <span class="c1">// 実際に必ずこのような順番になるかはわからない</span>
+
+<span class="k">auto</span> <span class="n">valueRng</span> <span class="p">=</span> <span class="n">madoMagi</span><span class="p">.</span><span class="n">byValue</span><span class="p">;</span>
+<span class="n">valueRng</span><span class="p">.</span><span class="n">front</span> <span class="p">=</span> <span class="mi">100</span><span class="p">;</span>
+
+<span class="n">valueRng</span><span class="p">.</span><span class="n">popFront</span><span class="p">();</span>
+<span class="n">valueRng</span><span class="p">.</span><span class="n">front</span> <span class="p">=</span> <span class="mi">100</span><span class="p">;</span>           <span class="c1">// これは、.byKeysとは違いOK</span>
+
+<span class="n">writeln</span><span class="p">(</span><span class="n">madoMagi</span><span class="p">);</span>              <span class="c1">// [&quot;homu&quot;:100, &quot;saya&quot;:100, &quot;mado&quot;:1, &quot;anko&quot;:4]</span>
+</code></pre></div>
+<h3><code>V[K] aa.rehash()</code></h3>
+
+<p>詳しくは「ハッシュ」の節で説明しますが、連想配列の各要素に高速にアクセス可能なようにします。</p>
+<div class="highlight"><pre><code class="language-d" data-lang="d"><span class="k">auto</span> <span class="n">madoMagi</span> <span class="p">=</span> <span class="p">[</span><span class="s">&quot;mado&quot;</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span> <span class="s">&quot;homu&quot;</span><span class="p">:</span> <span class="mi">2</span><span class="p">,</span>
+                 <span class="s">&quot;saya&quot;</span><span class="p">:</span> <span class="mi">3</span><span class="p">,</span> <span class="s">&quot;anko&quot;</span><span class="p">:</span> <span class="mi">4</span><span class="p">];</span>
+
+<span class="n">writeln</span><span class="p">(</span><span class="n">madoMagi</span><span class="p">);</span>  <span class="c1">// [&quot;homu&quot;:2, &quot;saya&quot;:3, &quot;mado&quot;:1, &quot;anko&quot;:4]</span>
+
+<span class="n">madoMagi</span><span class="p">.</span><span class="n">rehash</span><span class="p">();</span>
+
+<span class="n">writeln</span><span class="p">(</span><span class="n">madoMagi</span><span class="p">);</span>  <span class="c1">// [&quot;homu&quot;:2, &quot;saya&quot;:3, &quot;anko&quot;:4, &quot;mado&quot;:1]</span>
+                    <span class="c1">// 最適化されたので、並び順が上と異なっている！</span>
+</code></pre></div>
+<h2>foreach</h2>
+
+<p>連想配列は、さまざまな方法を使って<code>foreach</code>で回すことができます。</p>
+
+<h3>ベーシックな方法</h3>
+
+<p>もっとも基本的な方法は、<code>foreach(key, value; aa)</code>とすることです。
+<code>value</code>の方は<code>ref</code>をつけて参照(書き換え可能)にできますが、<code>key</code>を<code>ref</code>にすると危険なので、できません。</p>
+<div class="highlight"><pre><code class="language-d" data-lang="d"><span class="k">auto</span> <span class="n">madoMagi</span> <span class="p">=</span> <span class="p">[</span><span class="s">&quot;mado&quot;</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span> <span class="s">&quot;homu&quot;</span><span class="p">:</span> <span class="mi">2</span><span class="p">,</span>
+                 <span class="s">&quot;saya&quot;</span><span class="p">:</span> <span class="mi">3</span><span class="p">,</span> <span class="s">&quot;anko&quot;</span><span class="p">:</span> <span class="mi">4</span><span class="p">,</span> <span class="s">&quot;mami&quot;</span><span class="p">:</span> <span class="mi">5</span><span class="p">];</span>
+
+<span class="k">foreach</span><span class="p">(</span><span class="n">k</span><span class="p">,</span> <span class="n">v</span><span class="p">;</span> <span class="n">madoMagi</span><span class="p">)</span>
+    <span class="n">writefln</span><span class="p">(</span><span class="s">&quot;%s : %s&quot;</span><span class="p">,</span> <span class="n">k</span><span class="p">,</span> <span class="n">v</span><span class="p">);</span>
+
+<span class="n">writeln</span><span class="p">();</span>
+
+<span class="k">foreach</span><span class="p">(</span><span class="n">k</span><span class="p">,</span> <span class="k">ref</span> <span class="n">v</span><span class="p">;</span> <span class="n">madoMagi</span><span class="p">)</span>
+    <span class="n">v</span> <span class="p">=</span> <span class="mi">100</span><span class="p">;</span>
+
+<span class="n">writefln</span><span class="p">(</span><span class="s">&quot;%-(%s : %s%|\n%)&quot;</span><span class="p">,</span> <span class="n">madoMagi</span><span class="p">);</span>
+
+<span class="cm">/* 実行結果</span>
+<span class="cm">homu : 2</span>
+<span class="cm">saya : 3</span>
+<span class="cm">mado : 1</span>
+<span class="cm">anko : 4</span>
+<span class="cm">mami : 5</span>
+
+<span class="cm">homu : 100</span>
+<span class="cm">saya : 100</span>
+<span class="cm">mado : 100</span>
+<span class="cm">anko : 100</span>
+<span class="cm">mami : 100</span>
+<span class="cm">*/</span>
+</code></pre></div>
+<h3><code>aa.keys</code>を使った方法</h3>
+
+<p><code>aa.keys</code>はキーのスライスを返すので、そのスライスを<code>foreach</code>でたどれば良いのです。
+ただし、新たに領域が確保されてしまいます。
+先ほどの例と同じ動作をするものを<code>.keys</code>で書くと、以下のようになります。</p>
+<div class="highlight"><pre><code class="language-d" data-lang="d"><span class="k">auto</span> <span class="n">madoMagi</span> <span class="p">=</span> <span class="p">[</span><span class="s">&quot;mado&quot;</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span> <span class="s">&quot;homu&quot;</span><span class="p">:</span> <span class="mi">2</span><span class="p">,</span>
+                 <span class="s">&quot;saya&quot;</span><span class="p">:</span> <span class="mi">3</span><span class="p">,</span> <span class="s">&quot;anko&quot;</span><span class="p">:</span> <span class="mi">4</span><span class="p">,</span> <span class="s">&quot;mami&quot;</span><span class="p">:</span> <span class="mi">5</span><span class="p">];</span>
+
+<span class="k">foreach</span><span class="p">(</span><span class="n">k</span><span class="p">;</span> <span class="n">madoMagi</span><span class="p">.</span><span class="n">keys</span><span class="p">)</span>
+    <span class="n">writefln</span><span class="p">(</span><span class="s">&quot;%s : %s&quot;</span><span class="p">,</span> <span class="n">k</span><span class="p">,</span> <span class="n">madoMagi</span><span class="p">[</span><span class="n">k</span><span class="p">]);</span>
+
+<span class="n">writeln</span><span class="p">();</span>
+
+<span class="k">foreach</span><span class="p">(</span><span class="n">k</span><span class="p">;</span> <span class="n">madoMagi</span><span class="p">.</span><span class="n">keys</span><span class="p">)</span>
+    <span class="n">madoMagi</span><span class="p">[</span><span class="n">k</span><span class="p">]</span> <span class="p">=</span> <span class="mi">100</span><span class="p">;</span>
+
+<span class="n">writefln</span><span class="p">(</span><span class="s">&quot;%-(%s : %s%|\n%)&quot;</span><span class="p">,</span> <span class="n">madoMagi</span><span class="p">);</span>
+</code></pre></div>
+<h3><code>aa.byKey</code>を使った場合</h3>
+
+<p><code>aa.byKey</code>は、キーを要素とするレンジなので、<code>.keys</code>同様に使えますが、新たな領域が確保されません。</p>
+<div class="highlight"><pre><code class="language-d" data-lang="d"><span class="k">auto</span> <span class="n">madoMagi</span> <span class="p">=</span> <span class="p">[</span><span class="s">&quot;mado&quot;</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span> <span class="s">&quot;homu&quot;</span><span class="p">:</span> <span class="mi">2</span><span class="p">,</span>
+                 <span class="s">&quot;saya&quot;</span><span class="p">:</span> <span class="mi">3</span><span class="p">,</span> <span class="s">&quot;anko&quot;</span><span class="p">:</span> <span class="mi">4</span><span class="p">,</span> <span class="s">&quot;mami&quot;</span><span class="p">:</span> <span class="mi">5</span><span class="p">];</span>
+
+<span class="k">foreach</span><span class="p">(</span><span class="n">k</span><span class="p">;</span> <span class="n">madoMagi</span><span class="p">.</span><span class="n">byKey</span><span class="p">)</span>
+    <span class="n">writefln</span><span class="p">(</span><span class="s">&quot;%s : %s&quot;</span><span class="p">,</span> <span class="n">k</span><span class="p">,</span> <span class="n">madoMagi</span><span class="p">[</span><span class="n">k</span><span class="p">]);</span>
+
+<span class="n">writeln</span><span class="p">();</span>
+
+<span class="k">foreach</span><span class="p">(</span><span class="n">k</span><span class="p">;</span> <span class="n">madoMagi</span><span class="p">.</span><span class="n">byKey</span><span class="p">)</span>
+    <span class="n">madoMagi</span><span class="p">[</span><span class="n">k</span><span class="p">]</span> <span class="p">=</span> <span class="mi">100</span><span class="p">;</span>
+
+<span class="n">writefln</span><span class="p">(</span><span class="s">&quot;%-(%s : %s%|\n%)&quot;</span><span class="p">,</span> <span class="n">madoMagi</span><span class="p">);</span>
+</code></pre></div>
+<h3><code>aa.values</code>を使った場合</h3>
+
+<p>もしキーの値が要らないのであれば、<code>.values</code>を使うことで値だけイテレートできます。
+<code>.keys</code>同様に、新しく領域が確保されます。</p>
+<div class="highlight"><pre><code class="language-d" data-lang="d"><span class="k">auto</span> <span class="n">madoMagi</span> <span class="p">=</span> <span class="p">[</span><span class="s">&quot;mado&quot;</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span> <span class="s">&quot;homu&quot;</span><span class="p">:</span> <span class="mi">2</span><span class="p">,</span>
+                 <span class="s">&quot;saya&quot;</span><span class="p">:</span> <span class="mi">3</span><span class="p">,</span> <span class="s">&quot;anko&quot;</span><span class="p">:</span> <span class="mi">4</span><span class="p">,</span> <span class="s">&quot;mami&quot;</span><span class="p">:</span> <span class="mi">5</span><span class="p">];</span>
+
+<span class="k">foreach</span><span class="p">(</span><span class="n">v</span><span class="p">;</span> <span class="n">madoMagi</span><span class="p">.</span><span class="n">values</span><span class="p">)</span>
+    <span class="n">writeln</span><span class="p">(</span><span class="n">v</span><span class="p">);</span>
+</code></pre></div>
+<h3><code>aa.byValue()</code>を使った場合</h3>
+
+<p><code>.values</code>同様に値のみでイテレートできますが、<code>.byValue</code>経由だと値の変更ができ、レンジなので新しく領域が確保されません。</p>
+<div class="highlight"><pre><code class="language-d" data-lang="d"><span class="k">auto</span> <span class="n">madoMagi</span> <span class="p">=</span> <span class="p">[</span><span class="s">&quot;mado&quot;</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span> <span class="s">&quot;homu&quot;</span><span class="p">:</span> <span class="mi">2</span><span class="p">,</span>
+                 <span class="s">&quot;saya&quot;</span><span class="p">:</span> <span class="mi">3</span><span class="p">,</span> <span class="s">&quot;anko&quot;</span><span class="p">:</span> <span class="mi">4</span><span class="p">,</span> <span class="s">&quot;mami&quot;</span><span class="p">:</span> <span class="mi">5</span><span class="p">];</span>
+
+<span class="k">foreach</span><span class="p">(</span><span class="n">v</span><span class="p">;</span> <span class="n">madoMagi</span><span class="p">.</span><span class="n">byValue</span><span class="p">)</span>
+    <span class="n">writeln</span><span class="p">(</span><span class="n">v</span><span class="p">);</span>
+
+<span class="n">writeln</span><span class="p">();</span>
+
+<span class="k">foreach</span><span class="p">(</span><span class="k">ref</span> <span class="n">v</span><span class="p">;</span> <span class="n">madoMagi</span><span class="p">.</span><span class="n">byValue</span><span class="p">)</span>
+    <span class="n">v</span> <span class="p">=</span> <span class="mi">100</span><span class="p">;</span>
+
+<span class="n">writefln</span><span class="p">(</span><span class="s">&quot;%-(%s : %s%|\n%)&quot;</span><span class="p">,</span> <span class="n">madoMagi</span><span class="p">);</span>
+</code></pre></div>
+<h2>クラスをキーとして使うには(高度)</h2>
+
+<p>連想配列のキーとしてクラスを使うには、クラスに<code>toHash</code>や<code>opEquals</code>を定義する必要があります。
+<code>hash_t</code>は<code>size_t</code>の<code>alias</code>です。</p>
+<div class="highlight"><pre><code class="language-d" data-lang="d"><span class="c1">/// test.d</span>
+<span class="k">import</span> <span class="n">std</span><span class="p">.</span><span class="n">stdio</span><span class="p">;</span>
+
+<span class="k">class</span> <span class="n">MyKey</span>
+<span class="p">{</span>
+    <span class="k">this</span><span class="p">(</span><span class="kt">int</span> <span class="n">a</span><span class="p">){</span> <span class="n">_a</span> <span class="p">=</span> <span class="n">a</span><span class="p">;</span> <span class="p">}</span>
+
+    <span class="k">override</span> <span class="n">hash_t</span> <span class="n">toHash</span><span class="p">(){</span> <span class="k">return</span> <span class="n">_a</span><span class="p">;</span> <span class="p">}</span>
+    <span class="k">override</span> <span class="kt">bool</span> <span class="n">opEquals</span><span class="p">(</span><span class="n">Object</span> <span class="n">o</span><span class="p">){</span>
+        <span class="k">auto</span> <span class="n">rhs</span> <span class="p">=</span> <span class="k">cast</span><span class="p">(</span><span class="n">MyKey</span><span class="p">)</span><span class="n">o</span><span class="p">;</span>
+        <span class="k">return</span> <span class="n">rhs</span> <span class="p">&amp;&amp;</span> <span class="n">rhs</span><span class="p">.</span><span class="n">_a</span> <span class="p">==</span> <span class="k">this</span><span class="p">.</span><span class="n">_a</span><span class="p">;</span>
+    <span class="p">}</span>
+
+  <span class="k">private</span><span class="p">:</span>
+    <span class="kt">int</span> <span class="n">_a</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="kt">void</span> <span class="n">main</span><span class="p">()</span>
+<span class="p">{</span>
+    <span class="kt">int</span><span class="p">[</span><span class="n">MyKey</span><span class="p">]</span> <span class="n">aa</span><span class="p">;</span>
+
+    <span class="n">aa</span><span class="p">[</span><span class="k">new</span> <span class="n">MyKey</span><span class="p">(</span><span class="mi">1</span><span class="p">)]</span> <span class="p">=</span> <span class="mi">12</span><span class="p">;</span>
+    <span class="n">aa</span><span class="p">[</span><span class="k">new</span> <span class="n">MyKey</span><span class="p">(</span><span class="mi">2</span><span class="p">)]</span> <span class="p">=</span> <span class="mi">3</span><span class="p">;</span>
+    <span class="n">aa</span><span class="p">[</span><span class="k">new</span> <span class="n">MyKey</span><span class="p">(</span><span class="mi">3</span><span class="p">)]</span> <span class="p">=</span> <span class="mi">4</span><span class="p">;</span>
+
+    <span class="n">aa</span><span class="p">[</span><span class="k">new</span> <span class="n">MyKey</span><span class="p">(</span><span class="mi">1</span><span class="p">)]</span> <span class="p">=</span> <span class="mi">8</span><span class="p">;</span>   <span class="c1">// rewrite</span>
+
+    <span class="n">writeln</span><span class="p">(</span><span class="n">aa</span><span class="p">);</span>
+<span class="p">}</span>
+</code></pre></div><div class="highlight"><pre><code class="language-text" data-lang="text">$ rdmd test
+[foo.MyKey:8, foo.MyKey:3, foo.MyKey:4]
+</code></pre></div>
+<p>構造体や共用体については、これらの二つはデフォルトではバイナリから算出されます。
+もちろん、プログラマが定義するとその方式でハッシュ, 比較されます。</p>
+<div class="highlight"><pre><code class="language-d" data-lang="d"><span class="c1">/// test.d</span>
+<span class="k">import</span> <span class="n">std</span><span class="p">.</span><span class="n">stdio</span><span class="p">;</span>
+
+<span class="k">struct</span> <span class="n">MyKey</span>
+<span class="p">{</span>
+    <span class="kt">int</span> <span class="n">a</span><span class="p">;</span>
+    <span class="kt">int</span> <span class="n">b</span><span class="p">;</span>  <span class="c1">// これを無視したい</span>
+
+    <span class="n">hash_t</span> <span class="n">toHash</span><span class="p">()</span> <span class="k">const</span> <span class="k">nothrow</span> <span class="nd">@safe</span> <span class="p">{</span> <span class="k">return</span> <span class="n">a</span><span class="p">;</span> <span class="p">}</span>
+    <span class="kt">bool</span> <span class="n">opEquals</span><span class="p">(</span><span class="k">ref</span> <span class="k">const</span> <span class="n">MyKey</span> <span class="n">rhs</span><span class="p">)</span> <span class="k">const</span>
+    <span class="p">{</span> <span class="k">return</span> <span class="k">this</span><span class="p">.</span><span class="n">a</span> <span class="p">==</span> <span class="n">rhs</span><span class="p">.</span><span class="n">a</span><span class="p">;</span> <span class="p">}</span>
+<span class="p">}</span>
+
+<span class="kt">void</span> <span class="n">main</span><span class="p">()</span>
+<span class="p">{</span>
+    <span class="kt">int</span><span class="p">[</span><span class="n">MyKey</span><span class="p">]</span> <span class="n">aa</span><span class="p">;</span>
+
+    <span class="n">aa</span><span class="p">[</span><span class="n">MyKey</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">)]</span> <span class="p">=</span> <span class="mi">12</span><span class="p">;</span>
+    <span class="n">aa</span><span class="p">[</span><span class="n">MyKey</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">)]</span> <span class="p">=</span> <span class="mi">3</span><span class="p">;</span>
+    <span class="n">aa</span><span class="p">[</span><span class="n">MyKey</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">)]</span> <span class="p">=</span> <span class="mi">4</span><span class="p">;</span>
+
+    <span class="n">aa</span><span class="p">[</span><span class="n">MyKey</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">4</span><span class="p">)]</span> <span class="p">=</span> <span class="mi">8</span><span class="p">;</span>   <span class="c1">// rewrite</span>
+
+    <span class="n">writeln</span><span class="p">(</span><span class="n">aa</span><span class="p">);</span>
+<span class="p">}</span>
+</code></pre></div><div class="highlight"><pre><code class="language-text" data-lang="text">$ rdmd test
+[MyKey(1, 2):8, MyKey(2, 3):3, MyKey(3, 4):4]
+</code></pre></div>
+<h2>問題 -&gt; <a href="/dmanual/answer#associative_array">解答</a></h2>
+
+<ul>
+<li>問題1<br></li>
+</ul>
+
+<p>入力として、人の名前とある数字がN行与えられる。先頭行はNがいくらかを示している。人名が重なることはなく、数字は重なっている可能性がある。たとえば、以下のように。</p>
+<div class="highlight"><pre><code class="language-text" data-lang="text">11
+kotoge      92
+usagi       81
+keika       25
+uchizono    59
+ayakura     18
+shihori     33
+sakagami    13
+kasiwagi    13
+takahashi   25
+nakamura    11
+fuzimiya    89
+</code></pre></div>
+<p>このようなリストが与えられた場合に、名前をアルファベットでソートした順番(五十音順ではない)で数字も一緒に出力するようなプログラムを作成してください。<br>
+参考として、例のリストが入力された場合の正しい出力を以下に示しておきます。
+この出力例でのフォーマットは<code>writefln(&quot;%-12s\t\t%s&quot;, name, value);</code>となっていますが、異なったフォーマットでも構いません。</p>
+<div class="highlight"><pre><code class="language-text" data-lang="text">ayakura                 18
+fuzimiya                89
+kasiwagi                13
+keika                   25
+kotoge                  92
+nakamura                11
+sakagami                13
+shihori                 33
+takahashi               25
+uchizono                59
+usagi                   81
+</code></pre></div>
+<ul>
+<li>問題2<br></li>
+</ul>
+
+<p>問題1では、アルファベット順でしたが、今度は数字の順番で並べてみましょう。もし、同じ数字に複数人いる場合には、その中でもアルファベット順で出力してください。
+つまり、例に対する出力は以下のようになります。<br>
+(ヒント: 数字ごとに人名リストを作る<code>string[][int]</code>という連想配列に格納してみると…)</p>
+<div class="highlight"><pre><code class="language-text" data-lang="text">nakamura                11
+kasiwagi                13
+sakagami                13
+ayakura                 18
+keika                   25
+takahashi               25
+shihori                 33
+uchizono                59
+usagi                   81
+fuzimiya                89
+kotoge                  92
+</code></pre></div>
+<h2>おわりに</h2>
+
+<p>連想配列は、配列よりもコストが大きいですが、その分様々な局面で活躍してくれるすごい機能です。
+特にDの連想配列は、言語組込みという利点があり、<code>in</code>演算子や<code>dup</code>などのすごい機能が簡単に書けてしまいます。</p>
+
+<p>さて、次回は今までよく出てきたポインタについて再学習します。</p>
+
+<h2>キーワード</h2>
+
+<ul>
+<li>連想配列(Associative Array)</li>
+<li>キー(Key)</li>
+<li>値(Value)</li>
+<li><code>in</code></li>
+<li><code>.length</code></li>
+<li><code>.dup</code></li>
+<li><code>.get(K key, lazy V defValue)</code></li>
+<li><code>.keys</code></li>
+<li><code>.values</code></li>
+<li><code>.byKey</code></li>
+<li><code>.byValue</code></li>
+<li>ハッシュ(Hash)</li>
+</ul>
+
+<h2>仕様</h2>
+
+<p><a href="http://dlang.org/hash-map.html">英語</a>
+<a href="http://www.kmonos.net/alang/d/hash-map.html">日本語</a></p>
+
+              </div>
+            </div>
+          </div>
+          <div class="row">
+  <div class="col-md-12 col-sm-12 col-xs-12">
+    <div class="page-footer">
+      <div class="list-group">
+        <a href="/archives/#y-2013" class="list-group-item col-md-3 col-sm-4 col-xs-6">
+          <i class="fa fa fa-archive fa-lg"></i> 
+          <em itemprop="datePublished" content="2013-07-07">
+            07 Jul 2013
+          </em>
+        </a>
+        
+        <a href="/categories/#dmanual" class="list-group-item col-md-3 col-sm-4 col-xs-6">
+          <i class="fa fa-folder-open fa-lg"></i> <em itemprop="keywords">Dmanual</em>
+          <span class="badge">15</span>
+        </a>
+        
+        
+        <a href="/tags/#dmanual" class="list-group-item col-md-3 col-sm-4 col-xs-6">
+          <i class="fa fa-tag fa-lg"></i> <em itemprop="keywords">dmanual</em>
+          <span class="badge">15</span>
+        </a>
+        
+    </div>
+    <div id="disqus_thread"></div>
+    <script type="text/javascript">
+        /* * * CONFIGURATION VARIABLES: EDIT BEFORE PASTING INTO YOUR WEBPAGE * * */
+        var disqus_shortname = 'dmanual'; // required: replace example with your forum shortname
+
+        /* * * DON'T EDIT BELOW THIS LINE * * */
+        (function() {
+            var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+            dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+            (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+        })();
+    </script>
+    <noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+    <a href="http://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+  </div>
+</div>
+        </article>
+      </div>
+    </div>
+    
+<div class="footer">
+  <div class="container">
+    <hr/>
+    <div class="row">
+      <div class="col-md-12 col-sm-12 col-xs-12">
+        <ul class="nav nav-pills">
+          
+          <li>
+            <a href="https://www.github.com/k3kaimu">
+              <i class="fa fa-github-square fa-lg"></i> GitHub
+            </a>
+          </li>
+          
+          
+          <li>
+            <a href="http://www.twitter.com/k3_kaimu">
+              <i class="fa fa-twitter-square fa-lg"></i> Twitter
+            </a>
+          </li>
+          
+          
+          
+          <li>
+            <a href="/atom.xml">
+              <i class="fa fa-rss-square fa-lg"></i> Rss
+            </a>
+          </li>
+          <li class="pull-right visible-md visible-lg">
+            <a href="#top">
+              <i class="fa fa-arrow-circle-up fa-lg"></i> Back to top
+            </a>
+          </li>
+        </ul>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-md-12 col-sm-12 col-xs-12">        
+        <p>
+          &copy; k3-kaimu 2014 
+          with help from <a href="https://github.com/ogaclejapan/jekyllstrap" target="_blank" title="jekyllstrap is Jekyll template based on Bootstrap.">Jekyllstrap</a>.
+        </p>
+        <p>
+          Based on <a href="http://jekyllrb.com/" target="_blank">Jekyll</a>. 
+          Themes from <a href="http://getbootstrap.com/" target="_blank">Bootstrap</a> and <a href="http://bootswatch.com/" target="_blank">Bootswatch</a>. 
+          Icons from <a href="http://fontawesome.io/" target="_blank">Font Awesome</a>.
+        </p>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+    
+<div id="back-to-top">
+  <a href="#top"><i class="fa fa-arrow-circle-up fa-5x"></i></a>
+</div>
+
+    
+<script src="//code.jquery.com/jquery-2.0.3.min.js"></script>
+<script src="//netdna.bootstrapcdn.com/bootstrap/3.0.3/js/bootstrap.min.js"></script>
+<script src="/assets/js/all.min.js"></script>
+
+
+
+    
+
+
+  </body>
+</html>
