@@ -3,7 +3,7 @@
   
  <id>http://k3kaimu.github.io</id>
  <title></title>
- <updated>2014-09-02T12:37:37+09:00</updated>
+ <updated>2014-09-02T15:14:39+09:00</updated>
  <link rel="self" href="http://k3kaimu.github.io/atom.xml"/>
  <link href="http://k3kaimu.github.io/"/>
  <author><name>k3-kaimu</name></author>
@@ -14,23 +14,15 @@
   <title>D言語入門-Hello, World!</title>
   <updated>2014-09-02T21:17:41+09:00</updated>
   <link href="http://k3kaimu.github.io/dmanual/2014/09/02/hello_world/"/>
-  <content>Hello, world!---その前に
+  <content>ContentsHello, world!---その前にHello, world!注意...Hello, world!を詳しくみてみる注意...1行目2行目3行目4行目5行目6行目write, writelnと型について関数についてwritef, writeflnコメント問題 -&amp;gt; 解答おわりにキーワード
+
+Hello, world!---その前に
 
 プログラミングの入門といえばHello, world!ですね。
 早速書いてみたいのですが、皆さんは コンパイラ と テキストエディタ は手に入れていますか？
 
 プログラム(==ソースコード)を書くには、テキストエディタがいります。
-notepad.exeで編集したければそれでいいのですが、せっかくなのでカッコイイテキストエディタを入手しましょう。
-各エディタの説明はしませんが、個人的にはSublime Text2がオススメです。
-
-
-Sublime Text2
-notepad++
-Vim
-Emacs
-
-
-エディタをゲットしたら、次はコンパイラを...</content>
+n...</content>
  </entry>
  
  <entry>
