@@ -20,6 +20,18 @@
 	</url>
 
 	<url>
+	 	<loc>http://k3kaimu.github.io/blog/</loc>
+	 	<lastmod>2014-09-02</lastmod>
+	 	<changefreq>weekly</changefreq>
+	</url>
+
+	<url>
+	 	<loc>http://k3kaimu.github.io/dtips/</loc>
+	 	<lastmod>2014-09-02</lastmod>
+	 	<changefreq>weekly</changefreq>
+	</url>
+
+	<url>
 	 	<loc>http://k3kaimu.github.io/categories/</loc>
 	 	<lastmod>2014-09-02</lastmod>
 	 	<changefreq>weekly</changefreq>
@@ -31,6 +43,12 @@
 	 	<changefreq>weekly</changefreq>
 	</url>
 
+	
+	<url>
+	 	<loc>http://k3kaimu.github.io/blog/2014/09/03/about-move-dmaual/</loc>
+	 	<lastmod>2014-09-03</lastmod>
+	 	<changefreq>never</changefreq>
+	</url>
 	
 	<url>
 	 	<loc>http://k3kaimu.github.io/blog/2014/09/02/first-post/</loc>
