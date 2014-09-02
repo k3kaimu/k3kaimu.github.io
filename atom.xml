@@ -1,19 +1,19 @@
 <?xml version="1.0" encoding="utf-8"?>
 <feed xmlns="http://www.w3.org/2005/Atom">
   
- <id>http://ogaclejapan.github.io/jekyllstrap</id>
+ <id>http://k3kaimu.github.io</id>
  <title></title>
- <updated>2014-09-02T11:32:58+09:00</updated>
- <link rel="self" href="http://ogaclejapan.github.io/jekyllstrap/atom.xml"/>
- <link href="http://ogaclejapan.github.io/jekyllstrap/"/>
+ <updated>2014-09-02T11:43:28+09:00</updated>
+ <link rel="self" href="http://k3kaimu.github.io/atom.xml"/>
+ <link href="http://k3kaimu.github.io/"/>
  <author><name>k3-kaimu</name></author>
 
  
  <entry>
-  <id>http://ogaclejapan.github.io/jekyllstrap/jekyll/2013/12/18/welcome-to-jekyll</id>
+  <id>http://k3kaimu.github.io/jekyll/2013/12/18/welcome-to-jekyll</id>
   <title>Welcome to Jekyll!</title>
   <updated>2013-12-18T06:56:35+09:00</updated>
-  <link href="http://ogaclejapan.github.io/jekyllstrap/jekyll/2013/12/18/welcome-to-jekyll/"/>
+  <link href="http://k3kaimu.github.io/jekyll/2013/12/18/welcome-to-jekyll/"/>
   <content>You&amp;#39;ll find this post in your _posts directory - edit this post and re-build (or run with the -w switch) to see your changes!
 To add new posts, simply add a file in the _posts directory that follows the convention: YYYY-MM-DD-name-of-post.ext.
 

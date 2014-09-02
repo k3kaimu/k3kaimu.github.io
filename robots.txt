@@ -1,3 +1,3 @@
 User-agent: *
-Sitemap: http://ogaclejapan.github.io/jekyllstrap/sitemap.xml
+Sitemap: http://k3kaimu.github.io/sitemap.xml
 Disallow:

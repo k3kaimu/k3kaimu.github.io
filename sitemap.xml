@@ -2,32 +2,32 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
 
 	<url>
-	 	<loc>http://ogaclejapan.github.io/jekyllstrap/</loc>
+	 	<loc>http://k3kaimu.github.io/</loc>
 	 	<lastmod>2014-09-02</lastmod>
 	 	<changefreq>weekly</changefreq>
 	</url>
 
 	<url>
-	 	<loc>http://ogaclejapan.github.io/jekyllstrap/archives/</loc>
+	 	<loc>http://k3kaimu.github.io/archives/</loc>
 	 	<lastmod>2014-09-02</lastmod>
 	 	<changefreq>weekly</changefreq>
 	</url>
 
 	<url>
-	 	<loc>http://ogaclejapan.github.io/jekyllstrap/categories/</loc>
+	 	<loc>http://k3kaimu.github.io/categories/</loc>
 	 	<lastmod>2014-09-02</lastmod>
 	 	<changefreq>weekly</changefreq>
 	</url>
 
 	<url>
-	 	<loc>http://ogaclejapan.github.io/jekyllstrap/tags/</loc>
+	 	<loc>http://k3kaimu.github.io/tags/</loc>
 	 	<lastmod>2014-09-02</lastmod>
 	 	<changefreq>weekly</changefreq>
 	</url>
 
 	
 	<url>
-	 	<loc>http://ogaclejapan.github.io/jekyllstrap/jekyll/2013/12/18/welcome-to-jekyll/</loc>
+	 	<loc>http://k3kaimu.github.io/jekyll/2013/12/18/welcome-to-jekyll/</loc>
 	 	<lastmod>2013-12-18</lastmod>
 	 	<changefreq>never</changefreq>
 	</url>
