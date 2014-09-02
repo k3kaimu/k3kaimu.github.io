@@ -6,8 +6,6 @@ categories: dmanual
 tags: dmanual
 ---
 
-# D言語入門-Hello, World!
-
 ## Hello, world!---その前に
 
 プログラミングの入門といえば`Hello, world!`ですね。
