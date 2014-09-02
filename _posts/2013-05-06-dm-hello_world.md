@@ -1,7 +1,7 @@
 ---
 layout: post
 title:  "01 D言語入門-Hello, World!"
-date:   2014-9-2 12:17:41
+date:   2013-5-6 00:00:00
 categories: dmanual
 tags: dmanual
 ---
@@ -403,7 +403,7 @@ void main()
 // １行コメント
 ````
 
-## 問題 -> [解答](answer.md#hello_world)
+## 問題 -> [解答]({{ site.baseurl }}/dmanual/answer#hello_world)
 
 * 次のソースコードの`<a>`と`<b>`の部分に適切なものを入れて、`Hello, World!`と表示するプログラムを作ってください。  
 

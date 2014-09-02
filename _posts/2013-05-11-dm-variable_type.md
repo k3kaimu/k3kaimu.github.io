@@ -1,7 +1,7 @@
 ---
 layout: post
 title:  "02 変数と型"
-date:   2014-9-2 12:17:41
+date:   2013-5-11 00:00:00
 categories: dmanual
 tags: dmanual
 ---
@@ -596,7 +596,7 @@ pragma(msg, typeof(e)); // immutable(int)
 ~~~~
 
 
-## 問題 -> [解答](answer.md#variable_type)
+## 問題 -> [解答]({{ site.baseurl }}/dmanual/answer#variable_type)
 
 * ビッグエンディアンとリトルエンディアンについて調べてみましょう。
 
