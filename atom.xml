@@ -3,21 +3,20 @@
   
  <id>http://k3kaimu.github.io</id>
  <title></title>
- <updated>2014-09-02T11:43:28+09:00</updated>
+ <updated>2014-09-02T11:54:13+09:00</updated>
  <link rel="self" href="http://k3kaimu.github.io/atom.xml"/>
  <link href="http://k3kaimu.github.io/"/>
  <author><name>k3-kaimu</name></author>
 
  
  <entry>
-  <id>http://k3kaimu.github.io/jekyll/2013/12/18/welcome-to-jekyll</id>
-  <title>Welcome to Jekyll!</title>
-  <updated>2013-12-18T06:56:35+09:00</updated>
-  <link href="http://k3kaimu.github.io/jekyll/2013/12/18/welcome-to-jekyll/"/>
-  <content>You&amp;#39;ll find this post in your _posts directory - edit this post and re-build (or run with the -w switch) to see your changes!
-To add new posts, simply add a file in the _posts directory that follows the convention: YYYY-MM-DD-name-of-post.ext.
-
-Jekyll also offers powerful support for code sni...</content>
+  <id>http://k3kaimu.github.io/blog/2014/09/03/welcome-to-jekyll</id>
+  <title>first post</title>
+  <updated>2014-09-03T06:56:35+09:00</updated>
+  <link href="http://k3kaimu.github.io/blog/2014/09/03/welcome-to-jekyll/"/>
+  <content>そのうちd-manualをここで公開します。
+少々お待ちを(m´・ω・｀)m
+</content>
  </entry>
  
  
