@@ -35,18 +35,6 @@ title : Sitemaps
 	 	<changefreq>weekly</changefreq>
 	</url>
 
-	<url>
-	 	<loc>{{ site.url }}{{ site.baseurl }}/categories/</loc>
-	 	<lastmod>{{ site.time | date:'%Y-%m-%d' }}</lastmod>
-	 	<changefreq>weekly</changefreq>
-	</url>
-
-	<url>
-	 	<loc>{{ site.url }}{{ site.baseurl }}/tags/</loc>
-	 	<lastmod>{{ site.time | date:'%Y-%m-%d' }}</lastmod>
-	 	<changefreq>weekly</changefreq>
-	</url>
-
 	{% for post in site.posts %}
 	<url>
 	 	<loc>{{ site.url }}{{ site.baseurl }}{{ post.url }}</loc>
