@@ -31,18 +31,6 @@
 	 	<changefreq>weekly</changefreq>
 	</url>
 
-	<url>
-	 	<loc>http://k3kaimu.github.io/categories/</loc>
-	 	<lastmod>2014-09-02</lastmod>
-	 	<changefreq>weekly</changefreq>
-	</url>
-
-	<url>
-	 	<loc>http://k3kaimu.github.io/tags/</loc>
-	 	<lastmod>2014-09-02</lastmod>
-	 	<changefreq>weekly</changefreq>
-	</url>
-
 	
 	<url>
 	 	<loc>http://k3kaimu.github.io/blog/2014/09/03/about-move-dmaual/</loc>
