@@ -3,7 +3,7 @@
   
  <id>http://k3kaimu.github.io</id>
  <title></title>
- <updated>2014-09-02T12:20:13+09:00</updated>
+ <updated>2014-09-02T12:37:37+09:00</updated>
  <link rel="self" href="http://k3kaimu.github.io/atom.xml"/>
  <link href="http://k3kaimu.github.io/"/>
  <author><name>k3-kaimu</name></author>
@@ -14,9 +14,7 @@
   <title>D言語入門-Hello, World!</title>
   <updated>2014-09-02T21:17:41+09:00</updated>
   <link href="http://k3kaimu.github.io/dmanual/2014/09/02/hello_world/"/>
-  <content>D言語入門-Hello, World!
-
-Hello, world!---その前に
+  <content>Hello, world!---その前に
 
 プログラミングの入門といえばHello, world!ですね。
 早速書いてみたいのですが、皆さんは コンパイラ と テキストエディタ は手に入れていますか？
@@ -31,7 +29,8 @@ notepad++
 Vim
 Emacs
 
-...</content>
+
+エディタをゲットしたら、次はコンパイラを...</content>
  </entry>
  
  <entry>
