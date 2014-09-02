@@ -14,6 +14,12 @@
 	</url>
 
 	<url>
+	 	<loc>http://k3kaimu.github.io/dmanual/</loc>
+	 	<lastmod>2014-09-02</lastmod>
+	 	<changefreq>weekly</changefreq>
+	</url>
+
+	<url>
 	 	<loc>http://k3kaimu.github.io/categories/</loc>
 	 	<lastmod>2014-09-02</lastmod>
 	 	<changefreq>weekly</changefreq>
@@ -27,7 +33,13 @@
 
 	
 	<url>
-	 	<loc>http://k3kaimu.github.io/dmanual/2014/09/02/hello_world/</loc>
+	 	<loc>http://k3kaimu.github.io/dmanual/2014/09/02/dm-variable_type/</loc>
+	 	<lastmod>2014-09-02</lastmod>
+	 	<changefreq>never</changefreq>
+	</url>
+	
+	<url>
+	 	<loc>http://k3kaimu.github.io/dmanual/2014/09/02/dm-hello_world/</loc>
 	 	<lastmod>2014-09-02</lastmod>
 	 	<changefreq>never</changefreq>
 	</url>

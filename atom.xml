@@ -3,17 +3,25 @@
   
  <id>http://k3kaimu.github.io</id>
  <title></title>
- <updated>2014-09-02T15:14:39+09:00</updated>
+ <updated>2014-09-02T17:07:54+09:00</updated>
  <link rel="self" href="http://k3kaimu.github.io/atom.xml"/>
  <link href="http://k3kaimu.github.io/"/>
  <author><name>k3-kaimu</name></author>
 
  
  <entry>
-  <id>http://k3kaimu.github.io/dmanual/2014/09/02/hello_world</id>
-  <title>D言語入門-Hello, World!</title>
+  <id>http://k3kaimu.github.io/dmanual/2014/09/02/dm-variable_type</id>
+  <title>02 変数と型</title>
   <updated>2014-09-02T21:17:41+09:00</updated>
-  <link href="http://k3kaimu.github.io/dmanual/2014/09/02/hello_world/"/>
+  <link href="http://k3kaimu.github.io/dmanual/2014/09/02/dm-variable_type/"/>
+  <content>Contents式(Expression)と文(Statement)とは？変数(Variable)変数の宣言(Declaration)変数の寿命とスコープ左辺値(lvalue)と右辺値(rvalue)いろいろな型(Type)リテラル(Literal)とシンボル(Symbol)デフォルト初期化値(Default Initializer; Type.init)void論理型(Boolean)整数型(Decimal Number)浮動小数点型(Floating-Point Number)虚数浮動小数点型(Imaginary Floating-Point Number)複素浮動小数点型(Comp...</content>
+ </entry>
+ 
+ <entry>
+  <id>http://k3kaimu.github.io/dmanual/2014/09/02/dm-hello_world</id>
+  <title>01 D言語入門-Hello, World!</title>
+  <updated>2014-09-02T21:17:41+09:00</updated>
+  <link href="http://k3kaimu.github.io/dmanual/2014/09/02/dm-hello_world/"/>
   <content>ContentsHello, world!---その前にHello, world!注意...Hello, world!を詳しくみてみる注意...1行目2行目3行目4行目5行目6行目write, writelnと型について関数についてwritef, writeflnコメント問題 -&amp;gt; 解答おわりにキーワード
 
 Hello, world!---その前に
