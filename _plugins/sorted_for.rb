@@ -26,6 +26,8 @@ module Jekyll
         sorted_collections = collections.sort { | (k1, v1), (k2, v2) | v2.size <=> v1.size }  
       when 'name'
         sorted_collections = collections.sort { | (k1, v1), (k2, v2) | k1 <=> k2 }
+      when 'title'
+        sorted_collections = collections.sort { | a, b | a.title <=> b.title }
       else
         sorted_collections = collections
       end

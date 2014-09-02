@@ -1,6 +1,6 @@
 ---
 layout: post
-title:  "D言語入門-Hello, World!"
+title:  "01 D言語入門-Hello, World!"
 date:   2014-9-2 12:17:41
 categories: dmanual
 tags: dmanual

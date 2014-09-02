@@ -18,6 +18,12 @@ title : Sitemaps
 	</url>
 
 	<url>
+	 	<loc>{{ site.url }}{{ site.baseurl }}/dmanual/</loc>
+	 	<lastmod>{{ site.time | date:'%Y-%m-%d' }}</lastmod>
+	 	<changefreq>weekly</changefreq>
+	</url>
+
+	<url>
 	 	<loc>{{ site.url }}{{ site.baseurl }}/categories/</loc>
 	 	<lastmod>{{ site.time | date:'%Y-%m-%d' }}</lastmod>
 	 	<changefreq>weekly</changefreq>
