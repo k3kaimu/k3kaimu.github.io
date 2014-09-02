@@ -1,7 +1,0 @@
----
-title : robots.txt
----
-
-User-agent: *
-Sitemap: {{ site.url }}{{ site.baseurl }}/sitemap.xml
-Disallow:
