@@ -14,7 +14,28 @@
         <li><a href="{{ site.baseurl }}/blog/">Blog</a></li>
         <li><a href="{{ site.baseurl }}/dmanual/">DManual</a></li>
         <li><a href="{{ site.baseurl }}/dtips/">DTips</a></li>
-        <li><a href="{{ site.baseurl }}/archives/">Index...</a></li>
+        <!--<li><a href="{{ site.baseurl }}/archives/">Index...</a></li>
+        -->
+        <li class="dropdown">
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown">Index...<b class="caret"></b></a>
+          <ul class="dropdown-menu">
+            <li>
+              <a href="{{ site.baseurl }}/archives/" itemprop="sameAs" content="{{ site.baseurl }}/archives/">
+                <i class="fa fa-archive fa-lg"></i> Archives
+              </a>
+            </li>
+            <li>
+              <a href="{{ site.baseurl }}/categories/" itemprop="sameAs" content="{{ site.baseurl }}/categories/">
+                <i class="fa fa-folder-open fa-lg"></i> Categories
+              </a>
+            </li>
+            <li>
+              <a href="{{ site.baseurl }}/tags/" itemprop="sameAs" content="{{ site.baseurl }}/tags/">
+                <i class="fa fa-tags fa-lg"></i> Tags
+              </a>
+            </li>
+          </ul>
+        </li>
       </ul>
       <div id="owner" itemprop="author copyrightHolder editor" itemscope itemtype="http://schema.org/Person">
         <ul class="nav navbar-nav navbar-right">
