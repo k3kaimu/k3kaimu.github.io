@@ -62,7 +62,28 @@
         <li><a href="/blog/">Blog</a></li>
         <li><a href="/dmanual/">DManual</a></li>
         <li><a href="/dtips/">DTips</a></li>
-        <li><a href="/archives/">Index...</a></li>
+        <!--<li><a href="/archives/">Index...</a></li>
+        -->
+        <li class="dropdown">
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown">Index...<b class="caret"></b></a>
+          <ul class="dropdown-menu">
+            <li>
+              <a href="/archives/" itemprop="sameAs" content="/archives/">
+                <i class="fa fa-archive fa-lg"></i> Archives
+              </a>
+            </li>
+            <li>
+              <a href="/categories/" itemprop="sameAs" content="/categories/">
+                <i class="fa fa-folder-open fa-lg"></i> Categories
+              </a>
+            </li>
+            <li>
+              <a href="/tags/" itemprop="sameAs" content="/tags/">
+                <i class="fa fa-tags fa-lg"></i> Tags
+              </a>
+            </li>
+          </ul>
+        </li>
       </ul>
       <div id="owner" itemprop="author copyrightHolder editor" itemscope itemtype="http://schema.org/Person">
         <ul class="nav navbar-nav navbar-right">
