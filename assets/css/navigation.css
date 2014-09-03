@@ -1,0 +1,40 @@
+#cse-search-box {
+  margin: 0 auto;
+  float: none;
+  padding: 0;
+  width: 220px;
+}
+#cse-search-box div{
+  height: 28px;
+  padding: 0;
+  width: 220px;
+  border-radius: 10px;
+  background-color: #ffffff;
+  border: solid 2px #222222;
+}
+#cse-search-box input[type="text"] {
+  border: none !important;
+  font-size: 14px;
+  width: 180px;
+  height: 20px;
+  padding: 0;
+  margin: 3px 0 0 5px;
+}
+#cse-search-box input[type="text"]:focus {
+  outline: 0;
+}
+#cse-search-box input[type="submit"] {
+  font-family: FontAwesome;
+  font-size: 14px;
+  color: #111111;
+  border: none;
+  height: 20px;
+  margin: 0;
+  overflow: hidden;
+  width: 20px;
+  position: relative;
+  background-color: #ffffff;
+}
+#cse-search-box input[type="submit"]:hover {
+  cursor: pointer;
+}
