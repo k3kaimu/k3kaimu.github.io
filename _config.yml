@@ -11,6 +11,7 @@ redcarpet:
 
 pygments: true
 permalink: pretty
+# permalink: /:categories/:year-:month-:day-:title.html
 paginate: 5
 
 # Change your name, GitHub name, Twitter id, etc.
@@ -28,6 +29,10 @@ schema_article_type : Article
 #  tracking_id : 'UA-XXXXXXXX-X'
 
 #addthis:
-#  pub_id: 'ra-XXXXXXXXXXXXXXX'
+pub_id: 'ra-54066243545f5b47'
 
 exclude: ["README.md", "LICENSE", ".gitignore", "s3_website.yml"]
+
+# github src branch
+github_repo_name : k3kaimu.github.io
+github_src_branch : src
