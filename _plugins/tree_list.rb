@@ -29,7 +29,6 @@ module Jekyll
       ignore = false
 
       content = open context.environments[0]["page"]["path"]
-      puts context.environments[0]["page"]["path"]
       content.each_line do |line|
         unless ignore_area?(line, ignore) then
           ignore = false
