@@ -3,11 +3,30 @@
   
  <id>http://k3kaimu.github.io</id>
  <title></title>
- <updated>2014-09-03T13:04:30+09:00</updated>
+ <updated>2014-09-04T19:07:48+09:00</updated>
  <link rel="self" href="http://k3kaimu.github.io/atom.xml"/>
  <link href="http://k3kaimu.github.io/"/>
  <author><name>k3-kaimu</name></author>
 
+ 
+ <entry>
+  <id>http://k3kaimu.github.io/dtips/2014/09/04/dt-container-array-gc</id>
+  <title>std.container.arrayからGCの挙動を学ぶ</title>
+  <updated>2014-09-04T22:00:00+09:00</updated>
+  <link href="http://k3kaimu.github.io/dtips/2014/09/04/dt-container-array-gc/"/>
+  <content>Contentsはじめにメモリ確保時開放時まとめ気になったこと
+
+はじめに
+
+dmd 2.066からの新しい仕様として、@nogc属性が追加されました。
+@nogc属性が付加された関数内では、GC heapからメモリを一切確保しないことが静的に保証されます。
+
+ということで、現在メモリ管理やGCに注目が集まっているため、DのGCの挙動を復習するために、std.container.arrayではどのようにメモリ管理を行っているかをソースコードを読んでみたいと思います。
+
+メモリ確保時
+
+std.container.array.Array!T型は、内部でmallocやfree、realloc...</content>
+ </entry>
  
  <entry>
   <id>http://k3kaimu.github.io/blog/2014/09/03/about-move-dmaual</id>
