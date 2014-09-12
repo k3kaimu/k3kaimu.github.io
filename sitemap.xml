@@ -3,31 +3,31 @@
 
 	<url>
 	 	<loc>http://k3kaimu.github.io/</loc>
-	 	<lastmod>2014-09-04</lastmod>
+	 	<lastmod>2014-09-12</lastmod>
 	 	<changefreq>weekly</changefreq>
 	</url>
 
 	<url>
 	 	<loc>http://k3kaimu.github.io/archives/</loc>
-	 	<lastmod>2014-09-04</lastmod>
+	 	<lastmod>2014-09-12</lastmod>
 	 	<changefreq>weekly</changefreq>
 	</url>
 
 	<url>
 	 	<loc>http://k3kaimu.github.io/dmanual/</loc>
-	 	<lastmod>2014-09-04</lastmod>
+	 	<lastmod>2014-09-12</lastmod>
 	 	<changefreq>weekly</changefreq>
 	</url>
 
 	<url>
 	 	<loc>http://k3kaimu.github.io/blog/</loc>
-	 	<lastmod>2014-09-04</lastmod>
+	 	<lastmod>2014-09-12</lastmod>
 	 	<changefreq>weekly</changefreq>
 	</url>
 
 	<url>
 	 	<loc>http://k3kaimu.github.io/dtips/</loc>
-	 	<lastmod>2014-09-04</lastmod>
+	 	<lastmod>2014-09-12</lastmod>
 	 	<changefreq>weekly</changefreq>
 	</url>
 
@@ -47,96 +47,6 @@
 	<url>
 	 	<loc>http://k3kaimu.github.io/blog/2014/09/02/first-post/</loc>
 	 	<lastmod>2014-09-02</lastmod>
-	 	<changefreq>never</changefreq>
-	</url>
-	
-	<url>
-	 	<loc>http://k3kaimu.github.io/dmanual/2014/08/31/dm-union/</loc>
-	 	<lastmod>2014-08-31</lastmod>
-	 	<changefreq>never</changefreq>
-	</url>
-	
-	<url>
-	 	<loc>http://k3kaimu.github.io/dmanual/2014/04/08/dm-struct/</loc>
-	 	<lastmod>2014-04-08</lastmod>
-	 	<changefreq>never</changefreq>
-	</url>
-	
-	<url>
-	 	<loc>http://k3kaimu.github.io/dmanual/2013/11/16/dm-main/</loc>
-	 	<lastmod>2013-11-16</lastmod>
-	 	<changefreq>never</changefreq>
-	</url>
-	
-	<url>
-	 	<loc>http://k3kaimu.github.io/dmanual/2013/11/16/dm-io/</loc>
-	 	<lastmod>2013-11-16</lastmod>
-	 	<changefreq>never</changefreq>
-	</url>
-	
-	<url>
-	 	<loc>http://k3kaimu.github.io/dmanual/2013/08/23/dm-function/</loc>
-	 	<lastmod>2013-08-23</lastmod>
-	 	<changefreq>never</changefreq>
-	</url>
-	
-	<url>
-	 	<loc>http://k3kaimu.github.io/dmanual/2013/07/17/dm-pointer/</loc>
-	 	<lastmod>2013-07-17</lastmod>
-	 	<changefreq>never</changefreq>
-	</url>
-	
-	<url>
-	 	<loc>http://k3kaimu.github.io/dmanual/2013/07/07/dm-associative-array/</loc>
-	 	<lastmod>2013-07-07</lastmod>
-	 	<changefreq>never</changefreq>
-	</url>
-	
-	<url>
-	 	<loc>http://k3kaimu.github.io/dmanual/2013/06/23/dm-array/</loc>
-	 	<lastmod>2013-06-23</lastmod>
-	 	<changefreq>never</changefreq>
-	</url>
-	
-	<url>
-	 	<loc>http://k3kaimu.github.io/dmanual/2013/06/16/dm-string/</loc>
-	 	<lastmod>2013-06-16</lastmod>
-	 	<changefreq>never</changefreq>
-	</url>
-	
-	<url>
-	 	<loc>http://k3kaimu.github.io/dmanual/2013/06/16/dm-other-statement/</loc>
-	 	<lastmod>2013-06-16</lastmod>
-	 	<changefreq>never</changefreq>
-	</url>
-	
-	<url>
-	 	<loc>http://k3kaimu.github.io/dmanual/2013/05/26/dm-loop/</loc>
-	 	<lastmod>2013-05-26</lastmod>
-	 	<changefreq>never</changefreq>
-	</url>
-	
-	<url>
-	 	<loc>http://k3kaimu.github.io/dmanual/2013/05/25/dm-if/</loc>
-	 	<lastmod>2013-05-25</lastmod>
-	 	<changefreq>never</changefreq>
-	</url>
-	
-	<url>
-	 	<loc>http://k3kaimu.github.io/dmanual/2013/05/18/dm-expr_operator/</loc>
-	 	<lastmod>2013-05-18</lastmod>
-	 	<changefreq>never</changefreq>
-	</url>
-	
-	<url>
-	 	<loc>http://k3kaimu.github.io/dmanual/2013/05/11/dm-variable_type/</loc>
-	 	<lastmod>2013-05-11</lastmod>
-	 	<changefreq>never</changefreq>
-	</url>
-	
-	<url>
-	 	<loc>http://k3kaimu.github.io/dmanual/2013/05/06/dm-hello_world/</loc>
-	 	<lastmod>2013-05-06</lastmod>
 	 	<changefreq>never</changefreq>
 	</url>
 	 
