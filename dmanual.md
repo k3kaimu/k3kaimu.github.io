@@ -39,7 +39,15 @@ k3kaimuの文章がわかりにくいために、「C言語がある程度使え
 
 ## 記事リスト
 
-{% assign sorted_pages = (site.categories.dmanual | sort: 'title') %}
+<div class="list-group">
+{% assign sorted_pages = (site.pages | sort: 'title') %}
 {% for post in sorted_pages %}
-### [{{ post.title }}]({{ site.baseurl }}{{ post.url }})  
+{% for cp in post.categories %}
+{% if cp[0] == dmanual %}
+  <a href="{{ site.baseurl }}{{ post.url }}" class="list-group-item col-md-6 col-sm-12 col-xs-12">
+    <p class="list-group-item-heading">{{ post.title }}</p>
+  </a>
+{% endif %}
 {% endfor %}
+{% endfor %}
+</div>

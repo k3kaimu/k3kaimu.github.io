@@ -1,0 +1,3 @@
+[submodule "dmanual"]
+	path = dmanual
+	url = https://github.com/k3kaimu/d-manual.git
