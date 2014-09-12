@@ -35,7 +35,7 @@ title : Sitemaps
 	 	<changefreq>weekly</changefreq>
 	</url>
 
-	{% for post in site.posts %}
+	{% for post in site.pages %}
 	<url>
 	 	<loc>{{ site.url }}{{ site.baseurl }}{{ post.url }}</loc>
 	 	<lastmod>{% if post.modified %}{{ post.modified }}{% else %}{{ post.date | date:'%Y-%m-%d' }}{% endif %}</lastmod>
