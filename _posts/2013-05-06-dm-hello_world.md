@@ -1,12 +1,10 @@
 ---
-layout: post
+layout: article
 title:  "01 D言語入門-Hello, World!"
 date:   2013-5-6 00:00:00
 categories: dmanual
 tags: dmanual
 ---
-
-{% tree %}
 
 ## Hello, world!---その前に
 
