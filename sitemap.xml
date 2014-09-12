@@ -33,20 +33,158 @@
 
 	
 	<url>
-	 	<loc>http://k3kaimu.github.io/dtips/2014/09/04/dt-container-array-gc/</loc>
-	 	<lastmod>2014-09-04</lastmod>
-	 	<changefreq>never</changefreq>
-	</url>
-	
-	<url>
-	 	<loc>http://k3kaimu.github.io/blog/2014/09/03/about-move-dmaual/</loc>
+	 	<loc>http://k3kaimu.github.io/dmanual/answer/</loc>
 	 	<lastmod>2014-09-03</lastmod>
 	 	<changefreq>never</changefreq>
 	</url>
 	
 	<url>
-	 	<loc>http://k3kaimu.github.io/blog/2014/09/02/first-post/</loc>
+	 	<loc>http://k3kaimu.github.io/archives/</loc>
+	 	<lastmod></lastmod>
+	 	<changefreq>never</changefreq>
+	</url>
+	
+	<url>
+	 	<loc>http://k3kaimu.github.io/dmanual/array/</loc>
+	 	<lastmod>2013-07-07</lastmod>
+	 	<changefreq>never</changefreq>
+	</url>
+	
+	<url>
+	 	<loc>http://k3kaimu.github.io/atom.xml</loc>
+	 	<lastmod></lastmod>
+	 	<changefreq>never</changefreq>
+	</url>
+	
+	<url>
+	 	<loc>http://k3kaimu.github.io/blog/</loc>
+	 	<lastmod></lastmod>
+	 	<changefreq>never</changefreq>
+	</url>
+	
+	<url>
+	 	<loc>http://k3kaimu.github.io/categories/</loc>
+	 	<lastmod></lastmod>
+	 	<changefreq>never</changefreq>
+	</url>
+	
+	<url>
+	 	<loc>http://k3kaimu.github.io/dmanual/</loc>
 	 	<lastmod>2014-09-02</lastmod>
+	 	<changefreq>never</changefreq>
+	</url>
+	
+	<url>
+	 	<loc>http://k3kaimu.github.io/dtips/</loc>
+	 	<lastmod></lastmod>
+	 	<changefreq>never</changefreq>
+	</url>
+	
+	<url>
+	 	<loc>http://k3kaimu.github.io/dmanual/expr_operator/</loc>
+	 	<lastmod>2013-05-18</lastmod>
+	 	<changefreq>never</changefreq>
+	</url>
+	
+	<url>
+	 	<loc>http://k3kaimu.github.io/dmanual/function/</loc>
+	 	<lastmod>2013-08-23</lastmod>
+	 	<changefreq>never</changefreq>
+	</url>
+	
+	<url>
+	 	<loc>http://k3kaimu.github.io/dmanual/hello_world/</loc>
+	 	<lastmod>2013-05-06</lastmod>
+	 	<changefreq>never</changefreq>
+	</url>
+	
+	<url>
+	 	<loc>http://k3kaimu.github.io/dmanual/if/</loc>
+	 	<lastmod>2013-05-25</lastmod>
+	 	<changefreq>never</changefreq>
+	</url>
+	
+	<url>
+	 	<loc>http://k3kaimu.github.io/</loc>
+	 	<lastmod></lastmod>
+	 	<changefreq>never</changefreq>
+	</url>
+	
+	<url>
+	 	<loc>http://k3kaimu.github.io/dmanual/io/</loc>
+	 	<lastmod>2013-11-16</lastmod>
+	 	<changefreq>never</changefreq>
+	</url>
+	
+	<url>
+	 	<loc>http://k3kaimu.github.io/dmanual/loop/</loc>
+	 	<lastmod>2013-05-26</lastmod>
+	 	<changefreq>never</changefreq>
+	</url>
+	
+	<url>
+	 	<loc>http://k3kaimu.github.io/dmanual/main/</loc>
+	 	<lastmod>2013-11-16</lastmod>
+	 	<changefreq>never</changefreq>
+	</url>
+	
+	<url>
+	 	<loc>http://k3kaimu.github.io/dmanual/other_statements/</loc>
+	 	<lastmod>2013-06-16</lastmod>
+	 	<changefreq>never</changefreq>
+	</url>
+	
+	<url>
+	 	<loc>http://k3kaimu.github.io/dmanual/pointer/</loc>
+	 	<lastmod>2013-07-17</lastmod>
+	 	<changefreq>never</changefreq>
+	</url>
+	
+	<url>
+	 	<loc>http://k3kaimu.github.io/robots.txt</loc>
+	 	<lastmod></lastmod>
+	 	<changefreq>never</changefreq>
+	</url>
+	
+	<url>
+	 	<loc>http://k3kaimu.github.io/sitemap.xml</loc>
+	 	<lastmod></lastmod>
+	 	<changefreq>never</changefreq>
+	</url>
+	
+	<url>
+	 	<loc>http://k3kaimu.github.io/dmanual/string/</loc>
+	 	<lastmod>2013-06-16</lastmod>
+	 	<changefreq>never</changefreq>
+	</url>
+	
+	<url>
+	 	<loc>http://k3kaimu.github.io/dmanual/struct/</loc>
+	 	<lastmod>2014-04-08</lastmod>
+	 	<changefreq>never</changefreq>
+	</url>
+	
+	<url>
+	 	<loc>http://k3kaimu.github.io/tags/</loc>
+	 	<lastmod></lastmod>
+	 	<changefreq>never</changefreq>
+	</url>
+	
+	<url>
+	 	<loc>http://k3kaimu.github.io/dmanual/transtable/</loc>
+	 	<lastmod>2014-03-08</lastmod>
+	 	<changefreq>never</changefreq>
+	</url>
+	
+	<url>
+	 	<loc>http://k3kaimu.github.io/dmanual/union/</loc>
+	 	<lastmod>2014-08-31</lastmod>
+	 	<changefreq>never</changefreq>
+	</url>
+	
+	<url>
+	 	<loc>http://k3kaimu.github.io/dmanual/variable_type/</loc>
+	 	<lastmod>2013-05-11</lastmod>
 	 	<changefreq>never</changefreq>
 	</url>
 	 
