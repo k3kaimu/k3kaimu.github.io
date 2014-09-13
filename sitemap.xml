@@ -35,12 +35,25 @@ title : Sitemaps
 	 	<changefreq>weekly</changefreq>
 	</url>
 
-	{% for post in site.pages %}
+	{% for post in site.posts %}
 	<url>
 	 	<loc>{{ site.url }}{{ site.baseurl }}{{ post.url }}</loc>
 	 	<lastmod>{% if post.modified %}{{ post.modified }}{% else %}{{ post.date | date:'%Y-%m-%d' }}{% endif %}</lastmod>
 	 	<changefreq>never</changefreq>
 	</url>
-	{% endfor %} 
-	
+	{% endfor %}
+
+	{% assign sorted_pages = (site.pages | sort: 'title') %}
+	{% for post in sorted_pages %}
+	{% for cp in post.categories %}
+	{% if cp[0] == dmanual %}
+	<url>
+		<loc>{{ site.url }}{{ site.baseurl }}{{ post.url }}</loc>
+		<lastmod>{% if post.modified %}{{ post.modified }}{% else %}{{ post.date | date:'%Y-%m-%d' }}{% endif %}</lastmod>
+		<changefreq>never</changefreq>
+	</url>
+	{% endif %}
+	{% endfor %}
+	{% endfor %}
+
 </urlset>
