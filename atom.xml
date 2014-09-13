@@ -3,11 +3,30 @@
   
  <id>http://k3kaimu.github.io</id>
  <title></title>
- <updated>2014-09-13T11:26:14+09:00</updated>
+ <updated>2014-09-13T12:13:54+09:00</updated>
  <link rel="self" href="http://k3kaimu.github.io/atom.xml"/>
  <link href="http://k3kaimu.github.io/"/>
  <author><name>k3-kaimu</name></author>
 
+ 
+ <entry>
+  <id>http://k3kaimu.github.io/blog/2014/09/13/about-move-dmanual2</id>
+  <title>dmanualの移行に関して -- その2</title>
+  <updated>2014-09-13T21:00:00+09:00</updated>
+  <link href="http://k3kaimu.github.io/blog/2014/09/13/about-move-dmanual2/"/>
+  <content>d-manualの全記事を管理しているリポジトリを、本サイトのリポジトリにsubmoduleとして登録する作業を行いました。
+しかし、submoduleめんどくさいですね。
+当分は様子見としてsubmoduleのまま管理しますが、良い解決策があるのであればそちらを採用するかもしれません。
+
+また、本サイトの更新量が安定する頃はもう少々先になりそうです。お待ちください。
+
+d-manualへの修正の送り方について
+
+まず、修正送ってくれたり、不備を知らせてくれた皆様、いつもありがとうございます。
+
+本サイトにはコメント欄がありますので、不備がありましたらコメント等でおしえてください。
+また...</content>
+ </entry>
  
  <entry>
   <id>http://k3kaimu.github.io/dtips/2014/09/04/dt-container-array-gc</id>
