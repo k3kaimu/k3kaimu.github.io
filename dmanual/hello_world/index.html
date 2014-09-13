@@ -135,7 +135,7 @@
           <div class="row">
             <div class="col-md-12 col-sm-12 col-xs-12">
               <div itmprop="articleBody">
-                <p><h2 class="content_tree">Contents</h2><div class="content_tree_list"><ul><li>Hello, world!---その前に</li><li>Hello, world!</li><ul><li>注意...</li></ul><li>Hello, world!を詳しくみてみる</li><ul><li>注意...</li><li>1行目</li><li>2行目</li><li>3行目</li><li>4行目</li><li>5行目</li><li>6行目</li></ul><li>write, writelnと型について</li><li>関数について</li><li>writef, writefln</li><li>コメント</li><li>問題 -&gt; <a href="%7B%7B%20site.baseurl%20%7D%7D/dmanual/answer#hello_world">解答</a></li><li>おわりに</li><li>キーワード</li></ul></ul></div></p>
+                <p><h2 class="content_tree">Contents</h2><div class="content_tree_list"><ul><li>Hello, world!---その前に</li><li>Hello, world!</li><ul><li>注意...</li></ul><li>Hello, world!を詳しくみてみる</li><ul><li>注意...</li><li>1行目</li><li>2行目</li><li>3行目</li><li>4行目</li><li>5行目</li><li>6行目</li></ul><li>プログラミング言語の学び方について</li><li>ファイル名について</li><li>write, writelnと型について</li><li>関数について</li><li>writef, writefln</li><li>コメント</li><li>問題 -&gt; <a href="%7B%7B%20site.baseurl%20%7D%7D/dmanual/answer#hello_world">解答</a></li><li>おわりに</li><li>キーワード</li></ul></ul></div></p>
 
 <h2>Hello, world!---その前に</h2>
 
@@ -144,10 +144,10 @@
 
 <p>プログラム(==ソースコード)を書くには、テキストエディタがいります。
 notepad.exeで編集したければそれでいいのですが、せっかくなのでカッコイイテキストエディタを入手しましょう。
-各エディタの説明はしませんが、個人的にはSublime Text2がオススメです。</p>
+各エディタの説明はしませんが、個人的にはSublime Text3がオススメです。</p>
 
 <ul>
-<li>Sublime Text2</li>
+<li>Sublime Text3</li>
 <li>notepad++</li>
 <li>Vim</li>
 <li>Emacs</li>
@@ -209,6 +209,9 @@ Hello World!
 <code>writeln</code>は<code>std.stdio</code>で定義されているのですが、自分のプログラムに<code>import</code>(輸入)してやらなければ使えません。
 つまり、「<code>bar</code>モジュールで定義されてる<code>foo</code>を使いたい！」という場合には、<code>import bar;</code>と書かなければいけません。</p>
 
+<p>また、<code>;</code>という記号が至るところで出現します。
+今のところは、「この記号はなんか必要なんだな」と思ってしまってください。</p>
+
 <h3>2行目</h3>
 
 <p>2行目はただの空白です。
@@ -220,16 +223,30 @@ D言語のプログラムのソースコード中では、 <strong>任意の場�
 </code></pre></div>
 <p>D言語で書かれたプログラムは、 <strong><code>main</code></strong> という関数(<code>function</code>)から始まります。
 プログラムでの関数は数学の関数とほとんど同じで、入力(<code>input</code>)を受け取り、加工や外界に影響を及ぼしてから出力(<code>output</code>)を返すものです。
-この<code>main</code>の場合は何も受け取らずなにも返しません(<code>void</code>)が、<code>void main(string[] args)</code>と書けば、<code>string[] args</code>を受け取ってなにも返さない<code>main</code>関数となります。
-関数はソースコード上では以下のように記述されます。</p>
+この<code>main</code>の場合は何も受け取らずなにも返しません(<code>void</code>)が、<code>void main(string[] args)</code>と書けば、<code>string[] args</code>を受け取ってなにも返さない<code>main</code>関数となります。</p>
+
+<p>一般的な関数はソースコード上では以下のように記述されます。</p>
 <div class="highlight"><pre><code class="language-d" data-lang="d"><span class="n">OutputType</span> <span class="n">fName</span><span class="p">(</span><span class="n">InputType1</span> <span class="n">arg1</span><span class="p">,</span> <span class="n">InputType2</span> <span class="n">arg2</span><span class="p">,</span> <span class="p">...)</span>
 <span class="p">{</span>
     <span class="k">function</span> <span class="n">Body</span>
 <span class="p">}</span>
 </code></pre></div>
-<p><code>OutputType</code>は関数の出力の型(タイプ)、<code>InputType1</code>とか<code>InputType2</code>は入力の型(タイプ)で、<code>arg1, arg2</code>は仮引数(かりひきすう)と呼ばれます。
+<p><code>OutputType</code>は関数の出力の型(タイプ)、<code>InputType1</code>とか<code>InputType2</code>は入力の型(タイプ)で、<code>arg1, arg2</code>は仮引数(かりひきすう)と呼ばれます
 また、<code>InputType1, InputType2</code>は引数の型, <code>OutputType</code>は返り値や戻り値の型(<code>Returned Type</code>)と呼ばれます。
 <code>function Body</code>は関数本体といい、入力から出力を生成する手順を記述します。</p>
+
+<ul>
+<li>ちょっと休憩</li>
+</ul>
+
+<p>さて、難解になってきました！
+C言語などの他の言語をちょっとでも触ったことのある人であれば大丈夫かもしれませんが、
+まったくの初心者がこの文章を理解できていれば、その人は間違いなく「真のプログラマの生まれ変わり」です！
+もちろん、このd-manualはそんな伝説を対象にD言語を紹介しているわけではありませんから、普通の初心者の方はなんとなく目で追うだけでいいのです。
+再度言いますが、私も初心者をいきなりつまずかせて楽しむ鬼ではありません。
+理解できたら異常なのです。</p>
+
+<p>対して、他の言語の経験者の方は多分大丈夫だと思いますが、もし理解が怪しかったとしても読み進めることを諦めないでください。</p>
 
 <h3>4行目</h3>
 <div class="highlight"><pre><code class="language-d" data-lang="d"><span class="p">{</span>
@@ -257,9 +274,41 @@ D言語のプログラムのソースコード中では、 <strong>任意の場�
 <p><code>main</code>関数の終了を表す括弧です。
 D言語のソースコードでは、括弧は必ず対になっていなければなりません。</p>
 
+<h2>プログラミング言語の学び方について</h2>
+
+<p>さて、なんとかここまでたどり着いた人たちはおめでとうございます。
+ここから先は、ここに載っているプログラムを写経してもらうことが重要になります。
+写経をなめてはいけません。
+サンプルのプログラムを目で追うだけでは、そのサンプルに秘められた重大な意味を理解できません。
+写経し、説明文を読み、そのサンプルを理解することが重要です。</p>
+
+<p>しかしながらこの章は導入でしかないので、写経をしてもその意味の理解をしなくても大丈夫です。
+後々の章でじっくりと煮詰めるので、むしろそれまで楽しみにしておいてください。</p>
+
+<p>ではこの章の後半、D言語の摩訶不思議な世界をご堪能ください。</p>
+
+<h2>ファイル名について</h2>
+
+<p>おっと、いい忘れていたことがありました。
+サンプルのプログラムの写経を保存するファイルの名前ですが、はっきり言うと何でもいいですが、次の規則に従うように心がけてください。</p>
+
+<ul>
+<li>拡張子は<code>.d</code></li>
+<li>数字から始めない
+
+<ul>
+<li><code>0foo.d</code>はダメ</li>
+</ul></li>
+<li>数字やアルファベット以外の文字は入れない
+
+<ul>
+<li><code>a-b.d</code>なんかはダメ</li>
+</ul></li>
+</ul>
+
 <h2>write, writelnと型について</h2>
 
-<p><code>write, writeln</code>は<code>std.stdio</code>で宣言(==定義)されています。
+<p>Hello, Worldと名前がついたサンプルコードで出てきた<code>write, writeln</code>は<code>std.stdio</code>で宣言(==定義)されています。
 <code>write</code>や<code>writeln</code>は複数の引数を受け取ることができます。
 つまり、先ほどのHello, worldのプログラムを改変した以下のコードも有効です。
 コンパイルして実行してみましょう。</p>
@@ -457,11 +506,12 @@ object.Exception@C:\D\dmd2\src\phobos\std\format.d(2154): Incorrect format speci
 
 <span class="kt">void</span> <span class="n">main</span><span class="p">()</span>
 <span class="p">{</span>
-    <span class="n">writeln</span><span class="p">(</span><span class="s">&quot;%s, %s&quot;</span><span class="p">,</span> <span class="p">&lt;</span><span class="n">a</span><span class="p">&gt;,</span> <span class="p">&lt;</span><span class="n">b</span><span class="p">&gt;);</span>
+    <span class="n">writefln</span><span class="p">(</span><span class="s">&quot;%s, %s&quot;</span><span class="p">,</span> <span class="p">&lt;</span><span class="n">a</span><span class="p">&gt;,</span> <span class="p">&lt;</span><span class="n">b</span><span class="p">&gt;);</span>
 <span class="p">}</span>
 </code></pre></div>
 <ul>
-<li>次のソースコードは複数箇所間違っています。コンパイルしてエラーを確認しながら、訂正してください。</li>
+<li>次のソースコードは複数箇所間違っています。コンパイルしてエラーを確認しながら、訂正してください。
+初心者の方は、一番最初に示したサンプルコードとの差を確認しながら訂正してみてください。</li>
 </ul>
 <div class="highlight"><pre><code class="language-d" data-lang="d"><span class="n">vood</span> <span class="n">main</span><span class="p">{</span>
     <span class="n">writeln</span><span class="p">(</span><span class="s">&quot;Hello, World&quot;</span><span class="p">);</span>
@@ -482,7 +532,7 @@ object.Exception@C:\D\dmd2\src\phobos\std\format.d(2154): Incorrect format speci
 <h2>おわりに</h2>
 
 <p>さて、第一回目の「Hello, World!」の項が終わりました。お疲れ様でした。
-実は今回はかなり内容が詰まっていて、書いてる途中から、「初心者にはつらいかなあ」と思っていました。
+実は今回はかなり内容が詰まっていて、書いてる途中から「初心者にはつらいかなあ」と思っていました。
 プログラムの概念を考えると、今のノイマン型コンピュータを考えるところまで行き着いてしまい、D言語の話になかなか戻ってこれないので、このようなちょっと難しい形式になってしまいました。
 このような難しいお話については、C言語の入門書の頭のほうにわかりやすく書かれていることが多いので、図書館へ行って借りることをオススメします。
 また、D言語について詳しく知りたいと思った方は、「プログラミング言語D」(The D Programming Language; 略称:TDPL)という本をおすすめします。D言語の文法やそれに至った経緯など、詳しく学ぶにはとっておきです。
