@@ -3,11 +3,44 @@
   
  <id>http://k3kaimu.github.io</id>
  <title></title>
- <updated>2014-09-21T17:13:12+09:00</updated>
+ <updated>2014-09-21T18:01:52+09:00</updated>
  <link rel="self" href="http://k3kaimu.github.io/atom.xml"/>
  <link href="http://k3kaimu.github.io/"/>
  <author><name>k3-kaimu</name></author>
 
+ 
+ <entry>
+  <id>http://k3kaimu.github.io/blog/2014/09/22/tutcccamp</id>
+  <title>TUTコンピュータクラブ秋合宿に参加して思ったこととか</title>
+  <updated>2014-09-22T02:59:00+09:00</updated>
+  <link href="http://k3kaimu.github.io/blog/2014/09/22/tutcccamp/"/>
+  <content>予備知識
+
+TUT コンピュータクラブとは
+
+豊橋技術科学大学にあるコンピュータクラブ。
+
+頭おかしい(褒め言葉)な人が結構いるっぽい。
+つよそう。
+こわい。
+
+秋合宿とは
+
+事前に2人でグループが抽選で組まれ、3日間の合宿で一つの作品を作るという合宿。
+途中でLT大会があったりとか、花火やったりとか。
+
+部長によると、「おそらくTUTコンピュータクラブ史上初の合宿」とのこと。
+
+思ったことリスト
+
+思ったことその1「LT難しいね」
+
+実は初LT。
+
+LTタイトルは「やる夫と学ぶバグ報告入門」。
+最初は自己紹介だけで5分間のりきろうかなあと思ってて、ちゃんとスライドも用意してたけど、
+な...</content>
+ </entry>
  
  <entry>
   <id>http://k3kaimu.github.io/blog/2014/09/13/about-move-dmanual2</id>
