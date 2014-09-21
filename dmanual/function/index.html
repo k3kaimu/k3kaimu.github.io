@@ -137,7 +137,7 @@
           <div class="row">
             <div class="col-md-12 col-sm-12 col-xs-12">
               <div itmprop="articleBody">
-                <p><h2 class="content_tree">Contents</h2><div class="content_tree_list"><ul><li>関数とは？</li><ul><li>関数による処理のまとめ</li></ul><li>関数の基礎</li><ul><li>宣言の書き方と関数本体</li><li>関数の引数</li></ul><li>デフォルト引数</li><li>引数の記憶域クラス</li><li>可変個引数関数</li><li>オブジェクトを形成する引数</li><li>返値型推論</li><li>関数の属性</li><ul><li>プロパティ関数<code>@property</code></li><li>関数のメモリ安全性</li><li>純粋関数<code>pure</code></li><li>例外を投げない関数<code>nothrow</code></li><li>UDA(User Defined Attribute)</li><li><code>const</code>, <code>immutable</code>, <code>inout</code>, <code>abstract</code>, <code>final</code></li></ul><li>関数オーバーロード(多重定義, overload)</li><li>ローカル<code>static</code>変数</li><li>ネスト関数</li><li>関数ポインタ</li><li>デリゲート<code>delegate</code></li><li>関数のリテラルとラムダ</li><li>UFCS(Uniform Function Call Syntax)</li><li>CTFE(Compile Time Function Execution)</li><li>問題</li><li>終わりに</li><li>キーワード</li><li>仕様</li></ul></ul></div></p>
+                <p><h2 class="content_tree">Contents</h2><div class="content_tree_list"><ul><li>関数とは？</li><ul><li>関数による処理のまとめ</li></ul><li>関数の基礎</li><ul><li>宣言の書き方と関数本体</li><li>関数の引数</li></ul><li>デフォルト引数</li><li>引数の記憶域クラス</li><li>可変個引数関数</li><li>オブジェクトを形成する引数</li><li>返値型推論</li><li>関数の属性</li><ul><li>プロパティ関数<code>@property</code></li><li>関数のメモリ安全性</li><li>純粋関数<code>pure</code></li><li>例外を投げない関数<code>nothrow</code></li><li>UDA(User Defined Attribute)</li><li><code>const</code>, <code>immutable</code>, <code>inout</code>, <code>abstract</code>, <code>final</code></li><li>ガベージコレクタが動かない関数<code>@nogc</code></li></ul><li>関数オーバーロード(多重定義, overload)</li><li>ローカル<code>static</code>変数</li><li>ネスト関数</li><li>関数ポインタ</li><li>デリゲート<code>delegate</code></li><li>関数のリテラルとラムダ</li><li>UFCS(Uniform Function Call Syntax)</li><li>CTFE(Compile Time Function Execution)</li><li>問題</li><li>終わりに</li><li>キーワード</li><li>仕様</li></ul></ul></div></p>
 
 <h2>関数とは？</h2>
 
@@ -1202,6 +1202,28 @@ lazy: 1[usecs]
 ToDo: <a href="struct.md">構造体の章へ</a>
 ToDo: <a href="class.md">クラスの章へ</a></p>
 
+<h3>ガベージコレクタが動かない関数<code>@nogc</code></h3>
+
+<p>Dでは、言語仕様にガベージコレクタが含まれていますが、組み込みやゲームの開発などでは、ガベージコレクタが邪魔になる場合があります。
+<code>@nogc</code>は、その関数内ではガベージコレクタが絶対起動しないということを保証します。</p>
+
+<p>実行時にガベージコレクタが動かない関数であれば、<code>@nogc</code>属性を付加することで、<code>@nogc</code>関数となります。</p>
+
+<p>この属性は、DMD v2.066 より追加されました。</p>
+<div class="highlight"><pre><code class="language-d" data-lang="d"><span class="k">import</span> <span class="n">core</span><span class="p">.</span><span class="n">stdc</span><span class="p">.</span><span class="n">stdlib</span><span class="p">;</span>
+
+<span class="c1">// この関数では、ガベージコレクタが動かない</span>
+<span class="kt">void</span> <span class="n">fooNoGC</span><span class="p">()</span> <span class="nd">@nogc</span>
+<span class="p">{</span>
+    <span class="kt">int</span><span class="p">[</span><span class="mi">1024</span><span class="p">]</span> <span class="n">stack</span><span class="p">;</span>                <span class="c1">// stackのアロケーション</span>
+    <span class="kt">int</span><span class="p">[]</span> <span class="n">slice</span> <span class="p">=</span> <span class="n">stack</span><span class="p">[</span><span class="mi">0</span> <span class="p">..</span> <span class="p">$/</span><span class="mi">2</span><span class="p">];</span>  <span class="c1">// スライス</span>
+
+    <span class="c1">// Cヒープからの確保</span>
+    <span class="kt">int</span><span class="p">*</span> <span class="n">p</span> <span class="p">=</span> <span class="k">cast</span><span class="p">(</span><span class="kt">int</span><span class="p">*)</span><span class="n">malloc</span><span class="p">(</span><span class="kt">int</span><span class="p">.</span><span class="n">sizeof</span> <span class="p">*</span> <span class="mi">1024</span><span class="p">);</span>
+    <span class="k">if</span><span class="p">(!</span><span class="n">p</span><span class="p">)</span> <span class="k">return</span><span class="p">;</span>
+    <span class="k">scope</span><span class="p">(</span><span class="n">exit</span><span class="p">)</span> <span class="p">{</span> <span class="n">free</span><span class="p">(</span><span class="n">p</span><span class="p">);</span> <span class="n">p</span> <span class="p">=</span> <span class="kc">null</span><span class="p">;</span> <span class="p">};</span>
+<span class="p">}</span>
+</code></pre></div>
 <h2>関数オーバーロード(多重定義, overload)</h2>
 
 <p>D言語の関数は、引数が違えば、同じ関数名の関数を宣言することができます。</p>
