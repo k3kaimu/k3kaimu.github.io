@@ -3,11 +3,27 @@
   
  <id>http://k3kaimu.github.io</id>
  <title></title>
- <updated>2014-09-21T18:01:52+09:00</updated>
+ <updated>2014-10-23T01:41:07+09:00</updated>
  <link rel="self" href="http://k3kaimu.github.io/atom.xml"/>
  <link href="http://k3kaimu.github.io/"/>
  <author><name>k3-kaimu</name></author>
 
+ 
+ <entry>
+  <id>http://k3kaimu.github.io/blog/2014/10/23/procon25</id>
+  <title>プロコンお疲れ様でした</title>
+  <updated>2014-10-23T10:41:00+09:00</updated>
+  <link href="http://k3kaimu.github.io/blog/2014/10/23/procon25/"/>
+  <content>お疲れ様でした。
+
+プロコンおよびNAPROCKの運営の皆様、一関高専の皆様、またプロコンに出場した高専生・大学生の皆様、お疲れ様でした。
+
+実は、僕がプロコンに参加するのは今回が初めてで、準備を始めた5月の時点ではプロコンというものをまったく理解してませんでした。
+もちろんプロコンの存在は知っていましたし、競技部門についてはUstreamで何回か見たことがありました。
+
+正直に言えば、本当に本戦が始まる前までは高専生にボコボコにされるだろうと予測していたのですが、なんとか大学生としての意地を見せることができたと思います。
+大阪府大高専と沖縄高専に負けたじゃんって話ですが、僕達も高専卒業...</content>
+ </entry>
  
  <entry>
   <id>http://k3kaimu.github.io/blog/2014/09/22/tutcccamp</id>
