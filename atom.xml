@@ -3,11 +3,35 @@
   
  <id>http://k3kaimu.github.io</id>
  <title></title>
- <updated>2014-10-23T01:41:07+09:00</updated>
+ <updated>2014-10-29T11:05:34+09:00</updated>
  <link rel="self" href="http://k3kaimu.github.io/atom.xml"/>
  <link href="http://k3kaimu.github.io/"/>
  <author><name>k3-kaimu</name></author>
 
+ 
+ <entry>
+  <id>http://k3kaimu.github.io/d%E3%81%AE%E4%BC%9A/2014/10/29/d-nokai2</id>
+  <title>Dの会 #2 資料</title>
+  <updated>2014-10-29T20:00:00+09:00</updated>
+  <link href="http://k3kaimu.github.io/d%E3%81%AE%E4%BC%9A/2014/10/29/d-nokai2/"/>
+  <content>Contentsアンケートの結果アンケート結果順番様々な型スコープデフォルト初期化値(Default Initializer; Type.init)ポインタ等の宣言type-qualifierconstimmutableinoutsharedおまけ
+
+アンケートの結果
+
+アンケート
+
+http://goo.gl/forms/yzRr0qo1Hv
+
+内容は、C++やDを使う上で重要な知識。
+
+結果
+
+
+Type-Qualifierについて
+int const *と、int * constの違いが分かる人は半々くらい。
+immutableについて
+immutableの性質を知っている人も半分...</content>
+ </entry>
  
  <entry>
   <id>http://k3kaimu.github.io/blog/2014/10/23/procon25</id>

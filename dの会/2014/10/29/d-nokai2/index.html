@@ -1,0 +1,682 @@
+<!DOCTYPE html>
+<html lang="ja" xmlns="http://www.w3.org/1999/xhtml" prefix="og: http://ogp.me/ns#">
+  <head>
+    
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="format-detection" content="telephone=no">
+<link rel="alternate" type="application/rss+xml" title="RSS Feed" href="http://k3kaimu.github.io/atom.xml">
+<link rel="shortcut icon" href="/favicon.ico">
+
+    <title> Dの会 #2 資料 | Go to the future</title>
+    
+<meta property="og:type" content="blog">
+<meta property="og:title" content="Dの会 #2 資料">
+<meta property="og:description" content="{% tree %}
+
+## アンケートの結果
+
+### アンケート
+
+http://goo.gl/forms/yzRr0qo1Hv
+
+内容は、C++やDを使う上で重要な知識。
+
+
+### 結果
+
+* Type-Qualifierについて  
+    `int const *`と、`int *...">
+<meta property="og:url" content="http://k3kaimu.github.io/d%E3%81%AE%E4%BC%9A/2014/10/29/d-nokai2/">
+
+<meta property="og:site_name" content="Go to the future">
+<meta property="og:locale" content="ja_JP">
+<meta name="twitter:card" content="summary">
+
+<meta name="twitter:site" content="@k3_kaimu">
+
+
+    
+<link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootswatch/3.0.2/cerulean/bootstrap.min.css">
+<link rel="stylesheet" href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.min.css">
+<link rel="stylesheet" href="/assets/css/all.min.css">
+<link rel="stylesheet" href="/assets/css/navigation.css">
+
+    
+<!--[if lt IE 9]>
+  <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+  <script src="https://oss.maxcdn.com/libs/respond.js/1.3.0/respond.min.js"></script>
+<![endif]-->
+
+  </head>
+  <body>
+    
+<div class="navbar navbar-default navbar-fixed-top" role="navigation">
+  <div class="container">
+    <div class="navbar-header">
+      <a href="/" class="navbar-brand">Go to the future</a>
+      <button class="navbar-toggle" type="button" data-toggle="collapse" data-target="#navbar-main">
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+    </div>
+    <div class="navbar-collapse collapse" id="navbar-main">
+      <ul class="nav navbar-nav js_nav">
+        <li><a href="/blog/">Blog</a></li>
+        <li><a href="/dmanual/">DManual</a></li>
+        <li><a href="/dtips/">DTips</a></li>
+        <!--<li><a href="/archives/">Index...</a></li>
+        -->
+        <li class="dropdown">
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown">Index...<b class="caret"></b></a>
+          <ul class="dropdown-menu">
+            <li>
+              <a href="/archives/" itemprop="sameAs" content="/archives/">
+                <i class="fa fa-archive fa-lg"></i> Archives
+              </a>
+            </li>
+            <li>
+              <a href="/categories/" itemprop="sameAs" content="/categories/">
+                <i class="fa fa-folder-open fa-lg"></i> Categories
+              </a>
+            </li>
+            <li>
+              <a href="/tags/" itemprop="sameAs" content="/tags/">
+                <i class="fa fa-tags fa-lg"></i> Tags
+              </a>
+            </li>
+          </ul>
+        </li>
+      </ul>
+      <div id="owner" itemprop="author copyrightHolder editor" itemscope itemtype="http://schema.org/Person">
+        <ul class="nav navbar-nav navbar-right">
+          <li class="dropdown">
+            <a href="#" class="dropdown-toggle" data-toggle="dropdown">k3-kaimu <b class="caret"></b></a>
+            <ul class="dropdown-menu">
+              
+              <li>
+                
+                <a href="https://www.github.com/k3kaimu" itemprop="sameAs" content="https://www.github.com/k3kaimu">
+                  <i class="fa fa-github-square fa-lg"></i> GitHub
+                </a>
+              </li>
+              
+              
+              <li>
+                
+                <a href="http://www.twitter.com/k3_kaimu" itemprop="sameAs" content="http://www.twitter.com/k3_kaimu">
+                  <i class="fa fa-twitter-square fa-lg"></i> Twitter
+                </a>
+              </li>
+              
+              
+              
+              <li>
+                <a href="/atom.xml">
+                  <i class="fa fa-rss-square fa-lg fa-lg"></i> Rss
+                </a>
+              </li>
+            </ul>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</div>
+
+    <div id="content">
+      <div class="container">
+        <article itemscope itemtype="http://schema.org/Article" itemref="owner">
+          
+<div class="row">
+  <div class="col-md-12 col-sm-12 col-xs-12">
+    <div class="page-header">
+      <h1 itemprop="url" content="http://k3kaimu.github.io/d%E3%81%AE%E4%BC%9A/2014/10/29/d-nokai2/">
+        <i class="fa fa-puzzle-piece fa-lg"></i> <span itemprop="name">Dの会 #2 資料</span>
+      </h1>
+    </div>
+  </div>
+</div>
+
+          <div class="row">
+            <div class="col-md-12 col-sm-12 col-xs-12">
+              <div itmprop="articleBody">
+                <p><h2 class="content_tree">Contents</h2><div class="content_tree_list"><ul><li>アンケートの結果</li><ul><li>アンケート</li><li>結果</li><li>順番</li></ul><li>様々な型</li><li>スコープ</li><li>デフォルト初期化値(Default Initializer; Type.init)</li><li>ポインタ等の宣言</li><li>type-qualifier</li><li><code>const</code></li><li><code>immutable</code></li><li><code>inout</code></li><li><code>shared</code></li><ul><li>おまけ</li></ul></ul></ul></div></p>
+
+<h2>アンケートの結果</h2>
+
+<h3>アンケート</h3>
+
+<p>http://goo.gl/forms/yzRr0qo1Hv</p>
+
+<p>内容は、C++やDを使う上で重要な知識。</p>
+
+<h3>結果</h3>
+
+<ul>
+<li><p>Type-Qualifierについて<br>
+<code>int const *</code>と、<code>int * const</code>の違いが分かる人は半々くらい。</p></li>
+<li><p>immutableについて<br>
+immutableの性質を知っている人も半分くらい。
+immutableだから、スレッド間で共有しても無問題(スレッドセーフ)であると知っている人は少数。</p></li>
+<li><p>関数の純粋性<br>
+純粋性について知っている人は少数。
+「副作用」について聞けば、もっと良かったかも。</p></li>
+<li><p>参照渡しと値渡し<br>
+みんな知ってた</p></li>
+<li><p>値セマンティクスと参照セマンティクス<br>
+誰も知らない</p></li>
+<li><p>コピーコンストラクタ<br>
+ほとんどみんな知ってた</p></li>
+<li><p>デストラクタ<br>
+全員知ってた</p></li>
+<li><p>ムーヴセマンティクス<br>
+誰も知らなかった</p></li>
+<li><p><code>const T&amp;</code>で関数に渡す理由<br>
+あとから読み返すと質問の文章が悪かった。
+一人だけ知ってた。</p></li>
+<li><p><code>template</code>について<br>
+<code>template</code>を知っている人は半分。
+でも、<code>template</code>の本質を知っている人はいなかった。
+なのに、Template Meta Programming経験者がいた。</p></li>
+<li><p>GCについて<br>
+誰も知らなかった。</p></li>
+<li><p>RAIIについて<br>
+誰も知らなかった。</p></li>
+<li><p>参照カウントについて<br>
+一人だけ知ってた。</p></li>
+<li><p>イテレータ<br>
+ほとんどみんな使える。</p></li>
+<li><p>関数ポインタ<br>
+さすがに全員知ってた。</p></li>
+<li><p>関数オブジェクト<br>
+一人だけ知ってた。</p></li>
+<li><p>ラムダ式<br>
+知っている人は半分。</p></li>
+<li><p>クロージャ<br>
+一人だけ知ってた。</p></li>
+<li><p>UTFについて<br>
+UTF-8, 16, 32があることは知っていても、UTF-8, 16が可変長で、UTF-32が固定長であることを知っている人はいなかったっぽい。</p></li>
+<li><p>連想配列<br>
+半分の人は知ってた。</p></li>
+<li><p>タプル<br>
+誰も知らなかった。</p></li>
+<li><p>例外<br>
+例外のことは、全員知ってた。意外(失礼)。</p>
+
+<p>例外安全については、一人だけ日頃から気を付けてる人がいて安心した。</p></li>
+<li><p>メモリ安全性<br>
+一人だけ日頃から気を付けてくれてた。
+Buffer Overflowと未初期化変数には気をつけて。</p></li>
+<li><p>仮想関数<br>
+みんな知ってた。
+継承について聞けばよかったと後悔。</p></li>
+<li><p>実行時型情報(RTTI)
+誰も知らなかった。
+授業で教えてくれるのだと思ってた。</p></li>
+</ul>
+
+<h3>順番</h3>
+
+<ul>
+<li>type, qualifier</li>
+<li>array, GC and foreach-loop</li>
+<li>string, UTF</li>
+<li>Associative Array(HashMap)</li>
+<li>function(template)</li>
+<li>Exception, scope(exit|failure|success), DbC, unittest</li>
+<li>revisit function</li>
+<li>revisit template-function</li>
+<li>struct, union</li>
+<li>class, interface,</li>
+<li>re-revisit template</li>
+</ul>
+
+<h2>様々な型</h2>
+
+<p>Dには、次のような型がある。</p>
+<div class="highlight"><pre><code class="language-d" data-lang="d"><span class="p">*</span> <span class="kt">void</span>  <span class="p">:</span> <span class="err">特殊</span>
+<span class="p">*</span> <span class="kt">bool</span>  <span class="p">:</span> <span class="err">真偽値</span>
+<span class="p">*</span> <span class="err">整数型</span>
+    <span class="p">*</span> <span class="kt">byte</span>      <span class="p">:</span>  <span class="mi">8</span><span class="n">bit</span><span class="err">の符号あり</span><span class="p">(</span><span class="n">signed</span><span class="p">)</span><span class="err">な整数</span>
+    <span class="p">*</span> <span class="kt">ubyte</span>     <span class="p">:</span>  <span class="mi">8</span><span class="n">bit</span><span class="err">の符号なし</span><span class="p">(</span><span class="n">unsigned</span><span class="p">)</span><span class="err">な整数</span>
+    <span class="p">*</span> <span class="kt">short</span>     <span class="p">:</span> <span class="mi">16</span><span class="n">bit</span><span class="err">の符号あり整数</span>
+    <span class="p">*</span> <span class="kt">ushort</span>    <span class="p">:</span> <span class="mi">16</span><span class="n">bit</span><span class="err">の符号なし整数</span>
+    <span class="p">*</span> <span class="kt">int</span>       <span class="p">:</span> <span class="mi">32</span><span class="n">bit</span><span class="err">の符号あり整数</span>
+    <span class="p">*</span> <span class="kt">uint</span>      <span class="p">:</span> <span class="mi">32</span><span class="n">bit</span><span class="err">の符号なし整数</span>
+    <span class="p">*</span> <span class="kt">long</span>      <span class="p">:</span> <span class="mi">64</span><span class="n">bit</span><span class="err">の符号あり整数</span>
+    <span class="p">*</span> <span class="kt">ulong</span>     <span class="p">:</span> <span class="mi">64</span><span class="n">bit</span><span class="err">の符号なし整数</span>
+    <span class="p">*</span> <span class="kt">cent</span>      <span class="p">:</span> <span class="mi">128</span><span class="n">bit</span><span class="err">の符号あり整数</span><span class="p">(</span><span class="err">将来のために名前だけ付けられてる</span><span class="p">)</span>
+    <span class="p">*</span> <span class="kt">ucent</span>     <span class="p">:</span> <span class="mi">128</span><span class="n">bit</span><span class="err">の符号なし整数</span><span class="p">(</span><span class="err">将来のために名前だけ付けられてる</span><span class="p">)</span>
+
+    <span class="p">*</span> <span class="nb">size_t</span>    <span class="p">:</span> <span class="err">ポインタ値が十分に入る大きさの符号なし整数型</span>
+                  <span class="mi">32</span><span class="n">bit</span><span class="err">環境だと</span><span class="mi">32</span><span class="n">bit</span><span class="p">(</span><span class="kt">uint</span><span class="p">),</span> <span class="mi">64</span><span class="n">bit</span><span class="err">環境だと</span><span class="mi">64</span><span class="n">bit</span><span class="p">(</span><span class="kt">ulong</span><span class="p">)</span>
+
+    <span class="p">*</span> <span class="nb">ptrdiff_t</span> <span class="p">:</span> <span class="nb">size_t</span><span class="err">と同じ大きさの符号あり整数型</span>
+
+<span class="p">*</span> <span class="err">浮動小数点型</span>
+    <span class="p">()</span><span class="err">の中の</span><span class="mi">3</span><span class="err">つの数字は、</span><span class="p">(</span><span class="err">符号部</span><span class="n">bit</span><span class="err">数</span><span class="p">,</span> <span class="err">指数部</span><span class="n">bit</span><span class="err">数</span><span class="p">,</span> <span class="err">仮数部</span><span class="n">bit</span><span class="err">数</span><span class="p">)</span>
+    <span class="p">*</span> <span class="kt">float</span>     <span class="p">:</span> <span class="mi">32</span><span class="n">bit</span><span class="err">の浮動小数点の実数</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">8</span><span class="p">,</span> <span class="mi">23</span><span class="p">)</span>
+    <span class="p">*</span> <span class="kt">double</span>    <span class="p">:</span> <span class="mi">64</span><span class="n">bit</span><span class="err">の浮動小数点の実数</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">11</span><span class="p">,</span> <span class="mi">52</span><span class="p">)</span>
+    <span class="p">*</span> <span class="kt">real</span>      <span class="p">:</span> <span class="mi">64</span><span class="n">bit</span><span class="err">以上</span><span class="p">(</span><span class="err">システムによって違う</span><span class="p">)</span><span class="err">の浮動小数点の実数</span>
+
+    <span class="p">*</span> <span class="kt">ifloat</span>    <span class="p">:</span> <span class="mi">32</span><span class="n">bit</span><span class="err">の浮動小数点の虚数</span>
+    <span class="p">*</span> <span class="kt">idouble</span>   <span class="p">:</span> <span class="mi">64</span><span class="n">bit</span><span class="err">の浮動小数点の虚数</span>
+    <span class="p">*</span> <span class="kt">ireal</span>     <span class="p">:</span> <span class="mi">64</span><span class="n">bit</span><span class="err">以上</span><span class="p">(</span><span class="err">システムによって違う</span><span class="p">)</span><span class="err">の浮動小数点の虚数</span>
+
+    <span class="p">*</span> <span class="kt">cfloat</span>    <span class="p">:</span> <span class="mi">32</span><span class="n">bit</span><span class="err">の浮動小数点の複素数</span><span class="p">,</span> <span class="mi">64</span><span class="n">bit</span>
+    <span class="p">*</span> <span class="kt">cdouble</span>   <span class="p">:</span> <span class="mi">64</span><span class="n">bit</span><span class="err">の浮動小数点の複素数</span><span class="p">,</span> <span class="mi">128</span><span class="n">bit</span>
+    <span class="p">*</span> <span class="kt">creal</span>     <span class="p">:</span> <span class="mi">64</span><span class="n">bit</span><span class="err">以上</span><span class="p">(</span><span class="err">システムによって違う</span><span class="p">)</span><span class="err">の浮動小数点の複素数</span><span class="p">(</span><span class="mi">64</span><span class="n">bit</span><span class="err">以上</span> <span class="p">*</span> <span class="mi">2</span><span class="err">の大きさ</span><span class="p">)</span>
+
+<span class="p">*</span> <span class="err">文字型</span>
+    <span class="p">*</span> <span class="kt">char</span>      <span class="p">:</span> <span class="n">UTF</span><span class="p">-</span><span class="mi">8</span><span class="err">でエンコードされた文字</span><span class="p">(</span><span class="mi">8</span><span class="n">bit</span><span class="p">)</span>
+    <span class="p">*</span> <span class="kt">wchar</span>     <span class="p">:</span> <span class="n">UTF</span><span class="p">-</span><span class="mi">16</span><span class="err">でエンコードされた文字</span><span class="p">(</span><span class="mi">16</span><span class="n">bit</span><span class="p">)</span>
+    <span class="p">*</span> <span class="kt">dchar</span>     <span class="p">:</span> <span class="n">UTF</span><span class="p">-</span><span class="mi">32</span><span class="err">でエンコードされた文字</span><span class="p">(</span><span class="mi">32</span><span class="n">bit</span><span class="p">)</span>
+
+<span class="p">*</span> <span class="err">配列</span>
+    <span class="p">*</span> <span class="n">T</span><span class="p">[</span><span class="n">N</span><span class="p">]</span>      <span class="p">:</span> <span class="err">静的配列型</span>
+    <span class="p">*</span> <span class="n">T</span><span class="p">[]</span>       <span class="p">:</span> <span class="err">動的配列型</span><span class="p">(</span><span class="err">スライス</span><span class="p">)</span>
+    <span class="p">*</span> <span class="nb">string</span>    <span class="p">:</span> <span class="err">文字列型</span> <span class="k">immutable</span><span class="p">(</span><span class="kt">char</span><span class="p">)[]</span>
+    <span class="p">*</span> <span class="nb">wstring</span>   <span class="p">:</span> <span class="err">文字列型</span> <span class="k">immutable</span><span class="p">(</span><span class="kt">wchar</span><span class="p">)[]</span>
+    <span class="p">*</span> <span class="nb">dstring</span>   <span class="p">:</span> <span class="err">文字列型</span> <span class="k">immutable</span><span class="p">(</span><span class="kt">dchar</span><span class="p">)[]</span>
+
+<span class="p">*</span> <span class="n">V</span><span class="p">[</span><span class="n">K</span><span class="p">]</span>  <span class="p">:</span><span class="err">　連想配列</span>
+<span class="p">*</span> <span class="n">T</span><span class="p">*</span>    <span class="p">:</span> <span class="err">ポインタ</span>
+
+<span class="p">*</span> <span class="n">R</span> <span class="k">function</span><span class="p">(</span><span class="n">T</span><span class="p">...)</span>  <span class="p">:</span> <span class="err">関数ポインタ型</span>
+<span class="p">*</span> <span class="n">R</span> <span class="k">delegate</span><span class="p">(</span><span class="n">T</span><span class="p">...)</span>  <span class="p">:</span> <span class="err">デリゲート型</span>
+
+<span class="p">*</span> <span class="err">ユーザー定義型</span>
+    <span class="p">*</span> <span class="k">enum</span>      <span class="p">:</span> <span class="err">列挙体</span>
+    <span class="p">*</span> <span class="k">struct</span>    <span class="p">:</span> <span class="err">構造体</span><span class="p">(</span><span class="n">C</span><span class="p">++</span><span class="err">での</span><span class="k">struct</span><span class="p">,</span> <span class="k">class</span><span class="err">に相当</span><span class="p">)</span>
+    <span class="p">*</span> <span class="k">union</span>     <span class="p">:</span> <span class="err">共用体</span>
+    <span class="p">*</span> <span class="k">class</span>     <span class="p">:</span> <span class="err">クラス</span><span class="p">(</span><span class="n">Java</span><span class="p">,</span> <span class="n">C</span><span class="err">#等の</span><span class="k">class</span><span class="err">に相当</span><span class="p">)</span>
+    <span class="p">*</span> <span class="k">interface</span> <span class="p">:</span> <span class="err">インターフェイス</span><span class="p">(</span><span class="n">Java</span><span class="err">、</span><span class="n">C</span><span class="err">#等の</span><span class="k">interface</span><span class="err">に相当</span><span class="p">)</span>
+</code></pre></div>
+<h2>スコープ</h2>
+<div class="highlight"><pre><code class="language-d" data-lang="d"><span class="c1">// Thread Local Storage</span>
+<span class="c1">// 各スレッド毎に実体が異なる</span>
+<span class="kt">int</span> <span class="n">g</span> <span class="p">=</span> <span class="mi">0</span><span class="p">;</span>  <span class="c1">// TLS</span>
+
+<span class="kt">void</span> <span class="n">main</span><span class="p">()</span>
+<span class="p">{</span>
+    <span class="kt">int</span> <span class="n">g</span> <span class="p">=</span> <span class="mi">3</span><span class="p">;</span>
+
+    <span class="k">assert</span><span class="p">(</span><span class="n">g</span> <span class="p">==</span> <span class="mi">3</span><span class="p">);</span>
+    <span class="k">assert</span><span class="p">(.</span><span class="n">g</span> <span class="p">==</span> <span class="mi">3</span><span class="p">);</span>
+<span class="p">}</span>
+</code></pre></div>
+<h2>デフォルト初期化値(Default Initializer; Type.init)</h2>
+
+<p>D言語の変数は宣言した際に初期化されます。
+その際の値をデフォルト初期化値といいます。
+この初期化をしてほしくない場合には、<code>Type iden = void;</code>というように<code>= void</code>とします。</p>
+<div class="highlight"><pre><code class="language-d" data-lang="d"><span class="k">import</span> <span class="n">std</span><span class="p">.</span><span class="n">stdio</span><span class="p">;</span>
+
+<span class="kt">void</span> <span class="n">main</span><span class="p">()</span>
+<span class="p">{</span>
+    <span class="kt">int</span> <span class="n">a</span><span class="p">;</span>
+    <span class="n">writeln</span><span class="p">(</span><span class="n">a</span><span class="p">);</span>         <span class="c1">// 0; intのデフォルト初期化値は 0</span>
+
+    <span class="n">writeln</span><span class="p">(</span><span class="kt">int</span><span class="p">.</span><span class="n">init</span><span class="p">);</span>  <span class="c1">// Type.init でデフォルト初期化値を取得できる</span>
+
+    <span class="kt">int</span> <span class="n">b</span> <span class="p">=</span> <span class="kt">void</span><span class="p">;</span>       <span class="c1">// 初期化を阻止</span>
+    <span class="n">writeln</span><span class="p">(</span><span class="n">b</span><span class="p">);</span>         <span class="c1">// 何が表示されるかわからない</span>
+<span class="p">}</span>
+</code></pre></div>
+<h2>ポインタ等の宣言</h2>
+<div class="highlight"><pre><code class="language-d" data-lang="d"><span class="kt">void</span> <span class="n">main</span><span class="p">()</span>
+<span class="p">{</span>
+    <span class="kt">int</span><span class="p">*</span> <span class="n">p1</span><span class="p">,</span>    <span class="c1">// &lt;= ポインタ</span>
+         <span class="n">p2</span><span class="p">;</span>    <span class="c1">// &lt;= ポインタ</span>
+
+    <span class="kt">int</span><span class="p">[]</span> <span class="n">a1</span><span class="p">,</span>   <span class="c1">// &lt;= 配列</span>
+          <span class="n">a2</span><span class="p">;</span>   <span class="c1">// &lt;= 配列</span>
+
+    <span class="kt">int</span> <span class="k">function</span><span class="p">(</span><span class="kt">int</span><span class="p">,</span> <span class="kt">int</span><span class="p">)</span>
+        <span class="n">f1</span><span class="p">,</span>     <span class="c1">// &lt;= 関数ポインタ</span>
+        <span class="n">f2</span><span class="p">;</span>     <span class="c1">// &lt;= 関数ポインタ</span>
+<span class="p">}</span>
+</code></pre></div>
+<h2>type-qualifier</h2>
+
+<ul>
+<li>qualifier：修飾子</li>
+</ul>
+
+<p>型<code>T</code>に対して、<code>qualifier(T)</code>を導入する。</p>
+<div class="highlight"><pre><code class="language-d" data-lang="d"><span class="kt">void</span> <span class="n">main</span><span class="p">()</span>
+<span class="p">{</span>
+    <span class="c1">// const int a;</span>
+    <span class="k">const</span> <span class="kt">int</span> <span class="n">a</span><span class="p">;</span>    <span class="c1">// const(int) a;でもOK</span>
+
+    <span class="c1">// int const * b;</span>
+    <span class="k">const</span><span class="p">(</span><span class="kt">int</span><span class="p">)*</span> <span class="n">b</span><span class="p">;</span>
+
+    <span class="c1">// int * const c;</span>
+    <span class="c1">// 該当なし</span>
+
+    <span class="c1">// int const * const * const * d;</span>
+    <span class="k">const</span><span class="p">(</span><span class="kt">int</span><span class="p">**)*</span> <span class="n">d</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre></div>
+<p><code>T * qualifier</code>が存在しない理由は「使わないから」。
+あと、簡単にライブラリで実装可能。</p>
+<div class="highlight"><pre><code class="language-d" data-lang="d"><span class="c1">// E * const を実現する</span>
+<span class="k">struct</span> <span class="n">ConstPtr</span><span class="p">(</span><span class="n">E</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">private</span> <span class="n">E</span><span class="p">*</span> <span class="n">_ptr</span><span class="p">;</span>
+    <span class="k">inout</span><span class="p">(</span><span class="n">E</span><span class="p">*)</span> <span class="n">get</span><span class="p">()</span> <span class="k">inout</span> <span class="nd">@property</span> <span class="p">{</span> <span class="k">return</span> <span class="n">_ptr</span><span class="p">;</span> <span class="p">}</span>
+    <span class="k">alias</span> <span class="n">get</span> <span class="k">this</span><span class="p">;</span>
+
+    <span class="k">this</span><span class="p">(</span><span class="n">E</span><span class="p">*</span> <span class="n">p</span><span class="p">)</span> <span class="p">{</span> <span class="n">_ptr</span> <span class="p">=</span> <span class="n">p</span><span class="p">;</span> <span class="p">}</span>
+    <span class="k">this</span><span class="p">(</span><span class="n">ConstPtr</span><span class="p">!</span><span class="n">E</span> <span class="n">p</span><span class="p">)</span> <span class="p">{</span> <span class="n">_ptr</span> <span class="p">=</span> <span class="n">p</span><span class="p">.</span><span class="n">_ptr</span><span class="p">;</span> <span class="p">}</span>
+
+    <span class="nd">@disable</span> <span class="kt">void</span> <span class="n">opAssign</span><span class="p">(</span><span class="n">ConstPtr</span><span class="p">!</span><span class="n">E</span><span class="p">);</span>
+<span class="p">}</span>
+
+<span class="k">import</span> <span class="n">std</span><span class="p">.</span><span class="n">stdio</span><span class="p">;</span>
+
+<span class="kt">void</span> <span class="n">main</span><span class="p">()</span>
+<span class="p">{</span>
+    <span class="n">ConstPtr</span><span class="p">!</span><span class="kt">int</span> <span class="n">a</span> <span class="p">=</span> <span class="k">new</span> <span class="kt">int</span><span class="p">;</span>
+
+    <span class="c1">// a = new int;                 // NG</span>
+    <span class="c1">// a = ConstPtr!int(new int);   // NG</span>
+
+    <span class="p">*</span><span class="n">a</span> <span class="p">=</span> <span class="mi">12</span><span class="p">;</span>
+    <span class="n">writeln</span><span class="p">(*</span><span class="n">a</span><span class="p">);</span>    <span class="c1">// 12</span>
+<span class="p">}</span>
+</code></pre></div>
+<h2><code>const</code></h2>
+
+<p><code>const(T)</code>は、その型の値は読み取り専用であることを示す。</p>
+<div class="highlight"><pre><code class="language-d" data-lang="d"><span class="kt">void</span> <span class="n">main</span><span class="p">()</span>
+<span class="p">{</span>
+    <span class="k">const</span><span class="p">(</span><span class="kt">int</span><span class="p">)</span> <span class="n">a</span> <span class="p">=</span> <span class="mi">3</span><span class="p">;</span>
+
+    <span class="kt">int</span><span class="p">[]</span> <span class="n">mtbl</span> <span class="p">=</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">];</span>
+
+    <span class="c1">// T -&gt; const(T)の暗黙変換は常に可能</span>
+    <span class="k">const</span><span class="p">(</span><span class="kt">int</span><span class="p">[])</span> <span class="n">cnst</span> <span class="p">=</span> <span class="n">mtbl</span><span class="p">;</span>
+
+    <span class="c1">// 非constから書き換え可能</span>
+    <span class="n">mtbl</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="p">=</span> <span class="mi">3</span><span class="p">;</span>
+    <span class="k">assert</span><span class="p">(</span><span class="n">cnst</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="p">==</span> <span class="mi">3</span><span class="p">);</span>
+
+    <span class="k">auto</span> <span class="n">cp</span> <span class="p">=</span> <span class="n">cnst</span><span class="p">.</span><span class="n">ptr</span><span class="p">;</span>
+    <span class="k">static</span> <span class="k">assert</span><span class="p">(</span><span class="k">is</span><span class="p">(</span><span class="k">typeof</span><span class="p">(</span><span class="n">cp</span><span class="p">)</span> <span class="p">:</span> <span class="k">const</span><span class="p">(</span><span class="kt">int</span><span class="p">*)));</span>
+
+    <span class="c1">// const(int)の動的配列</span>
+    <span class="k">const</span><span class="p">(</span><span class="kt">int</span><span class="p">)[]</span> <span class="n">cnst2</span> <span class="p">=</span> <span class="n">cnst</span><span class="p">;</span>
+    <span class="n">cnst2</span><span class="p">.</span><span class="n">length</span> <span class="p">=</span> <span class="mi">2</span><span class="p">;</span>           <span class="c1">// OK</span>
+    <span class="c1">// cnst2[0] = 3;            // NG(要素がconst)</span>
+<span class="p">}</span>
+</code></pre></div>
+<h2><code>immutable</code></h2>
+
+<p><code>immutable(T)</code>は、その値は生まれてから死ぬまで絶対に書き換わることがないことを示す。</p>
+<div class="highlight"><pre><code class="language-d" data-lang="d"><span class="kt">void</span> <span class="n">main</span><span class="p">()</span>
+<span class="p">{</span>
+    <span class="k">immutable</span><span class="p">(</span><span class="kt">int</span><span class="p">)</span> <span class="n">a</span> <span class="p">=</span> <span class="mi">3</span><span class="p">;</span>
+
+    <span class="kt">int</span><span class="p">[]</span> <span class="n">mtbl</span> <span class="p">=</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">];</span>
+
+    <span class="c1">// T -&gt; immutable(T)の暗黙変換は不可能</span>
+    <span class="c1">// immutable(int[]) immt = mtbl;</span>
+
+    <span class="c1">// unique-expressionなら、</span>
+    <span class="c1">// T -&gt; immutable(T)へ暗黙変換可能</span>
+    <span class="k">immutable</span><span class="p">(</span><span class="kt">int</span><span class="p">[])</span> <span class="n">immt</span> <span class="p">=</span> <span class="n">mtbl</span><span class="p">.</span><span class="n">dup</span><span class="p">;</span>
+
+    <span class="k">assert</span><span class="p">(</span><span class="n">immt</span> <span class="p">!</span><span class="k">is</span> <span class="n">mtbl</span><span class="p">);</span>
+
+    <span class="c1">// immutable(int)の動的配列</span>
+    <span class="k">immutable</span><span class="p">(</span><span class="kt">int</span><span class="p">)[]</span> <span class="n">imm2</span><span class="p">;</span>
+
+    <span class="c1">// 参照先や長さは変更可能</span>
+    <span class="n">imm2</span> <span class="p">=</span> <span class="n">immt</span><span class="p">;</span>
+    <span class="n">imm2</span><span class="p">.</span><span class="n">length</span> <span class="p">=</span> <span class="mi">1</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre></div>
+<h2><code>inout</code></h2>
+
+<p>たとえば、次のメンバ関数では、mutable, <code>const</code>, <code>immutable</code>の3つの関数を宣言しなければいけない。</p>
+<div class="highlight"><pre><code class="language-d" data-lang="d"><span class="k">struct</span> <span class="n">Vector</span><span class="p">(</span><span class="n">T</span><span class="p">)</span>
+<span class="p">{</span>
+  <span class="nd">@property</span>
+  <span class="p">{</span>
+    <span class="n">T</span><span class="p">*</span> <span class="n">ptr</span><span class="p">()</span> <span class="p">{</span> <span class="k">return</span> <span class="n">_arr</span><span class="p">.</span><span class="n">ptr</span><span class="p">;</span> <span class="p">}</span>
+    <span class="k">const</span><span class="p">(</span><span class="n">T</span><span class="p">)*</span> <span class="n">ptr</span><span class="p">()</span> <span class="k">const</span> <span class="p">{</span> <span class="k">return</span> <span class="n">_arr</span><span class="p">.</span><span class="n">ptr</span><span class="p">;</span> <span class="p">}</span>
+    <span class="k">immutable</span><span class="p">(</span><span class="n">T</span><span class="p">)*</span> <span class="n">ptr</span><span class="p">()</span> <span class="k">immutable</span> <span class="p">{</span> <span class="k">return</span> <span class="n">_arr</span><span class="p">.</span><span class="n">ptr</span><span class="p">;</span> <span class="p">}</span>
+  <span class="p">}</span>
+
+  <span class="k">private</span><span class="p">:</span>
+    <span class="n">T</span><span class="p">[]</span> <span class="n">_arr</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre></div>
+<p><code>inout</code>を導入することで、この冗長性の問題は解消される。
+<code>inout(T)</code>は<code>T</code>, <code>const(T)</code>, <code>immutable(T)</code>のワイルドカード。
+関数引数に<code>inout</code>があったり、<code>inout</code>メンバ関数の場合のみ、その関数内で使用可能。</p>
+<div class="highlight"><pre><code class="language-d" data-lang="d"><span class="k">struct</span> <span class="n">Vector</span><span class="p">(</span><span class="n">T</span><span class="p">)</span>
+<span class="p">{</span>
+    <span class="c1">// inoutで関数を書けば、3種類の関数を書いたことと同義になる</span>
+    <span class="c1">// int*             ptr();</span>
+    <span class="c1">// const(int)*      ptr() const;</span>
+    <span class="c1">// immutable(int)*  ptr() immutable;</span>
+    <span class="k">inout</span><span class="p">(</span><span class="n">T</span><span class="p">)*</span> <span class="n">ptr</span><span class="p">()</span> <span class="k">inout</span> <span class="nd">@property</span> <span class="p">{</span>
+        <span class="k">return</span> <span class="n">_arr</span><span class="p">.</span><span class="n">ptr</span><span class="p">;</span>
+    <span class="p">}</span>
+
+  <span class="k">private</span><span class="p">:</span>
+    <span class="n">T</span><span class="p">[]</span> <span class="n">_arr</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre></div>
+<h2><code>shared</code></h2>
+
+<p>複数のスレッド間での共有データを示す。</p>
+
+<ul>
+<li>並列化なし：14.1 [s]</li>
+<li>並列化有り： 6.1 [s]</li>
+</ul>
+
+<p>2倍高速化(on 2-Core, 4-Thread)</p>
+<div class="highlight"><pre><code class="language-d" data-lang="d"><span class="k">import</span> <span class="n">core</span><span class="p">.</span><span class="n">sync</span><span class="p">.</span><span class="n">mutex</span><span class="p">;</span>
+<span class="k">import</span> <span class="n">std</span><span class="p">.</span><span class="n">parallelism</span><span class="p">;</span>
+<span class="k">import</span> <span class="n">std</span><span class="p">.</span><span class="n">range</span><span class="p">;</span>
+<span class="k">import</span> <span class="n">std</span><span class="p">.</span><span class="n">algorithm</span><span class="p">;</span>
+<span class="k">import</span> <span class="n">std</span><span class="p">.</span><span class="n">datetime</span><span class="p">;</span>
+<span class="k">import</span> <span class="n">std</span><span class="p">.</span><span class="n">stdio</span><span class="p">;</span>
+
+<span class="k">shared</span> <span class="kt">int</span><span class="p">[]</span> <span class="n">arr</span><span class="p">;</span>
+<span class="k">__gshared</span> <span class="n">Mutex</span> <span class="n">mtx</span><span class="p">;</span>
+
+
+<span class="k">shared</span> <span class="k">static</span> <span class="k">this</span><span class="p">()</span>
+<span class="p">{</span>
+    <span class="n">mtx</span> <span class="p">=</span> <span class="k">new</span> <span class="n">Mutex</span><span class="p">;</span>
+<span class="p">}</span>
+
+
+<span class="kt">void</span> <span class="n">main</span><span class="p">()</span>
+<span class="p">{</span>
+    <span class="n">StopWatch</span> <span class="n">sw</span><span class="p">;</span>
+    <span class="n">sw</span><span class="p">.</span><span class="n">start</span><span class="p">();</span>
+
+    <span class="n">arr</span><span class="p">.</span><span class="n">reserve</span><span class="p">(</span><span class="mi">1024</span> <span class="p">*</span> <span class="mi">64</span><span class="p">);</span>
+    <span class="k">foreach</span><span class="p">(</span><span class="n">e</span><span class="p">;</span> <span class="n">parallel</span><span class="p">(</span><span class="n">iota</span><span class="p">(</span><span class="mi">1024</span> <span class="p">*</span> <span class="mi">64</span><span class="p">))){</span>
+        <span class="k">const</span> <span class="n">a</span> <span class="p">=</span> <span class="n">arr</span><span class="p">,</span>
+              <span class="n">b</span> <span class="p">=</span> <span class="n">reduce</span><span class="p">!</span><span class="s">&quot;a+b&quot;</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">a</span><span class="p">);</span>
+
+        <span class="k">synchronized</span><span class="p">(</span><span class="n">mtx</span><span class="p">)</span>
+            <span class="n">arr</span> <span class="p">~=</span> <span class="n">b</span><span class="p">;</span>
+    <span class="p">}</span>
+    <span class="n">sw</span><span class="p">.</span><span class="n">stop</span><span class="p">();</span>
+
+    <span class="n">writeln</span><span class="p">(</span><span class="n">sw</span><span class="p">.</span><span class="n">peek</span><span class="p">.</span><span class="n">msecs</span><span class="p">,</span> <span class="s">&quot;[ms]&quot;</span><span class="p">);</span>
+    <span class="n">writeln</span><span class="p">(</span><span class="n">arr</span><span class="p">.</span><span class="n">length</span><span class="p">);</span>
+<span class="p">}</span>
+</code></pre></div>
+<h3>おまけ</h3>
+
+<p><code>parallel</code>を付加することで、3倍高速化！(on 2-Core, 4-Thread)</p>
+<div class="highlight"><pre><code class="language-d" data-lang="d"><span class="k">import</span> <span class="n">std</span><span class="p">.</span><span class="n">parallelism</span><span class="p">;</span>
+<span class="k">import</span> <span class="n">std</span><span class="p">.</span><span class="n">datetime</span><span class="p">;</span>
+<span class="k">import</span> <span class="n">std</span><span class="p">.</span><span class="n">stdio</span><span class="p">;</span>
+<span class="k">import</span> <span class="n">std</span><span class="p">.</span><span class="n">math</span><span class="p">;</span>
+
+<span class="kt">void</span> <span class="n">main</span><span class="p">()</span>
+<span class="p">{</span>
+    <span class="n">StopWatch</span> <span class="n">sw</span><span class="p">;</span>
+    <span class="k">auto</span> <span class="n">logs</span> <span class="p">=</span> <span class="k">new</span> <span class="kt">double</span><span class="p">[</span><span class="mi">128_000_000</span><span class="p">];</span>
+
+    <span class="n">sw</span><span class="p">.</span><span class="n">start</span><span class="p">();</span>
+
+    <span class="k">foreach</span><span class="p">(</span><span class="n">i</span><span class="p">,</span> <span class="k">ref</span> <span class="n">elem</span><span class="p">;</span> <span class="n">parallel</span><span class="p">(</span><span class="n">logs</span><span class="p">))</span>
+        <span class="n">elem</span> <span class="p">=</span> <span class="n">log</span><span class="p">(</span><span class="n">i</span> <span class="p">+</span> <span class="mf">1.0</span><span class="p">);</span>
+
+    <span class="n">sw</span><span class="p">.</span><span class="n">stop</span><span class="p">();</span>
+
+    <span class="n">writeln</span><span class="p">(</span><span class="n">sw</span><span class="p">.</span><span class="n">peek</span><span class="p">.</span><span class="n">msecs</span><span class="p">,</span> <span class="s">&quot;[ms]&quot;</span><span class="p">);</span>
+<span class="p">}</span>
+</code></pre></div>
+              </div>
+            </div>
+          </div>
+          <div class="row">
+  <div class="col-md-12 col-sm-12 col-xs-12">
+    <div class="page-footer">
+      <div class="list-group">
+        <a href="/archives/#y-2014" class="list-group-item col-md-3 col-sm-4 col-xs-6">
+          <i class="fa fa fa-archive fa-lg"></i> 
+          <em itemprop="datePublished" content="2014-10-29">
+            29 Oct 2014
+          </em>
+        </a>
+        
+        <a href="/categories/#dの会" class="list-group-item col-md-3 col-sm-4 col-xs-6">
+          <i class="fa fa-folder-open fa-lg"></i> <em itemprop="keywords">Dの会</em>
+          <span class="badge">1</span>
+        </a>
+        
+        
+        <a href="/tags/#dmanual" class="list-group-item col-md-3 col-sm-4 col-xs-6">
+          <i class="fa fa-tag fa-lg"></i> <em itemprop="keywords">dmanual</em>
+          <span class="badge">3</span>
+        </a>
+        
+        <a href="/tags/#blog" class="list-group-item col-md-3 col-sm-4 col-xs-6">
+          <i class="fa fa-tag fa-lg"></i> <em itemprop="keywords">blog</em>
+          <span class="badge">6</span>
+        </a>
+        
+        <a href="/tags/#dの会" class="list-group-item col-md-3 col-sm-4 col-xs-6">
+          <i class="fa fa-tag fa-lg"></i> <em itemprop="keywords">Dの会</em>
+          <span class="badge">1</span>
+        </a>
+        
+    </div>
+    <div id="disqus_thread"></div>
+    <script type="text/javascript">
+        /* * * CONFIGURATION VARIABLES: EDIT BEFORE PASTING INTO YOUR WEBPAGE * * */
+        var disqus_shortname = 'dmanual'; // required: replace example with your forum shortname
+
+        /* * * DON'T EDIT BELOW THIS LINE * * */
+        (function() {
+            var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+            dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+            (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+        })();
+    </script>
+    <noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+    <a href="http://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+  </div>
+</div>
+        </article>
+      </div>
+    </div>
+    
+<div class="footer">
+  <div class="container">
+    <hr/>
+    <div class="row">
+      <div class="col-md-12 col-sm-12 col-xs-12">
+        <ul class="nav nav-pills">
+          
+          <li>
+            <a href="https://www.github.com/k3kaimu">
+              <i class="fa fa-github-square fa-lg"></i> GitHub
+            </a>
+          </li>
+          
+          
+          <li>
+            <a href="http://www.twitter.com/k3_kaimu">
+              <i class="fa fa-twitter-square fa-lg"></i> Twitter
+            </a>
+          </li>
+          
+          
+          
+          <li>
+            <a href="/atom.xml">
+              <i class="fa fa-rss-square fa-lg"></i> Rss
+            </a>
+          </li>
+          <li class="pull-right visible-md visible-lg">
+            <a href="#top">
+              <i class="fa fa-arrow-circle-up fa-lg"></i> Back to top
+            </a>
+          </li>
+        </ul>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-md-12 col-sm-12 col-xs-12">        
+        <p>
+          &copy; k3-kaimu 2014 
+          with help from <a href="https://github.com/ogaclejapan/jekyllstrap" target="_blank" title="jekyllstrap is Jekyll template based on Bootstrap.">Jekyllstrap</a>.
+        </p>
+        <p>
+          Based on <a href="http://jekyllrb.com/" target="_blank">Jekyll</a>. 
+          Themes from <a href="http://getbootstrap.com/" target="_blank">Bootstrap</a> and <a href="http://bootswatch.com/" target="_blank">Bootswatch</a>. 
+          Icons from <a href="http://fontawesome.io/" target="_blank">Font Awesome</a>.
+        </p>
+        <p>
+        <a href="https://github.com/k3kaimu/k3kaimu.github.io/commits/src/_posts/2014-10-29-d-nokai2.md">View this page's history on GitHub</a>
+        </p>
+      </div>
+    </div>
+    <div class="row">
+    <form action="http://www.google.com/cse" id="cse-search-box">
+<input type="hidden" name="cx" value="004390249242222246033:d_53xmyptd0" />
+<input type="hidden" name="ie" value="UTF-8" />
+<input type="text" name="q" size="31" />
+<input type="submit" name="sa" value="&#xf00e;" />
+</form>
+<script type="text/javascript" src="//www.google.com/cse/brand?form=cse-search-box&lang=ja"></script>
+
+    </div>
+  </div>
+</div>
+
+
+    
+<div id="back-to-top">
+  <a href="#top"><i class="fa fa-arrow-circle-up fa-5x"></i></a>
+</div>
+
+    
+<script src="//code.jquery.com/jquery-2.0.3.min.js"></script>
+<script src="//netdna.bootstrapcdn.com/bootstrap/3.0.3/js/bootstrap.min.js"></script>
+<script src="/assets/js/all.min.js"></script>
+
+
+
+    
+
+
+  </body>
+</html>
