@@ -3,11 +3,47 @@
   
  <id>http://k3kaimu.github.io</id>
  <title></title>
- <updated>2014-10-29T11:05:34+09:00</updated>
+ <updated>2014-11-20T16:44:44+09:00</updated>
  <link rel="self" href="http://k3kaimu.github.io/atom.xml"/>
  <link href="http://k3kaimu.github.io/"/>
  <author><name>k3-kaimu</name></author>
 
+ 
+ <entry>
+  <id>http://k3kaimu.github.io/d%E3%81%AE%E4%BC%9A/2014/11/21/d-nokai4</id>
+  <title>Dの会 #4 資料</title>
+  <updated>2014-11-21T03:30:00+09:00</updated>
+  <link href="http://k3kaimu.github.io/d%E3%81%AE%E4%BC%9A/2014/11/21/d-nokai4/"/>
+  <content>
+
+資料URL
+
+Range, 文字列, 連想配列
+
+
+
+順番
+
+
+type, qualifier
+array, GC and foreach-loop
+string, UTF
+Associative Array(HashMap)
+function(template)
+Exception, scope(exit|failure|success), DbC, unittest
+revisit function
+revisit template-function
+struct, union
+class, interface,
+re-revisit template
+
+
+
+
+復習-1
+
+Pro...</content>
+ </entry>
  
  <entry>
   <id>http://k3kaimu.github.io/d%E3%81%AE%E4%BC%9A/2014/10/29/d-nokai2</id>
