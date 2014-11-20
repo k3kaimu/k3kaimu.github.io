@@ -89,7 +89,7 @@ pandoc -s -t revealjs -V theme:sky -o d-nokai4.html 2014-11-20-d-nokai4.md
 <li><code>filter!&quot;....&quot;</code></li>
 <li><code>reduce!&quot;....&quot;</code></li>
 </ul>
-<pre class="sourceCode d"><code class="sourceCode d">[<span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">3</span>, <span class="dv">4</span>].filter!<span class="st">&quot;(a | 0x3) == 0&quot;</span>    -&gt; [<span class="dv">4</span>]
+<pre class="sourceCode d"><code class="sourceCode d">[<span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">3</span>, <span class="dv">4</span>].filter!<span class="st">&quot;(a &amp; 0x3) == 0&quot;</span>    -&gt; [<span class="dv">4</span>]
 
 [<span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">3</span>, <span class="dv">4</span>].reduce!<span class="st">&quot;a * b&quot;</span>             -&gt; <span class="dv">24</span></code></pre>
 </section>

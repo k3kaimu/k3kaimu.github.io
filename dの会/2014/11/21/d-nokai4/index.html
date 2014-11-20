@@ -191,7 +191,7 @@ pandoc -s -t revealjs -V theme:sky -o d-nokai4.html 2014-11-20-d-nokai4.md
 <li><code>filter!&quot;....&quot;</code></li>
 <li><code>reduce!&quot;....&quot;</code></li>
 </ul>
-<div class="highlight"><pre><code class="language-d" data-lang="d"><span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">].</span><span class="n">filter</span><span class="p">!</span><span class="s">&quot;(a | 0x3) == 0&quot;</span>    <span class="p">-&gt;</span> <span class="p">[</span><span class="mi">4</span><span class="p">]</span>
+<div class="highlight"><pre><code class="language-d" data-lang="d"><span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">].</span><span class="n">filter</span><span class="p">!</span><span class="s">&quot;(a &amp; 0x3) == 0&quot;</span>    <span class="p">-&gt;</span> <span class="p">[</span><span class="mi">4</span><span class="p">]</span>
 
 <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">].</span><span class="n">reduce</span><span class="p">!</span><span class="s">&quot;a * b&quot;</span>             <span class="p">-&gt;</span> <span class="mi">24</span>
 </code></pre></div>
