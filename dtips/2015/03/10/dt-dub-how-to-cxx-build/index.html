@@ -1,0 +1,412 @@
+<!DOCTYPE html>
+<html lang="ja" xmlns="http://www.w3.org/1999/xhtml" prefix="og: http://ogp.me/ns#">
+  <head>
+    
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="format-detection" content="telephone=no">
+<link rel="alternate" type="application/rss+xml" title="RSS Feed" href="http://k3kaimu.github.io/atom.xml">
+<link rel="shortcut icon" href="/favicon.ico">
+
+    <title> dubのcopyFiles | Go to the future</title>
+    
+<meta property="og:type" content="blog">
+<meta property="og:title" content="dubのcopyFiles">
+<meta property="og:description" content="{% tree %}
+
+## 背景
+
+dubでは、`dub.json`に記述した`"copyFiles"`というプロパティにファイル名を設定することで、
+ビルド時にファイルをコピーするように設定できます。
+これはWindowsでDLLを実行ファイルと同じディレクトリに置くために存在します。
+
+...">
+<meta property="og:url" content="http://k3kaimu.github.io/dtips/2015/03/10/dt-dub-how-to-cxx-build/">
+
+<meta property="og:site_name" content="Go to the future">
+<meta property="og:locale" content="ja_JP">
+<meta name="twitter:card" content="summary">
+
+<meta name="twitter:site" content="@k3_kaimu">
+
+
+    
+<link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootswatch/3.0.2/cerulean/bootstrap.min.css">
+<link rel="stylesheet" href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.min.css">
+<link rel="stylesheet" href="/assets/css/all.min.css">
+<link rel="stylesheet" href="/assets/css/navigation.css">
+
+    
+<!--[if lt IE 9]>
+  <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+  <script src="https://oss.maxcdn.com/libs/respond.js/1.3.0/respond.min.js"></script>
+<![endif]-->
+
+  </head>
+  <body>
+    
+<div class="navbar navbar-default navbar-fixed-top" role="navigation">
+  <div class="container">
+    <div class="navbar-header">
+      <a href="/" class="navbar-brand">Go to the future</a>
+      <button class="navbar-toggle" type="button" data-toggle="collapse" data-target="#navbar-main">
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+    </div>
+    <div class="navbar-collapse collapse" id="navbar-main">
+      <ul class="nav navbar-nav js_nav">
+        <li><a href="/blog/">Blog</a></li>
+        <li><a href="/dmanual/">DManual</a></li>
+        <li><a href="/dtips/">DTips</a></li>
+        <!--<li><a href="/archives/">Index...</a></li>
+        -->
+        <li class="dropdown">
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown">Index...<b class="caret"></b></a>
+          <ul class="dropdown-menu">
+            <li>
+              <a href="/archives/" itemprop="sameAs" content="/archives/">
+                <i class="fa fa-archive fa-lg"></i> Archives
+              </a>
+            </li>
+            <li>
+              <a href="/categories/" itemprop="sameAs" content="/categories/">
+                <i class="fa fa-folder-open fa-lg"></i> Categories
+              </a>
+            </li>
+            <li>
+              <a href="/tags/" itemprop="sameAs" content="/tags/">
+                <i class="fa fa-tags fa-lg"></i> Tags
+              </a>
+            </li>
+          </ul>
+        </li>
+      </ul>
+      <div id="owner" itemprop="author copyrightHolder editor" itemscope itemtype="http://schema.org/Person">
+        <ul class="nav navbar-nav navbar-right">
+          <li class="dropdown">
+            <a href="#" class="dropdown-toggle" data-toggle="dropdown">k3-kaimu <b class="caret"></b></a>
+            <ul class="dropdown-menu">
+              
+              <li>
+                
+                <a href="https://www.github.com/k3kaimu" itemprop="sameAs" content="https://www.github.com/k3kaimu">
+                  <i class="fa fa-github-square fa-lg"></i> GitHub
+                </a>
+              </li>
+              
+              
+              <li>
+                
+                <a href="http://www.twitter.com/k3_kaimu" itemprop="sameAs" content="http://www.twitter.com/k3_kaimu">
+                  <i class="fa fa-twitter-square fa-lg"></i> Twitter
+                </a>
+              </li>
+              
+              
+              
+              <li>
+                <a href="/atom.xml">
+                  <i class="fa fa-rss-square fa-lg fa-lg"></i> Rss
+                </a>
+              </li>
+            </ul>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</div>
+
+    <div id="content">
+      <div class="container">
+        <article itemscope itemtype="http://schema.org/Article" itemref="owner">
+          
+<div class="row">
+  <div class="col-md-12 col-sm-12 col-xs-12">
+    <div class="page-header">
+      <h1 itemprop="url" content="http://k3kaimu.github.io/dtips/2015/03/10/dt-dub-how-to-cxx-build/">
+        <i class="fa fa-puzzle-piece fa-lg"></i> <span itemprop="name">dubのcopyFiles</span>
+      </h1>
+    </div>
+  </div>
+</div>
+
+          <div class="row">
+            <div class="col-md-12 col-sm-12 col-xs-12">
+              <div itmprop="articleBody">
+                <p><h2 class="content_tree">Contents</h2><div class="content_tree_list"><ul><li>背景</li><li>ファイルがコピーされるタイミング</li><li>ディレクトリをコピーする</li><li>他の言語のソースをビルドした結果のオブジェクトファイルをリンクする</li><li>さいごに</li></ul></ul></div></p>
+
+<h2>背景</h2>
+
+<p>dubでは、<code>dub.json</code>に記述した<code>&quot;copyFiles&quot;</code>というプロパティにファイル名を設定することで、
+ビルド時にファイルをコピーするように設定できます。
+これはWindowsでDLLを実行ファイルと同じディレクトリに置くために存在します。</p>
+
+<p>今回はこのcopyFilesを使い倒します。</p>
+
+<h2>ファイルがコピーされるタイミング</h2>
+
+<p><code>&quot;copyFiles&quot;</code>に設定したファイルは、プロジェクトのビルドが完全に終わってからコピーされます。
+そのため、プロジェクトのビルド前にファイルをコピーしてほしい場合には、<code>&quot;preGenerateCommands&quot;</code>や<code>&quot;preBuildCommands&quot;</code>にコピーするコマンドを書くしかありません。</p>
+<div class="highlight"><pre><code class="language-js" data-lang="js"><span class="s2">&quot;preGenerateCommands&quot;</span><span class="o">:</span> <span class="p">[</span><span class="s2">&quot;cp fromFile toFile&quot;</span><span class="p">]</span>
+</code></pre></div>
+<p>もし、あなたが作っているプロジェクトがライブラリとして、他のプロジェクトから使用されるのであればこの方法は使用できません。
+なぜなら、<code>&quot;preGenerateCommands&quot;</code>や<code>&quot;preBuildCommands&quot;</code>は、あなたのライブラリのディレクトリで実行されるわけではなく、そのライブラリを使用するプロジェクトのディレクトリで実行されるためです。
+そこで、あなたのライブラリの<code>dub.json</code>の&quot;configurations&quot;を次のように編集します。</p>
+<div class="highlight"><pre><code class="language-js" data-lang="js"><span class="s2">&quot;configurations&quot;</span><span class="o">:</span><span class="p">[</span>
+  <span class="p">{</span>
+    <span class="s2">&quot;name&quot;</span><span class="o">:</span> <span class="s2">&quot;library&quot;</span><span class="p">,</span>
+  <span class="p">},</span>
+
+  <span class="p">{</span>
+    <span class="s2">&quot;name&quot;</span><span class="o">:</span> <span class="s2">&quot;preBuildCopyCommand&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;copyFiles&quot;</span><span class="o">:</span> <span class="p">[</span><span class="s2">&quot;Build前にコピーしたいファイル&quot;</span><span class="p">],</span>
+  <span class="p">}</span>
+<span class="p">]</span>
+</code></pre></div>
+<p>そして、このライブラリ使用者は次のような<code>configurations</code>を<code>dub.json</code>に書くように心がけます。</p>
+<div class="highlight"><pre><code class="language-js" data-lang="js"><span class="s2">&quot;configurations&quot;</span><span class="o">:</span> <span class="p">[</span>
+  <span class="p">{</span>
+    <span class="s2">&quot;name&quot;</span><span class="o">:</span> <span class="s2">&quot;application&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;targetType&quot;</span><span class="o">:</span> <span class="s2">&quot;executable&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;preGenerateCommands&quot;</span><span class="o">:</span><span class="p">[</span>
+      <span class="s2">&quot;dub generate --config=preBuildCopyCommand visuald&quot;</span><span class="p">,</span>
+    <span class="p">],</span>
+  <span class="p">},</span>
+
+  <span class="p">{</span>
+    <span class="s2">&quot;name&quot;</span><span class="o">:</span> <span class="s2">&quot;preBuildCopyCommand&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;subConfigurations&quot;</span><span class="o">:</span> <span class="p">{</span>
+      <span class="s2">&quot;myLibrary&quot;</span><span class="o">:</span> <span class="s2">&quot;preBuildCopyCommand&quot;</span>
+    <span class="p">}</span>
+  <span class="p">},</span>
+<span class="p">],</span>
+</code></pre></div>
+<p>このconfigurationsは、まず<code>&quot;application&quot;</code>の<code>&quot;preGenerateCommands&quot;</code>が実行されます。
+つまり、<code>dub generate --config=preBuildCopyCommand visuald</code>が実行されるため、ライブラリmyLibraryの<code>&quot;preBuildCopyCommand&quot;</code>の<code>copyFiles</code>がビルド前に実行されるのです。
+このとき、VisualD用の<code>.sln</code>ファイル等ができてしまうため、邪魔に思った場合は<code>&quot;application&quot;</code>の<code>&quot;postBuildCommands&quot;</code>や<code>&quot;postGenerateCommands&quot;</code>でそれらのファイルを削除してしまいましょう。</p>
+
+<h2>ディレクトリをコピーする</h2>
+
+<p>ディレクトリをコピーするには、事前にディレクトリをzip等で圧縮しておき、先ほど述べたBuild前コピーのテクニックで先にコピーしておき、<code>unzip</code>してしまいましょう。</p>
+<div class="highlight"><pre><code class="language-js" data-lang="js"><span class="s2">&quot;configurations&quot;</span><span class="o">:</span><span class="p">[</span>
+  <span class="p">{</span>
+    <span class="s2">&quot;name&quot;</span><span class="o">:</span> <span class="s2">&quot;library&quot;</span><span class="p">,</span>
+  <span class="p">},</span>
+
+  <span class="p">{</span>
+    <span class="s2">&quot;name&quot;</span><span class="o">:</span> <span class="s2">&quot;preBuildCopyCommand&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;copyFiles&quot;</span><span class="o">:</span> <span class="p">[</span><span class="s2">&quot;zipFile.zip&quot;</span><span class="p">],</span>
+  <span class="p">}</span>
+
+  <span class="p">{</span>
+    <span class="s2">&quot;name&quot;</span><span class="o">:</span> <span class="s2">&quot;preBuildPostCopyCommand&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;preGenerateCommands&quot;</span><span class="o">:</span> <span class="p">[</span><span class="s2">&quot;unzip zipFile.zip&quot;</span><span class="p">]</span>
+  <span class="p">}</span>
+<span class="p">]</span>
+</code></pre></div><div class="highlight"><pre><code class="language-js" data-lang="js"><span class="s2">&quot;configurations&quot;</span><span class="o">:</span> <span class="p">[</span>
+  <span class="p">{</span>
+    <span class="s2">&quot;name&quot;</span><span class="o">:</span> <span class="s2">&quot;application&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;targetType&quot;</span><span class="o">:</span> <span class="s2">&quot;executable&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;preGenerateCommands&quot;</span><span class="o">:</span><span class="p">[</span>
+      <span class="s2">&quot;dub generate --config=preBuildCopyCommand visuald&quot;</span><span class="p">,</span>
+      <span class="s2">&quot;dub generate --config=preBuildPostCopyCommand visuald&quot;</span>
+    <span class="p">],</span>
+  <span class="p">},</span>
+
+  <span class="p">{</span>
+    <span class="s2">&quot;name&quot;</span><span class="o">:</span> <span class="s2">&quot;preBuildCopyCommand&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;subConfigurations&quot;</span><span class="o">:</span> <span class="p">{</span>
+      <span class="s2">&quot;myLibrary&quot;</span><span class="o">:</span> <span class="s2">&quot;preBuildCopyCommand&quot;</span>
+    <span class="p">}</span>
+  <span class="p">},</span>
+
+  <span class="p">{</span>
+    <span class="s2">&quot;name&quot;</span><span class="o">:</span> <span class="s2">&quot;preBuildPostCopyCommand&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;subConfigurations&quot;</span><span class="o">:</span> <span class="p">{</span>
+      <span class="s2">&quot;myLibrary&quot;</span><span class="o">:</span> <span class="s2">&quot;preBuildCopyCommand&quot;</span>
+    <span class="p">}</span>
+  <span class="p">}</span>
+<span class="p">],</span>
+</code></pre></div>
+<h2>他の言語のソースをビルドした結果のオブジェクトファイルをリンクする</h2>
+
+<p>Build前コピーのテクニックで先にそのコードをコピーしておき、その直後にその言語でビルドしオブジェクトファイルを生成します。</p>
+<div class="highlight"><pre><code class="language-js" data-lang="js"><span class="s2">&quot;configurations&quot;</span><span class="o">:</span><span class="p">[</span>
+  <span class="p">{</span>
+    <span class="s2">&quot;name&quot;</span><span class="o">:</span> <span class="s2">&quot;library&quot;</span><span class="p">,</span>
+  <span class="p">},</span>
+
+  <span class="p">{</span>
+    <span class="s2">&quot;name&quot;</span><span class="o">:</span> <span class="s2">&quot;preBuildCopyCommand&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;copyFiles&quot;</span><span class="o">:</span> <span class="p">[</span><span class="s2">&quot;c/src/src.cpp&quot;</span><span class="p">],</span>
+  <span class="p">}</span>
+
+  <span class="p">{</span>
+    <span class="s2">&quot;name&quot;</span><span class="o">:</span> <span class="s2">&quot;preBuildPostCopyCommand&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;preGenerateCommands&quot;</span><span class="o">:</span> <span class="p">[</span><span class="s2">&quot;g++ -c src.cpp&quot;</span><span class="p">]</span>
+  <span class="p">}</span>
+<span class="p">]</span>
+</code></pre></div><div class="highlight"><pre><code class="language-js" data-lang="js"><span class="s2">&quot;configurations&quot;</span><span class="o">:</span> <span class="p">[</span>
+  <span class="p">{</span>
+    <span class="s2">&quot;name&quot;</span><span class="o">:</span> <span class="s2">&quot;application&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;targetType&quot;</span><span class="o">:</span> <span class="s2">&quot;executable&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;preGenerateCommands&quot;</span><span class="o">:</span><span class="p">[</span>
+      <span class="s2">&quot;dub generate --config=preBuildCopyCommand visuald&quot;</span><span class="p">,</span>
+      <span class="s2">&quot;dub generate --config=preBuildPostCopyCommand visuald&quot;</span>
+    <span class="p">],</span>
+  <span class="p">},</span>
+
+  <span class="p">{</span>
+    <span class="s2">&quot;name&quot;</span><span class="o">:</span> <span class="s2">&quot;preBuildCopyCommand&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;subConfigurations&quot;</span><span class="o">:</span> <span class="p">{</span>
+      <span class="s2">&quot;myLibrary&quot;</span><span class="o">:</span> <span class="s2">&quot;preBuildCopyCommand&quot;</span>
+    <span class="p">}</span>
+  <span class="p">},</span>
+
+  <span class="p">{</span>
+    <span class="s2">&quot;name&quot;</span><span class="o">:</span> <span class="s2">&quot;preBuildPostCopyCommand&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;subConfigurations&quot;</span><span class="o">:</span> <span class="p">{</span>
+      <span class="s2">&quot;myLibrary&quot;</span><span class="o">:</span> <span class="s2">&quot;preBuildPostCopyCommand&quot;</span>
+    <span class="p">}</span>
+  <span class="p">}</span>
+<span class="p">],</span>
+</code></pre></div>
+<h2>さいごに</h2>
+
+<p>そもそも、<code>copyFiles</code>に書いたファイルのコピーが<code>&quot;preGenerateCommands&quot;</code>よりも先に実行されていれば、このような労力はいらなかったのです。</p>
+
+<p>この方法はかなりのバッドノウハウですが、使えるとかなり融通がきくため知っていると良いと思います。
+使うかどうかは別として。</p>
+
+              </div>
+            </div>
+          </div>
+          <div class="row">
+  <div class="col-md-12 col-sm-12 col-xs-12">
+    <div class="page-footer">
+      <div class="list-group">
+        <a href="/archives/#y-2015" class="list-group-item col-md-3 col-sm-4 col-xs-6">
+          <i class="fa fa fa-archive fa-lg"></i> 
+          <em itemprop="datePublished" content="2015-03-10">
+            10 Mar 2015
+          </em>
+        </a>
+        
+        <a href="/categories/#dtips" class="list-group-item col-md-3 col-sm-4 col-xs-6">
+          <i class="fa fa-folder-open fa-lg"></i> <em itemprop="keywords">Dtips</em>
+          <span class="badge">2</span>
+        </a>
+        
+        
+        <a href="/tags/#dtips" class="list-group-item col-md-3 col-sm-4 col-xs-6">
+          <i class="fa fa-tag fa-lg"></i> <em itemprop="keywords">dtips</em>
+          <span class="badge">2</span>
+        </a>
+        
+    </div>
+    <div id="disqus_thread"></div>
+    <script type="text/javascript">
+        /* * * CONFIGURATION VARIABLES: EDIT BEFORE PASTING INTO YOUR WEBPAGE * * */
+        var disqus_shortname = 'dmanual'; // required: replace example with your forum shortname
+
+        /* * * DON'T EDIT BELOW THIS LINE * * */
+        (function() {
+            var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+            dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+            (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+        })();
+    </script>
+    <noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+    <a href="http://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+  </div>
+</div>
+        </article>
+      </div>
+    </div>
+    
+<div class="footer">
+  <div class="container">
+    <hr/>
+    <div class="row">
+      <div class="col-md-12 col-sm-12 col-xs-12">
+        <ul class="nav nav-pills">
+          
+          <li>
+            <a href="https://www.github.com/k3kaimu">
+              <i class="fa fa-github-square fa-lg"></i> GitHub
+            </a>
+          </li>
+          
+          
+          <li>
+            <a href="http://www.twitter.com/k3_kaimu">
+              <i class="fa fa-twitter-square fa-lg"></i> Twitter
+            </a>
+          </li>
+          
+          
+          
+          <li>
+            <a href="/atom.xml">
+              <i class="fa fa-rss-square fa-lg"></i> Rss
+            </a>
+          </li>
+          <li class="pull-right visible-md visible-lg">
+            <a href="#top">
+              <i class="fa fa-arrow-circle-up fa-lg"></i> Back to top
+            </a>
+          </li>
+        </ul>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-md-12 col-sm-12 col-xs-12">        
+        <p>
+          &copy; k3-kaimu 2015 
+          with help from <a href="https://github.com/ogaclejapan/jekyllstrap" target="_blank" title="jekyllstrap is Jekyll template based on Bootstrap.">Jekyllstrap</a>.
+        </p>
+        <p>
+          Based on <a href="http://jekyllrb.com/" target="_blank">Jekyll</a>. 
+          Themes from <a href="http://getbootstrap.com/" target="_blank">Bootstrap</a> and <a href="http://bootswatch.com/" target="_blank">Bootswatch</a>. 
+          Icons from <a href="http://fontawesome.io/" target="_blank">Font Awesome</a>.
+        </p>
+        <p>
+        <a href="https://github.com/k3kaimu/k3kaimu.github.io/commits/src/_posts/2015-03-10-dt-dub-how-to-cxx-build.md">View this page's history on GitHub</a>
+        </p>
+      </div>
+    </div>
+    <div class="row">
+    <form action="http://www.google.com/cse" id="cse-search-box">
+<input type="hidden" name="cx" value="004390249242222246033:d_53xmyptd0" />
+<input type="hidden" name="ie" value="UTF-8" />
+<input type="text" name="q" size="31" />
+<input type="submit" name="sa" value="&#xf00e;" />
+</form>
+<script type="text/javascript" src="//www.google.com/cse/brand?form=cse-search-box&lang=ja"></script>
+
+    </div>
+  </div>
+</div>
+
+
+    
+<div id="back-to-top">
+  <a href="#top"><i class="fa fa-arrow-circle-up fa-5x"></i></a>
+</div>
+
+    
+<script src="//code.jquery.com/jquery-2.0.3.min.js"></script>
+<script src="//netdna.bootstrapcdn.com/bootstrap/3.0.3/js/bootstrap.min.js"></script>
+<script src="/assets/js/all.min.js"></script>
+
+
+
+    
+
+
+  </body>
+</html>
