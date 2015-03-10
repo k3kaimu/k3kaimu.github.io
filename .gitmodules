@@ -1,3 +1,7 @@
 [submodule "dmanual"]
 	path = dmanual
 	url = https://github.com/k3kaimu/d-manual.git
+
+[submodule "slide/reveal.js"]
+    path = slide/reveal.js
+    url = https://github.com/hakimel/reveal.js.git
