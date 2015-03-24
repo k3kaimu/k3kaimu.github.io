@@ -1,0 +1,51 @@
+---
+layout: post
+title:  "opDollarを使ったjQuery的なセレクタ"
+date:   2015-3-25 2:00:00
+categories: dtips
+tags: dtips
+---
+
+{% tree %}
+
+## 背景
+
+opDollarを使うと、jQueryの`$(".class")`とか`$("$id")`みたいなドル記号を使った感じのアレが実装できるって思いついただけです。
+
+
+## How-to
+
+`opDollar`と、それに対応する`opIndex`を書くだけです。
+
+~~~~~~~~~~~~~~d
+struct jQuery
+{
+    void opIndex(Dollar.QuerySelector qs)
+    {
+        writeln(qs.selector);
+    }
+
+
+    Dollar opDollar() pure nothrow @safe @nogc { return Dollar.init; }
+
+
+    static struct Dollar
+    {
+        static struct QuerySelector { string selector; }
+
+        QuerySelector opCall(string str) { return QuerySelector(str); }
+    }
+}
+
+
+void main()
+{
+    jQuery jq;
+    jq[$(".foo")];
+}
+~~~~~~~~~~~~~~~
+
+
+## さいごに
+
+opDollarはいろいろな用途に使えそうです。(汚くなるけど)
