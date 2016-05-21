@@ -13,15 +13,7 @@
     
 <meta property="og:type" content="blog">
 <meta property="og:title" content="11 関数">
-<meta property="og:description" content="{{ **注意** このページを含むd-manualの全記事は[専用ページ](https://k3kaimu.github.io/dmanual/)へ移行しました。今後は専用ページでご覧ください。}}
-
-{% tree %}
-
-## 関数とは？
-
-関数(function)は、
-
-1. データを...">
+<meta property="og:description" content="Contents関数とは？関数による処理のまとめ関数の基礎宣言の書き方と関数本体関数の引数デフォルト引数引数の記憶域クラス可変個引数関数オブジェクトを形成する引数返値型推論関数の属性プロパティ関数@property関数のメモリ安全性純粋関数pure例外を投げない関数nothrowUDA(Use...">
 <meta property="og:url" content="http://k3kaimu.github.io/dmanual/function/">
 
 <meta property="og:site_name" content="Go to the future">
@@ -1379,7 +1371,8 @@ ToDo: <a href="class.md">クラスの章へ</a></p>
 <p><a href="#Q5">Goto: 問題5 「Grand Total」</a><br>
 <a href="#Q6">Goto: 問題6 「Tagged Grand Total」</a>  </p>
 
-<h2>ネスト関数
+<h2>ネスト関数</h2>
+
 <p>なんと関数内には関数を記述できます！
 また、その関数は外側の関数のシンボルを参照することができます。
 もし、ネスト関数が<code>static</code>であれば、その外部の関数の<code>static</code>なものしか参照できません。</p>
@@ -1544,7 +1537,7 @@ ToDo: <a href="class.md">クラスの章へ</a></p>
 <small>(このようなデリゲートをクロージャ(closure)と呼びます。)</small></p>
 
 <p><code>accum</code>を2回呼び出し、その2つの返り値のデリゲートが持っているスタックポインタを比較すると、それらは異なります。
-つまり、<code>accum</code>の環境(スタック)の複製をデリゲートは持ちます。
+なぜなら、デリゲートは<code>accum</code>の環境を独自に持ちます。
 このような性質により、<code>accum</code>を何回呼び出したとしてもメモリがある限り、返されるデリゲートは独立します。</p>
 
 <p>「<code>A</code>型を受け取り、<code>B</code>型を返すデリゲート」の型は<code>B delegate(A)</code>となります。</p>
@@ -2109,7 +2102,7 @@ D言語の標準ライブラリPhobosは、基本的にこの技法をベース�
     <div class="row">
       <div class="col-md-12 col-sm-12 col-xs-12">        
         <p>
-          &copy; k3-kaimu 2015 
+          &copy; k3-kaimu 2016 
           with help from <a href="https://github.com/ogaclejapan/jekyllstrap" target="_blank" title="jekyllstrap is Jekyll template based on Bootstrap.">Jekyllstrap</a>.
         </p>
         <p>

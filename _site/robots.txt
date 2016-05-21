@@ -1,3 +1,0 @@
-User-agent: *
-Sitemap: http://k3kaimu.github.io/sitemap.xml
-Disallow:

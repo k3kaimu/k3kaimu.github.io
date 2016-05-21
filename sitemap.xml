@@ -3,44 +3,50 @@
 
 	<url>
 	 	<loc>http://k3kaimu.github.io/</loc>
-	 	<lastmod>2015-03-10</lastmod>
+	 	<lastmod>2016-05-21</lastmod>
 	 	<changefreq>weekly</changefreq>
 	</url>
 
 	<url>
 	 	<loc>http://k3kaimu.github.io/archives/</loc>
-	 	<lastmod>2015-03-10</lastmod>
+	 	<lastmod>2016-05-21</lastmod>
 	 	<changefreq>weekly</changefreq>
 	</url>
 
 	<url>
 	 	<loc>http://k3kaimu.github.io/dmanual/</loc>
-	 	<lastmod>2015-03-10</lastmod>
+	 	<lastmod>2016-05-21</lastmod>
 	 	<changefreq>weekly</changefreq>
 	</url>
 
 	<url>
 	 	<loc>http://k3kaimu.github.io/blog/</loc>
-	 	<lastmod>2015-03-10</lastmod>
+	 	<lastmod>2016-05-21</lastmod>
 	 	<changefreq>weekly</changefreq>
 	</url>
 
 	<url>
 	 	<loc>http://k3kaimu.github.io/dtips/</loc>
-	 	<lastmod>2015-03-10</lastmod>
+	 	<lastmod>2016-05-21</lastmod>
 	 	<changefreq>weekly</changefreq>
 	</url>
 
 	
 	<url>
-	 	<loc>http://k3kaimu.github.io/dtips/2015/03/10/dt-dub-how-to-cxx-build/</loc>
-	 	<lastmod>2015-03-10</lastmod>
+	 	<loc>http://k3kaimu.github.io/dtips/2015/03/25/dt-dollar-like-jquery/</loc>
+	 	<lastmod>2015-03-25</lastmod>
 	 	<changefreq>never</changefreq>
 	</url>
 	
 	<url>
-	 	<loc>http://k3kaimu.github.io/d%E3%81%AE%E4%BC%9A/2014/11/20/d-nokai4/</loc>
-	 	<lastmod>2014-11-20</lastmod>
+	 	<loc>http://k3kaimu.github.io/dtips/2015/03/11/dt-dub-how-to-cxx-build/</loc>
+	 	<lastmod>2015-03-11</lastmod>
+	 	<changefreq>never</changefreq>
+	</url>
+	
+	<url>
+	 	<loc>http://k3kaimu.github.io/d%E3%81%AE%E4%BC%9A/2014/11/21/d-nokai4/</loc>
+	 	<lastmod>2014-11-21</lastmod>
 	 	<changefreq>never</changefreq>
 	</url>
 	
@@ -57,8 +63,8 @@
 	</url>
 	
 	<url>
-	 	<loc>http://k3kaimu.github.io/blog/2014/09/21/tutcccamp/</loc>
-	 	<lastmod>2014-09-21</lastmod>
+	 	<loc>http://k3kaimu.github.io/blog/2014/09/22/tutcccamp/</loc>
+	 	<lastmod>2014-09-22</lastmod>
 	 	<changefreq>never</changefreq>
 	</url>
 	
@@ -75,8 +81,8 @@
 	</url>
 	
 	<url>
-	 	<loc>http://k3kaimu.github.io/blog/2014/09/02/about-move-dmaual/</loc>
-	 	<lastmod>2014-09-02</lastmod>
+	 	<loc>http://k3kaimu.github.io/blog/2014/09/03/about-move-dmaual/</loc>
+	 	<lastmod>2014-09-03</lastmod>
 	 	<changefreq>never</changefreq>
 	</url>
 	
@@ -265,7 +271,7 @@
 	
 	<url>
 		<loc>http://k3kaimu.github.io/dmanual/answer/</loc>
-		<lastmod>2014-09-02</lastmod>
+		<lastmod>2014-09-03</lastmod>
 		<changefreq>never</changefreq>
 	</url>
 	

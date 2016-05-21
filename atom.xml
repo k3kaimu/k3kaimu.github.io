@@ -3,17 +3,42 @@
   
  <id>http://k3kaimu.github.io</id>
  <title></title>
- <updated>2015-03-10T11:52:24+00:00</updated>
+ <updated>2016-05-21T17:43:41+09:00</updated>
  <link rel="self" href="http://k3kaimu.github.io/atom.xml"/>
  <link href="http://k3kaimu.github.io/"/>
  <author><name>k3-kaimu</name></author>
 
  
  <entry>
-  <id>http://k3kaimu.github.io/dtips/2015/03/10/dt-dub-how-to-cxx-build</id>
+  <id>http://k3kaimu.github.io/dtips/2015/03/25/dt-dollar-like-jquery</id>
+  <title>opDollarを使ったjQuery的なセレクタ</title>
+  <updated>2015-03-25T11:00:00+09:00</updated>
+  <link href="http://k3kaimu.github.io/dtips/2015/03/25/dt-dollar-like-jquery/"/>
+  <content>Contents背景How-toさいごに
+
+背景
+
+opDollarを使うと、jQueryの$(&amp;quot;.class&amp;quot;)とか$(&amp;quot;$id&amp;quot;)みたいなドル記号を使った感じのアレが実装できるって思いついただけです。
+
+How-to
+
+opDollarと、それに対応するopIndexを書くだけです。
+struct jQuery
+{
+    void opIndex(Dollar.QuerySelector qs)
+    {
+        writeln(qs.selector);
+    }
+
+
+    Dollar opDollar() pure not...</content>
+ </entry>
+ 
+ <entry>
+  <id>http://k3kaimu.github.io/dtips/2015/03/11/dt-dub-how-to-cxx-build</id>
   <title>dubのcopyFiles</title>
-  <updated>2015-03-10T20:00:00+00:00</updated>
-  <link href="http://k3kaimu.github.io/dtips/2015/03/10/dt-dub-how-to-cxx-build/"/>
+  <updated>2015-03-11T05:00:00+09:00</updated>
+  <link href="http://k3kaimu.github.io/dtips/2015/03/11/dt-dub-how-to-cxx-build/"/>
   <content>Contents背景ファイルがコピーされるタイミングディレクトリをコピーする他の言語のソースをビルドした結果のオブジェクトファイルをリンクするさいごに
 
 背景
@@ -30,11 +55,13 @@ dubでは、dub.jsonに記述した&amp;quot;copyFiles&amp;quot;というプロ�
  </entry>
  
  <entry>
-  <id>http://k3kaimu.github.io/d%E3%81%AE%E4%BC%9A/2014/11/20/d-nokai4</id>
+  <id>http://k3kaimu.github.io/d%E3%81%AE%E4%BC%9A/2014/11/21/d-nokai4</id>
   <title>Dの会 #4 資料</title>
-  <updated>2014-11-20T18:30:00+00:00</updated>
-  <link href="http://k3kaimu.github.io/d%E3%81%AE%E4%BC%9A/2014/11/20/d-nokai4/"/>
+  <updated>2014-11-21T03:30:00+09:00</updated>
+  <link href="http://k3kaimu.github.io/d%E3%81%AE%E4%BC%9A/2014/11/21/d-nokai4/"/>
   <content>
+
+資料URL
 
 Range, 文字列, 連想配列
 
@@ -60,13 +87,13 @@ re-revisit template
 
 復習-1
 
-Project Eu...</content>
+Pro...</content>
  </entry>
  
  <entry>
   <id>http://k3kaimu.github.io/d%E3%81%AE%E4%BC%9A/2014/10/29/d-nokai2</id>
   <title>Dの会 #2 資料</title>
-  <updated>2014-10-29T11:00:00+00:00</updated>
+  <updated>2014-10-29T20:00:00+09:00</updated>
   <link href="http://k3kaimu.github.io/d%E3%81%AE%E4%BC%9A/2014/10/29/d-nokai2/"/>
   <content>Contentsアンケートの結果アンケート結果順番様々な型スコープデフォルト初期化値(Default Initializer; Type.init)ポインタ等の宣言type-qualifierconstimmutableinoutsharedおまけ
 
@@ -90,7 +117,7 @@ immutableの性質を知っている人も半分...</content>
  <entry>
   <id>http://k3kaimu.github.io/blog/2014/10/23/procon25</id>
   <title>プロコンお疲れ様でした</title>
-  <updated>2014-10-23T01:41:00+00:00</updated>
+  <updated>2014-10-23T10:41:00+09:00</updated>
   <link href="http://k3kaimu.github.io/blog/2014/10/23/procon25/"/>
   <content>お疲れ様でした。
 
@@ -104,10 +131,10 @@ immutableの性質を知っている人も半分...</content>
  </entry>
  
  <entry>
-  <id>http://k3kaimu.github.io/blog/2014/09/21/tutcccamp</id>
+  <id>http://k3kaimu.github.io/blog/2014/09/22/tutcccamp</id>
   <title>TUTコンピュータクラブ秋合宿に参加して思ったこととか</title>
-  <updated>2014-09-21T17:59:00+00:00</updated>
-  <link href="http://k3kaimu.github.io/blog/2014/09/21/tutcccamp/"/>
+  <updated>2014-09-22T02:59:00+09:00</updated>
+  <link href="http://k3kaimu.github.io/blog/2014/09/22/tutcccamp/"/>
   <content>予備知識
 
 TUT コンピュータクラブとは
@@ -139,7 +166,7 @@ LTタイトルは「やる夫と学ぶバグ報告入門」。
  <entry>
   <id>http://k3kaimu.github.io/blog/2014/09/13/about-move-dmanual2</id>
   <title>dmanualの移行に関して -- その2</title>
-  <updated>2014-09-13T12:00:00+00:00</updated>
+  <updated>2014-09-13T21:00:00+09:00</updated>
   <link href="http://k3kaimu.github.io/blog/2014/09/13/about-move-dmanual2/"/>
   <content>d-manualの全記事を管理しているリポジトリを、本サイトのリポジトリにsubmoduleとして登録する作業を行いました。
 しかし、submoduleめんどくさいですね。
@@ -158,7 +185,7 @@ d-manualへの修正の送り方について
  <entry>
   <id>http://k3kaimu.github.io/dtips/2014/09/04/dt-container-array-gc</id>
   <title>std.container.arrayからGCの挙動を学ぶ</title>
-  <updated>2014-09-04T13:00:00+00:00</updated>
+  <updated>2014-09-04T22:00:00+09:00</updated>
   <link href="http://k3kaimu.github.io/dtips/2014/09/04/dt-container-array-gc/"/>
   <content>Contentsはじめにメモリ確保時開放時まとめ気になったこと
 
@@ -175,10 +202,10 @@ std.container.array.Array!T型は、内部でmallocやfree、realloc...</content
  </entry>
  
  <entry>
-  <id>http://k3kaimu.github.io/blog/2014/09/02/about-move-dmaual</id>
+  <id>http://k3kaimu.github.io/blog/2014/09/03/about-move-dmaual</id>
   <title>dmanualの移行に関して</title>
-  <updated>2014-09-02T19:57:00+00:00</updated>
-  <link href="http://k3kaimu.github.io/blog/2014/09/02/about-move-dmaual/"/>
+  <updated>2014-09-03T04:57:00+09:00</updated>
+  <link href="http://k3kaimu.github.io/blog/2014/09/03/about-move-dmaual/"/>
   <content>つい先程、d-manualの全記事を本ページに移行しました。
 もともと、このブログはd-manualの公開ページとして新設した
 ものです。
@@ -193,7 +220,7 @@ std.container.array.Array!T型は、内部でmallocやfree、realloc...</content
  <entry>
   <id>http://k3kaimu.github.io/blog/2014/09/02/first-post</id>
   <title>first post</title>
-  <updated>2014-09-02T11:10:00+00:00</updated>
+  <updated>2014-09-02T20:10:00+09:00</updated>
   <link href="http://k3kaimu.github.io/blog/2014/09/02/first-post/"/>
   <content>そのうちd-manualをここで公開します。
 少々お待ちを(m´・ω・｀)m

@@ -13,14 +13,14 @@
     
 <meta property="og:type" content="blog">
 <meta property="og:title" content="std.container.arrayからGCの挙動を学ぶ">
-<meta property="og:description" content="{% tree %}
+<meta property="og:description" content="Contentsはじめにメモリ確保時開放時まとめ気になったこと
 
-## はじめに
+はじめに
 
-dmd 2.066からの新しい仕様として、`@nogc`属性が追加されました。
-`@nogc`属性が付加された関数内では、GC heapからメモリを一切確保しないことが静的に保証されます。
+dmd 2.066からの新しい仕様として、@nogc属性が追加されました。
+@nogc属性が付加された関数内では、GC heapからメモリを一切確保しないことが静的に保証されます。
 
-ということで、現在メモリ管理やGCに注目が集まっているため、...">
+ということで、現在メモリ管理やG...">
 <meta property="og:url" content="http://k3kaimu.github.io/dtips/2014/09/04/dt-container-array-gc/">
 
 <meta property="og:site_name" content="Go to the future">
@@ -266,13 +266,13 @@ GCのスキャン対象にメモリ領域を設定している場合は、<code>
         
         <a href="/categories/#dtips" class="list-group-item col-md-3 col-sm-4 col-xs-6">
           <i class="fa fa-folder-open fa-lg"></i> <em itemprop="keywords">Dtips</em>
-          <span class="badge">2</span>
+          <span class="badge">3</span>
         </a>
         
         
         <a href="/tags/#dtips" class="list-group-item col-md-3 col-sm-4 col-xs-6">
           <i class="fa fa-tag fa-lg"></i> <em itemprop="keywords">dtips</em>
-          <span class="badge">2</span>
+          <span class="badge">3</span>
         </a>
         
     </div>
@@ -334,7 +334,7 @@ GCのスキャン対象にメモリ領域を設定している場合は、<code>
     <div class="row">
       <div class="col-md-12 col-sm-12 col-xs-12">        
         <p>
-          &copy; k3-kaimu 2015 
+          &copy; k3-kaimu 2016 
           with help from <a href="https://github.com/ogaclejapan/jekyllstrap" target="_blank" title="jekyllstrap is Jekyll template based on Bootstrap.">Jekyllstrap</a>.
         </p>
         <p>

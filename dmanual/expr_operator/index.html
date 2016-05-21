@@ -13,14 +13,7 @@
     
 <meta property="og:type" content="blog">
 <meta property="og:title" content="03 式と演算子">
-<meta property="og:description" content="{{ **注意** このページを含むd-manualの全記事は[専用ページ](https://k3kaimu.github.io/dmanual/)へ移行しました。今後は専用ページでご覧ください。}}
-
-{% tree %}
-
-## 式と演算子
-
-ここからは式のお話をします。
-式は、D言語での...">
+<meta property="og:description" content="Contents式と演算子演算子と暗黙の数値型変換数値型に対する演算子括弧(bracket)単項プラス(unary plus), 単項マイナス(unary minus)インクリメント(increment), デクリメント(decrement)算術演算子ビット演算子(Bitwise operat...">
 <meta property="og:url" content="http://k3kaimu.github.io/dmanual/expr_operator/">
 
 <meta property="og:site_name" content="Go to the future">
@@ -429,7 +422,7 @@ D言語でも(大体のプログラミング言語でも)同じ規則が成り�
 最後の例のように、浮動小数点数の演算では丸め誤差が存在するため、思った答えと違うものが出る可能性があります。
 ほとんど整数でしか使用しないので気にはなりませんが、浮動小数点に対して使用する場合には注意が必要です。</p>
 
-<p>優先順位は積や商と同じ5で、結合規則も同じ右→左です。</p>
+<p>優先順位は積や商と同じ5で、結合規則も同じ左→右です。</p>
 <div class="highlight"><pre><code class="language-d" data-lang="d"><span class="n">writeln</span><span class="p">(</span><span class="mi">10</span> <span class="p">%</span> <span class="mi">3</span><span class="p">);</span>    <span class="c1">// 1; 10 / 3 = 3 .. 1</span>
 <span class="n">writeln</span><span class="p">(</span><span class="mi">12</span> <span class="p">%</span> <span class="mi">3</span><span class="p">);</span>    <span class="c1">// 0; 12 / 3 = 3 .. 0</span>
 
@@ -852,7 +845,7 @@ a, b        14                      →
     <div class="row">
       <div class="col-md-12 col-sm-12 col-xs-12">        
         <p>
-          &copy; k3-kaimu 2015 
+          &copy; k3-kaimu 2016 
           with help from <a href="https://github.com/ogaclejapan/jekyllstrap" target="_blank" title="jekyllstrap is Jekyll template based on Bootstrap.">Jekyllstrap</a>.
         </p>
         <p>

@@ -13,13 +13,7 @@
     
 <meta property="og:type" content="blog">
 <meta property="og:title" content="13 ファイルと標準入出力">
-<meta property="og:description" content="{{ **注意** このページを含むd-manualの全記事は[専用ページ](https://k3kaimu.github.io/dmanual/)へ移行しました。今後は専用ページでご覧ください。}}
-
-{% tree %}
-
-## ファイル出力
-
-ファイルに出力するには大きく分けて二通りの方...">
+<meta property="og:description" content="Contentsファイル出力std.stdio.Fileを使うstd.file.writeやstd.file.appendを使う標準出力stdoutファイル入力std.stdio.Fileを使うstd.file.readやstd.file.readTextを使う標準入力stdin問題おわりにキ...">
 <meta property="og:url" content="http://k3kaimu.github.io/dmanual/io/">
 
 <meta property="og:site_name" content="Go to the future">
@@ -453,7 +447,7 @@ Standard Score:
                   <span class="p">.</span><span class="n">chomp</span><span class="p">()</span>      <span class="c1">// 末尾の改行を消して</span>
                   <span class="p">.</span><span class="n">to</span><span class="p">!</span><span class="kt">int</span><span class="p">();</span>    <span class="c1">// intに変換</span>
 
-    <span class="n">writeln</span><span class="p">(</span><span class="s">&quot;Sum of the numbers you entered is %s.&quot;</span><span class="p">,</span> <span class="n">n</span> <span class="p">+</span> <span class="n">m</span><span class="p">);</span>
+    <span class="n">writefln</span><span class="p">(</span><span class="s">&quot;Sum of the numbers you entered is %s.&quot;</span><span class="p">,</span> <span class="n">n</span> <span class="p">+</span> <span class="n">m</span><span class="p">);</span>
 <span class="p">}</span>
 </code></pre></div>
 <h2>問題</h2>
@@ -599,7 +593,7 @@ hogehoge
     <div class="row">
       <div class="col-md-12 col-sm-12 col-xs-12">        
         <p>
-          &copy; k3-kaimu 2015 
+          &copy; k3-kaimu 2016 
           with help from <a href="https://github.com/ogaclejapan/jekyllstrap" target="_blank" title="jekyllstrap is Jekyll template based on Bootstrap.">Jekyllstrap</a>.
         </p>
         <p>
