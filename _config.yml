@@ -4,12 +4,14 @@ url: http://k3kaimu.github.io
 baseurl: 
 timezone: Asia/Tokyo
 encoding: utf-8
+gems:
+  - jekyll-paginate
 
 markdown: redcarpet
 redcarpet:
   extensions: ["strikethrough", "tables", "fenced_code_blocks"]
 
-pygments: true
+highlighter: 'pygments'
 permalink: pretty
 # permalink: /:categories/:year-:month-:day-:title.html
 paginate: 5
